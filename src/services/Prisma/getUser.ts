@@ -3,6 +3,7 @@
 import { prisma } from '../Prisma.service'
 import type { IUser } from '@/interfaces/IUser.interface'
 import type { IResponse } from '@/interfaces/IResponse.interface'
+import { gravatar } from '../gravatar.service'
 
 interface IGetById {
 	id: number
@@ -25,7 +26,7 @@ export const getUser = async (where: IGetById | IGetByUsername | IGetByEmail): P
 			ok: true,
 			code: 200,
 			message: 'success',
-			data: user
+			data: { ...user, avatar: (await gravatar.getAvatar(user.email))?.entry?.[0].thumbnailUrl }
 		}
 	} else {
 		return {

@@ -46,7 +46,7 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 		<>
 			<Card className={styles.post}>
 				<div className={styles.author}>
-					<div className={styles.avatar}></div>
+					<img src={exists(author?.avatar)} className={styles.avatar}></img>
 					<div className={styles.userdata}>
 						<Link href={`/user/${author?.username}`} className={styles.name}>{author?.username}</Link>
 						<span className={styles.date}>{formatDate(props.publishDate)}</span>

@@ -10,12 +10,17 @@ import { CopyButton } from '../CopyButton/CopyButton.component'
 import { Body1 } from '@/ui/components/Body1/Body1.component'
 import { ChangeBioPopup } from '@/popups/ChangeBioPopup'
 import { cookies } from 'next/headers'
+import { ChangeAvatarPopup } from './ChangeAvatarPopup/ChangeAvatarPopup'
 
 export const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 	return (
 		<div className={styles.profile}>
 			<div className={styles.user}>
-				<div className={styles.avatar}></div>
+				{props.selfProfile
+					? <ChangeAvatarPopup buttonContent={
+						<img src={exists(props.user?.avatar)} className={styles.avatar}></img>
+					} />
+					: <img src={exists(props.user?.avatar)} className={styles.avatar}></img>}
 				<div className={styles.counters}>
 					<div className={styles.counter}>
 						<span className={styles.count}>0</span>

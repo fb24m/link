@@ -9,6 +9,7 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { parseUser } from '@/functions/parseUser'
+import { hashValue } from '@/functions/generateHash'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await parseUser(true)
@@ -16,6 +17,8 @@ const Welcome = async (): Promise<ReactElement> => {
 	if (!user.data) return <Container>{user.message}</Container>
 
 	const posts = await getPosts({ authorId: [exists(user?.data.id)] })
+
+	console.log(await hashValue('fakem1ner@yandex.ru'))
 
 	return (
 		<Container>
