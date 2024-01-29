@@ -26,6 +26,7 @@
 
 	&.secondary {
 		border: var(--medium-color) 1px solid;
+		color: var(--foreground-color);
 
 		&::before {
 			transition: opacity .3s;
@@ -69,7 +70,7 @@
 	}
 
 	&.transparent {
-		color: var(--accent-color);
+		color: var(--foreground-color);
 
 		&::before {
 			transition: opacity .3s;

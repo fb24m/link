@@ -4,7 +4,7 @@
 	border-bottom: var(--medium-color) 1px solid;
 	position: sticky;
 	top: 0;
-	background-color: #fff;
+	background-color: var(--background-color);
 	z-index: $fixed;
 
 }

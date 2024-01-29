@@ -100,7 +100,7 @@
 .badge {
 	padding: 4px 8px;
 	border-radius: 8px;
-	background-color: var(--accent-color);
-	color: #fff;
+	background-color: var(--foreground-color);
+	color: var(--background-color);
 	font-size: 14px;
 }
