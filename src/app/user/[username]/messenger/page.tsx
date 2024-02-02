@@ -32,6 +32,11 @@ const Messenger = async ({ params }: { params: { username: string } }): Promise<
 		})
 	}
 
+	if (!user) {
+		console.error('user does not exist in Messenger in @/app/user/[username]/messenger/page.tsx')
+		return <>user not found</>
+	}
+
 	if (!user.data) return <Container>{user.message}</Container>
 
 	return (

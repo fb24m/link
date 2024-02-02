@@ -11,6 +11,11 @@ export const saveArticle = async (formData: FormData): Promise<void> => {
 
 	const user = await getSelf()
 
+	if (!user) {
+		console.error('user does not exist in saveArticle in saveArticle.action.ts')
+		return
+	}
+
 	if (!user.ok || !user.data) console.error(`${user.code}: ${user.message}`)
 
 	if (await checkSavedPost(id)) {
