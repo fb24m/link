@@ -10,9 +10,12 @@ import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { parseUser } from '@/functions/parseUser'
 import { hashValue } from '@/functions/generateHash'
+import { redirect } from 'next/navigation'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await parseUser(true)
+
+	if (!user) { redirect('/login') }
 
 	if (!user.data) return <Container>{user.message}</Container>
 

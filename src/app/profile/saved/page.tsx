@@ -8,9 +8,13 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { getSelf } from '@/services/Prisma/getSelf'
+import { redirect } from 'next/navigation'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await getSelf()
+
+	if (!user) { redirect('/login') }
+
 	const savedPosts = user.data?.savedArticles?.split('/')
 	const items = savedPosts?.map((item) => +item.replace('/', ''))
 		.filter((item) => !isNaN(item))

@@ -7,9 +7,13 @@ import type { IResponse } from '@/interfaces/IResponse.interface'
 import { getUser } from './getUser'
 import { exists } from '@/functions/exists'
 
-export const getSelf = async (redirectAfter: boolean = true): Promise<IResponse<IUser>> => {
+export const getSelf = async (redirectAfter: boolean = false): Promise<IResponse<IUser> | undefined> => {
 	if (!cookies().has('link_saved_user') && redirectAfter) {
 		redirect('/login')
+	}
+
+	if (!cookies().get('link_saved_user')) {
+		return
 	}
 
 	const savedData = {

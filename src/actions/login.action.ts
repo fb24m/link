@@ -24,5 +24,8 @@ export const login = async (formData: FormData): Promise<false | null> => {
 
 	cookies().set('link_saved_user', `${rawData.email}:${rawData.password}`)
 
+	if (cookies().has('login_next_page')) {
+		redirect(exists(cookies().get('login_next_page')).value)
+	}
 	redirect('/profile')
 }

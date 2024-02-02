@@ -9,9 +9,13 @@ import { UserProfile } from '@/components/UserProfile/UserProfile.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { parseUser } from '@/functions/parseUser'
+import { redirect } from 'next/navigation'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await parseUser()
+
+	if (!user) { redirect('/login') }
+
 	const posts = await getDeletedPostsByAuthorId([exists(user?.data?.id)])
 
 	if (!user.data) return <Container>{user.message}</Container>

@@ -4,13 +4,13 @@ import { exists } from './exists'
 import { getSelf } from '@/services/Prisma/getSelf'
 import type { IResponse } from '@/interfaces/IResponse.interface'
 
-export const parseUser = async (redirectAfter = false): Promise<IResponse<IUser>> => {
+export const parseUser = async (redirectAfter = false /* , next: string = '/' */): Promise<IResponse<IUser> | undefined> => {
 	const str = cookies().get('session_user')?.value
 	try {
 		return JSON.parse(exists(str))
 	} catch {
 		console.log('Возможно, пользователь авторизован, но в Cookies его аккаунт не сохранен')
-		const user = await getSelf(redirectAfter)
+		const user = await getSelf(redirectAfter /* , next */)
 		return user
 	}
 }

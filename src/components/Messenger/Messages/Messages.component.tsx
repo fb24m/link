@@ -12,8 +12,6 @@ export const Messages = (props: MessagesProps): ReactElement => {
 		})
 	}, [props.messages])
 
-	console.log('update')
-
 	return (
 		<div className={styles.messages}>
 			{props.messages.map((message) =>

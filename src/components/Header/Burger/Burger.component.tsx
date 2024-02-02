@@ -11,7 +11,6 @@ const Burger = ({ className, openedClass, ...props }: BurgerProps): ReactNode =>
 
 	const toggleClassName = (): void => {
 		toggleState(openedClassName, setOpenedClassName, openedClass)
-		console.log('click')
 	}
 
 	return (

@@ -56,6 +56,13 @@ details {
 	}
 }
 
+button,
+input,
+textarea {
+	background-color: transparent;
+	color: var(--foreground-color);
+}
+
 summary {
 	user-select: none;
 	cursor: pointer;

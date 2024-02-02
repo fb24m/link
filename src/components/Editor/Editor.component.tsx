@@ -17,7 +17,7 @@ export interface EditorProps {
 }
 
 export const Editor = async (props: EditorProps): Promise<ReactElement> => {
-	const user = await parseUser()
+	const user = await parseUser(true)
 
 	const now = typeof props.post?.publishDate !== 'undefined' ? props.post?.publishDate : props.publishDate
 	const date = `${now?.getDate()}.${exists(now?.getMonth()) + 1}.${now?.getFullYear()}`
