@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 import styles from './Logo.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
-import { cookies } from 'next/headers'
 
 export const Logo = (): ReactNode => {
 	return (
