@@ -11,9 +11,6 @@ export const Logo = (): ReactNode => {
 				<span className={styles.title}>
 					NextLink
 				</span>
-				{process.env.IS_TEST_ENVIROMENT === '1' ? <span className={styles.subtitle}>
-					Test Enviroment, 0.3.0-beta.18
-				</span> : ''}
 			</div>
 		</Link>
 	)
