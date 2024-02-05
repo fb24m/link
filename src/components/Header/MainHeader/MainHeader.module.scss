@@ -1,3 +1,4 @@
+@use "@/scss/breakpoints.scss";
 @import "@/scss/vars.scss";
 
 .header {
@@ -13,28 +14,39 @@
 	transition: padding .3s;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	// justify-content: space-between;
 	gap: 16px 32px;
-	// flex-wrap: wrap;
+	flex-wrap: wrap;
 	padding-block: 8px;
+
+	@media (max-width: breakpoints.$tablet) {
+		justify-content: space-between;
+	}
 }
 
 .menu {
 	display: flex;
-	gap: 4px 16px;
-	justify-content: center;
-	// font-weight: w;
+	gap: 16px 16px;
 	flex-wrap: wrap;
 	flex-grow: 1;
+
+	@media (max-width: breakpoints.$tablet) {
+		flex-direction: column;
+		max-width: 320px;
+		width: 100%;
+		align-items: center;
+		// justify-content: center;
+	}
 }
 
 .opened {
-	background-color: #fff;
+	// background-color: #fff;
 }
 
 .wrapper {
 	transition: left .5s;
 	flex-grow: 1;
+	justify-content: flex-start;
 	display: flex;
 	align-items: center;
 
@@ -43,10 +55,9 @@
 		padding: 16px;
 		left: -100%;
 		top: calc(100% + 1px);
-		background-color: #fff;
+		background-color: var(--background-color);
 		width: 100%;
 		height: calc(100vh - 120px);
-
 		flex-direction: column;
 	}
 }

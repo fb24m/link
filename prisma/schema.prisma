@@ -11,16 +11,18 @@ datasource db {
 }
 
 model User {
-  id            Int     @id @default(autoincrement())
-  avatar        String?
-  email         String  @unique
-  username      String  @unique
-  password      String
-  bio           String?
-  subscribedTo  String?
-  subscribers   Int?
-  badge         String?
-  savedArticles String?
+  id                      Int         @id @default(autoincrement())
+  avatar                  String?
+  email                   String      @unique
+  username                String      @unique
+  password                String
+  bio                     String?
+  subscribedTo            String?
+  subscribedToCommunities String?
+  subscribers             Int?
+  badge                   String?
+  savedArticles           String?
+  Community               Community[]
 }
 
 model Comment {
@@ -52,4 +54,14 @@ model Message {
   date     DateTime @default(now())
   author   String?
   content  String
+}
+
+model Community {
+  id          Int     @id @default(autoincrement())
+  avatar      String?
+  bio         String?
+  subscribers Int?
+  badge       String?
+  ownerId     Int
+  admins      User[]
 }
