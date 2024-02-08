@@ -9,7 +9,7 @@
 	@media(prefers-color-scheme: dark) {
 		--medium-color: #222;
 		--accent-color: #fff;
-		--background-color: #000;
+		--background-color: #111;
 		--foreground-color: #eee;
 	}
 }
@@ -66,4 +66,10 @@ textarea {
 summary {
 	user-select: none;
 	cursor: pointer;
+}
+
+video,
+iframe,
+img {
+	border-radius: 8px;
 }

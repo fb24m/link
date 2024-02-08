@@ -16,11 +16,18 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 	return (
 		<div className={styles.profile}>
 			<div className={styles.user}>
+				{/* <div className={styles.radial}></div> */}
 				{props.selfProfile
 					? <ChangeAvatarPopup buttonContent={
-						<img src={exists(props.user?.avatar)} className={styles.avatar}></img>
+						<>
+							<img src={exists(props.user?.avatar)} className={styles.avatar}></img>
+							<img src={exists(props.user?.avatar)} className={styles.glow}></img>
+						</>
 					} />
-					: <img src={exists(props.user?.avatar)} className={styles.avatar}></img>}
+					: <>
+						<img src={exists(props.user?.avatar)} className={styles.avatar}></img>
+						<img src={exists(props.user?.avatar)} className={styles.glow}></img>
+					</>}
 				<div className={styles.counters}>
 					<div className={styles.counter}>
 						<span className={styles.count}>0</span>
@@ -62,6 +69,6 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					? <ChangeBioPopup currentBio={props.user?.bio} buttonText={props.user?.bio === null || props.user?.bio === '' ? 'Добавить пару строк о себе' : 'Изменить'} />
 					: ''}
 			</div>
-		</div>
+		</div >
 	)
 }

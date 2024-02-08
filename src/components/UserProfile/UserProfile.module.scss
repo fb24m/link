@@ -53,6 +53,7 @@
 	align-items: center;
 	gap: 8px;
 	margin-bottom: 16px;
+	position: relative;
 }
 
 .userInfo {}
@@ -69,6 +70,12 @@
 }
 
 .avatar {
+	position: relative;
+	z-index: 1;
+}
+
+.avatar,
+.glow {
 	width: 96px;
 	height: 96px;
 	background-color: #ddd;
@@ -78,6 +85,47 @@
 		width: 80px;
 		height: 80px;
 	}
+}
+
+.radial {
+
+	&,
+	&::before,
+	&::after {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		background-color: #fff;
+		width: 40px;
+		height: 40px;
+		border-radius: 999px;
+		filter: blur(30px)
+	}
+
+	& {
+		left: -20px;
+		top: -20px;
+		background: crimson;
+	}
+
+	&::before {
+		left: 30px;
+		top: 70px;
+		background: lime;
+	}
+
+	&::after {
+		left: 70px;
+		top: 0px;
+		background: lightblue;
+	}
+}
+
+.glow {
+	position: absolute;
+	left: 0;
+	top: 0;
+	filter: blur(24px);
 }
 
 .bio {
