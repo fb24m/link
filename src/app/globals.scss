@@ -73,3 +73,27 @@ iframe,
 img {
 	border-radius: 8px;
 }
+
+.main-container {
+	display: flex;
+	align-items: flex-start;
+}
+
+.menu-title {
+	display: inline-block;
+	margin-bottom: 8px;
+}
+
+.sidebar {
+	flex-basis: 240px;
+	flex-shrink: 0;
+	position: sticky;
+	top: 68px;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 16px;
+}

@@ -7,7 +7,7 @@ import Icon from '../Icon/Icon.component'
 import { exists } from '@/functions/exists'
 import Link from 'next/link'
 
-export const Button = ({ appearance, className, href, icon, children, ...props }: ButtonProps): ReactNode => {
+export const Button = ({ appearance, className, href, icon, children, target, ...props }: ButtonProps): ReactNode => {
 	const defaultProps = {
 		className: `${styles.button} ${typeof appearance !== 'undefined' ? styles[appearance] : ''} ${className} ${exists(icon) !== '' ? styles.icon : ''}`,
 		children: <>{exists(icon) !== '' ? <Icon icon={exists(icon)} /> : ''} {children}</>,
@@ -15,7 +15,7 @@ export const Button = ({ appearance, className, href, icon, children, ...props }
 	}
 
 	if (typeof href !== 'undefined') {
-		return <Link prefetch={false} href={href} {...defaultProps}></Link>
+		return <Link prefetch={false} href={href} target={target} {...defaultProps}></Link>
 	} else {
 		return <button {...defaultProps}></button>
 	}

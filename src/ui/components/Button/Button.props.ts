@@ -7,4 +7,5 @@ export interface ButtonProps {
 	children?: ReactNode
 	type?: 'submit' | 'button'
 	icon?: string
+	target?: '_blank'
 }

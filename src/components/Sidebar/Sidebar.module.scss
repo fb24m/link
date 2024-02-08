@@ -1,0 +1,28 @@
+.button {
+	padding: 4px !important;
+	justify-content: flex-start !important;
+	width: 100%;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 16px;
+}
+
+// .usersList {
+// 	display: flex;
+// 	flex-direction: column;
+// 	gap: 8px;
+// 	margin-bottom: 16px;
+// }
+
+.title {
+	margin-left: 4px;
+	margin-bottom: 8px;
+	display: inline-block;
+}
+
+.sidebar {
+	background-color: var(--background-color);
+}

@@ -23,6 +23,7 @@ model User {
   badge                   String?
   savedArticles           String?
   Community               Community[]
+  apps                    App[]
 }
 
 model Comment {
@@ -64,4 +65,13 @@ model Community {
   badge       String?
   ownerId     Int
   admins      User[]
+}
+
+model App {
+  id          Int    @id @default(autoincrement())
+  User        User?  @relation(fields: [userId], references: [id])
+  userId      Int?
+  title       String
+  description String @db.LongText
+  url         String
 }

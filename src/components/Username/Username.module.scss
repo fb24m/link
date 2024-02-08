@@ -1,0 +1,17 @@
+.avatar {
+	width: 28px;
+	height: 28px;
+	background-color: #fff;
+	appearance: none;
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+}
+
+.avatar_placeholder {
+	font-size: 24px !important;
+}
