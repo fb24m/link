@@ -1,0 +1,23 @@
+.app {
+	border-top: var(--medium-color) 1px solid;
+	height: calc(100% - 32px);
+	width: calc(100% + 32px);
+	margin-left: -16px;
+	margin-top: 12px;
+}
+
+.wrapper {
+	border: var(--medium-color) 1px solid;
+	padding: 16px;
+	width: 100%;
+	height: calc(100vh - 150px);
+	overflow: hidden;
+	border-radius: 8px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 4px;
+}
