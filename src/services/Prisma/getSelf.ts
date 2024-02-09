@@ -8,6 +8,8 @@ import { getUser } from './getUser'
 import { exists } from '@/functions/exists'
 
 export const getSelf = async (redirectAfter: boolean = false): Promise<IResponse<IUser> | undefined> => {
+	console.log('getting self in async getSelf')
+
 	if (!cookies().has('link_saved_user') && redirectAfter) {
 		redirect('/login')
 	}

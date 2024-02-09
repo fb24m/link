@@ -7,11 +7,12 @@ import { UserProfile } from '@/components/UserProfile/UserProfile.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
-import { getSelf } from '@/services/Prisma/getSelf'
 import { redirect } from 'next/navigation'
+import { parseUser } from '@/functions/parseUser'
 
 const Welcome = async (): Promise<ReactElement> => {
-	const user = await getSelf()
+	console.log('rendering welcome')
+	const user = await parseUser()
 
 	if (!user) { redirect('/login') }
 

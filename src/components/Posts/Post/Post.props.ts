@@ -1,4 +1,7 @@
+import type { IUser } from '@/interfaces/IUser.interface'
+
 export interface PostProps {
+	author?: IUser
 	authorId: number
 	authorAvatarUrl?: string | undefined
 	imageUrl?: string | undefined
@@ -10,4 +13,5 @@ export interface PostProps {
 	title?: string | undefined
 	restore?: boolean | undefined
 	likes?: number | undefined
+	self: IUser | undefined
 }

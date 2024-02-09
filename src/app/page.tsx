@@ -14,7 +14,7 @@ const Home = async (): Promise<ReactElement> => {
     exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
   const posts = exists<IPost[]>((await getPosts({ authorId: subsribedTo })).data)
 
-  console.log('posts', posts)
+  console.log('posts')
 
   console.log(user)
 

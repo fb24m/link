@@ -5,7 +5,7 @@ import { prisma } from '../Prisma.service'
 import { parseUser } from '@/functions/parseUser'
 
 export const createPost = async (content: string): Promise<void> => {
-	const author = await parseUser()
+	const author = await parseUser(false, 'createPost')
 
 	await prisma.post.create({
 		data: {

@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 }
 
 const Layout = async ({ children }: { children: ReactNode }): Promise<ReactElement> => {
+  console.log('layout render')
   return (
     <html lang="en">
       <body className={montserrat.className}>

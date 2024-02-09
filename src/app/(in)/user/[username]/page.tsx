@@ -11,11 +11,11 @@ import { Posts } from '@/components/Posts/Posts.component'
 import type { IUser } from '@/interfaces/IUser.interface'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { getUser } from '@/services/Prisma/getUser'
-import { getSelf } from '@/services/Prisma/getSelf'
 import { redirect } from 'next/navigation'
+import { parseUser } from '@/functions/parseUser'
 
 export const generateMetadata = async (props: { params: { username: string } }): Promise<Metadata> => {
-	const user = await getUser({ username: props.params.username })
+	const user = await getUser({ username: props.params.username }, 'profile')
 
 	return {
 		title: `Профиль ${user?.data?.username} в NextLink`,
@@ -30,7 +30,7 @@ export const generateMetadata = async (props: { params: { username: string } }):
 const Welcome = async (props: { params: { username: string } }): Promise<ReactElement> => {
 	const user = await getUser({ username: props.params.username })
 	const posts = await getPosts({ authorId: [exists(user?.data?.id)] })
-	const self = await getSelf()
+	const self = await parseUser(false, 'user')
 
 	if (self?.data?.username === user.data?.username) {
 		redirect('/profile')
@@ -42,7 +42,7 @@ const Welcome = async (props: { params: { username: string } }): Promise<ReactEl
 	return (
 		<div>
 			<UserProfile user={exists<IUser>(user.data)} postsCount={posts.data.length} />
-			<Posts posts={posts.data} />
+			<Posts author={user.data} posts={posts.data} />
 		</div>
 	)
 }

@@ -1,9 +1,7 @@
-import { getSelf } from '../getSelf'
+import type { IUser } from '@/interfaces/IUser.interface'
 
-export const checkSavedPost = async (id: number): Promise<boolean> => {
-	const user = await getSelf()
+export const checkSavedPost = async (user: IUser, id: number): Promise<boolean> => {
+	if (!user || !user.id) console.error('checkSavedPost: user is not valid')
 
-	if (!user?.ok || !user?.data) console.error(`${user?.code}: ${user?.message}`)
-
-	return user?.data?.savedArticles?.includes(`/${id}/`) === true
+	return user?.savedArticles?.includes(`/${id}/`) === true
 }

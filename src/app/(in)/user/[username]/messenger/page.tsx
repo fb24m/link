@@ -18,7 +18,7 @@ import { parseUser } from '@/functions/parseUser'
 const Messenger = async ({ params }: { params: { username: string } }): Promise<ReactElement> => {
 	/* Код извлекает информацию о пользователе, генерирует имя чата на основе предоставленного имени
 	пользователя и имени пользователя, а затем извлекает сообщения для этого чата. */
-	const user = await parseUser()
+	const user = await parseUser(false, 'messenger')
 	const chatName = await generateChatName(params.username, exists<string>(user?.data?.username))
 	const messages = await getMessages(chatName)
 

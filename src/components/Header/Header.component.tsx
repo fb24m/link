@@ -8,6 +8,7 @@ import { Container } from '../Container/Container.component'
 import { MainHeader } from './MainHeader/MainHeader.component'
 
 export const Header = (): ReactNode => {
+	console.log('rendering header')
 	return (
 		<>
 			<div className={styles.subheader}>

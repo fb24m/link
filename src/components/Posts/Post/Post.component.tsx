@@ -22,7 +22,7 @@ import { checkSavedPost } from '@/services/Prisma/post/checkSaved'
 const maxContentLength = 500
 
 export const Post = async (props: PostProps): Promise<ReactElement> => {
-	const author = (await getUser({ id: props.authorId })).data
+	const author = props.author ? props.author : (await getUser({ id: props.authorId }, `[Post] rendering, getting user  ${props.authorId}`)).data
 
 	// let content = props.content
 	let content = props.content.split('<br>').join('\n')
@@ -73,13 +73,15 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 							<Button className={styles.interactionButton} icon="chat" appearance="secondary" href={`/article/${props.id}#comments`}>Комментарии ({comments.length})</Button>
 						}
 						<CopyButton className={styles.interactionButton} success="Ссылка на пост скопирована" text={`https://link.fb24m.ru/article/${props.id}`} icon="share" appearance="secondary">Поделиться</CopyButton>
-						<ActionButton
-							action={saveArticle}
-							appearance="secondary"
-							icon="save"
-							fields={[{ name: 'post-id', value: `${props.id}` }]}>
-							{(await checkSavedPost(props.id)) ? 'Удалить из сохраненных' : 'Сохранить'}
-						</ActionButton>
+						{props.self
+							? <ActionButton
+								action={saveArticle}
+								appearance="secondary"
+								icon="save"
+								fields={[{ name: 'post-id', value: `${props.id}` }]}>
+								{(await checkSavedPost(props.self, props.id)) ? 'Удалить из сохраненных' : 'Сохранить'}
+							</ActionButton>
+							: ''}
 					</Box>
 				</div>
 

@@ -2,12 +2,12 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import type { ReactElement } from 'react'
 import styles from './Sidebar.module.scss'
-import { getSelf } from '@/services/Prisma/getSelf'
 import { exists } from '@/functions/exists'
 import { Username } from '../Username/Username.component'
+import { parseUser } from '@/functions/parseUser'
 
 export const Sidebar = async (): Promise<ReactElement> => {
-	const user = await getSelf()
+	const user = await parseUser(false, 'sidebar')
 	const subsribedTo: number[] =
 		exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
 

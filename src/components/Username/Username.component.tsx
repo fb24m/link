@@ -6,7 +6,8 @@ import { Button } from '@/ui/components/Button/Button.component'
 import Icon from '@/ui/components/Icon/Icon.component'
 
 export const Username = async ({ id, avatar, className }: { id: number, avatar?: boolean, className: string }): Promise<ReactElement> => {
-	const user = await getUser({ id })
+	const user = await getUser({ id }, 'sidebar')
+	console.log('rendering Username')
 
 	return (
 		<Button href={`/user/${user.data?.username}`} appearance="transparent" className={className}>

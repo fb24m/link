@@ -18,7 +18,8 @@ interface IGetByEmail {
 	password: string
 }
 
-export const getUser = async (where: IGetById | IGetByUsername | IGetByEmail): Promise<IResponse<IUser>> => {
+export const getUser = async (where: IGetById | IGetByUsername | IGetByEmail, log?: string): Promise<IResponse<IUser>> => {
+	log && console.log(`[${log}]`)
 	const user: IUser | null = await prisma.user.findUnique({ where })
 
 	if (user !== null) {
