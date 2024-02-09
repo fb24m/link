@@ -1,5 +1,5 @@
 export const GET = async (request: Request, { params }: { params: { name: string } }): Promise<Response> => {
-	if (!request) return
+	if (!request) return new Response('400')
 
 	const file = await fetch(`https://fb24m.site/next-link-web-components/js/${params.name}.js`)
 	if (file.ok) {
