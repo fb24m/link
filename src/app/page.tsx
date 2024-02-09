@@ -4,7 +4,6 @@ import type { IPost } from '@/interfaces/IPost.interface'
 import { exists } from '../functions/exists'
 
 import { Posts } from '@/components/Posts/Posts.component'
-import { Container } from '@/components/Container/Container.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { parseUser } from '@/functions/parseUser'
 import { Sidebar } from '@/components/Sidebar/Sidebar.component'
