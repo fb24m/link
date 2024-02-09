@@ -26,7 +26,7 @@ const Welcome = async (): Promise<ReactElement> => {
 	if (!posts.ok || !posts.data) return <Container>{posts.message}</Container>
 
 	return (
-		<Container>
+		<div>
 			<UserProfile selfProfile user={user.data} postsCount={posts.data.length} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
 				<Button appearance="secondary" icon="person" href="/profile">Профиль</Button>
@@ -35,7 +35,7 @@ const Welcome = async (): Promise<ReactElement> => {
 				<Button appearance="transparent" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
 			<Posts posts={posts.data} />
-		</Container>
+		</div>
 	)
 }
 

@@ -6,7 +6,6 @@ import { type PostProps } from '@/components/Posts/Post/Post.props'
 import type { ReactElement } from 'react'
 import type { Metadata } from 'next'
 import { exists } from '@/functions/exists'
-import { Container } from '@/components/Container/Container.component'
 import { BackButton } from '@/components/BackButton/BackButton.component'
 import { Post } from '@/components/Posts/Post/Post.component'
 import { getUser } from '@/services/Prisma/getUser'
@@ -30,10 +29,10 @@ const Article = async ({ params }: { params: { id: string } }): Promise<ReactEle
 	const post = await getPostById(id)
 
 	return (
-		<Container>
+		<div>
 			<BackButton appearance="transparent" icon="arrow_back" className={styles.button}>Назад</BackButton>
 			<Post full {...post as PostProps}></Post>
-		</Container>
+		</div>
 	)
 }
 

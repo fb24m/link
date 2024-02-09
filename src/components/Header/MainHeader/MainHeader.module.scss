@@ -14,14 +14,10 @@
 	transition: padding .3s;
 	display: flex;
 	align-items: center;
-	// justify-content: space-between;
+	justify-content: space-between;
 	gap: 16px 32px;
 	flex-wrap: wrap;
 	padding-block: 8px;
-
-	@media (max-width: breakpoints.$tablet) {
-		justify-content: space-between;
-	}
 }
 
 .menu {

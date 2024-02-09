@@ -76,7 +76,8 @@ img {
 
 .main-container {
 	display: flex;
-	align-items: flex-start;
+	gap: 16px;
+	flex-grow: 1;
 }
 
 .menu-title {

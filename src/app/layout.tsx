@@ -6,9 +6,8 @@ import { type ReactElement, type ReactNode } from 'react'
 import { Header } from '@/components/Header/Header.component'
 import { UserSaver } from '@/components/UserSaver/UserSaver.component'
 import { Container } from '@/components/Container/Container.component'
-import { Sidebar } from '@/components/Sidebar/Sidebar.component'
 
-const montserrat = Montserrat({ preload: false, weight: ['300', '400', '500', '600', '700'], display: 'swap' })
+const montserrat = Montserrat({ weight: ['300', '400', '500', '600', '700'], display: 'swap', subsets: ['cyrillic', 'latin'] })
 
 export const metadata: Metadata = {
   title: 'NextLink',
@@ -25,13 +24,9 @@ const Layout = async ({ children }: { children: ReactNode }): Promise<ReactEleme
     <html lang="en">
       <body className={montserrat.className}>
         <Header />
-
         <main className="main">
           <Container className="main-container">
-            <Sidebar></Sidebar>
-            <div className="content">
-              {children}
-            </div>
+            {children}
           </Container>
         </main>
         <UserSaver />

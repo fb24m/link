@@ -23,6 +23,13 @@
 	display: inline-block;
 }
 
+.loginButton {
+	// margin-top: 8px;
+	margin-bottom: 24px;
+}
+
 .sidebar {
 	background-color: var(--background-color);
+	max-height: calc(100vh - 120px);
+	overflow-y: auto;
 }
