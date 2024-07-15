@@ -78,6 +78,10 @@ img {
 	display: flex;
 	gap: 16px;
 	flex-grow: 1;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .menu-title {
@@ -90,6 +94,10 @@ img {
 	flex-shrink: 0;
 	position: sticky;
 	top: 68px;
+
+	@media (max-width: 768px) {
+		position: static;
+	}
 }
 
 .list {

@@ -11,10 +11,10 @@ datasource db {
 }
 
 model User {
-  id                      Int         @id @default(autoincrement())
+  id                      Int     @id @default(autoincrement())
   avatar                  String?
-  email                   String      @unique
-  username                String      @unique
+  email                   String  @unique
+  username                String  @unique
   password                String
   bio                     String?
   subscribedTo            String?
@@ -22,7 +22,6 @@ model User {
   subscribers             Int?
   badge                   String?
   savedArticles           String?
-  Community               Community[]
   apps                    App[]
 }
 
@@ -42,6 +41,7 @@ model Post {
   content     String    @db.LongText
   imageUrl    String?
   authorId    Int?      @default(0)
+  writtenBy   Int?      @default(0)
   deleted     Boolean?  @default(false)
   likes       Int?      @default(0)
   liked       String?   @default("")
@@ -60,11 +60,13 @@ model Message {
 model Community {
   id          Int     @id @default(autoincrement())
   avatar      String?
+  name        String? @unique
   bio         String?
   subscribers Int?
   badge       String?
   ownerId     Int
-  admins      User[]
+  admins      String
+  visibility  String
 }
 
 model App {

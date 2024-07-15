@@ -10,17 +10,25 @@
 	margin-bottom: 16px;
 }
 
-// .usersList {
-// 	display: flex;
-// 	flex-direction: column;
-// 	gap: 8px;
-// 	margin-bottom: 16px;
-// }
+.subscriptions {
+	@media (max-width: 768px) {
+		flex-direction: row;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+}
 
 .title {
 	margin-left: 4px;
 	margin-bottom: 8px;
 	display: inline-block;
+
+}
+
+.mainTitle {
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 .loginButton {
@@ -32,4 +40,55 @@
 	background-color: var(--background-color);
 	max-height: calc(100vh - 120px);
 	overflow-y: auto;
+
+	@media (max-width: 768px) {
+		flex-basis: auto;
+	}
+}
+
+.cookies {
+	display: flex;
+	gap: 8px;
+	// align-items: center;
+
+	margin-bottom: 16px;
+
+	span {
+		font-size: 20px;
+	}
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.menu {
+	@media (max-width: 768px) {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		flex-direction: row;
+		justify-content: space-evenly;
+		background-color: var(--background-color);
+		margin-bottom: 0;
+		padding-block: 8px;
+		border-top: var(--medium-color) 1px solid;
+		z-index: 999;
+	}
+
+
+	li a {
+		@media (max-width: 768px) {
+			font-size: 10px;
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+	li i {
+		@media (max-width: 768px) {
+			font-size: 24px;
+		}
+	}
 }
