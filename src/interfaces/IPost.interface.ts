@@ -8,5 +8,5 @@ export interface IPost {
 	deleted?: boolean | null
 	likes?: number | null
 	liked?: string | null
-	writtenBy?: number
+	writtenBy?: number | null
 }

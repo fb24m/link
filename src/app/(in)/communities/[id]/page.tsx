@@ -2,7 +2,7 @@ import { prisma } from '@/services/Prisma.service'
 import { Button } from '@/ui/components/Button/Button.component'
 import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'
-import styles from './page.module.scss'
+// import styles from './page.module.scss'
 import { Posts } from '@/components/Posts/Posts.component'
 import type { IPost } from '@/interfaces/IPost.interface'
 

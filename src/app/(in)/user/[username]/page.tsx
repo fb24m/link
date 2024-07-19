@@ -13,6 +13,7 @@ import { getPosts } from '@/services/Prisma/post/getPosts'
 import { getUser } from '@/services/Prisma/getUser'
 import { redirect } from 'next/navigation'
 import { parseUser } from '@/functions/parseUser'
+import styles from './page.module.scss'
 
 export const generateMetadata = async (props: { params: { username: string } }): Promise<Metadata> => {
 	const user = await getUser({ username: props.params.username }, 'profile')
@@ -40,7 +41,7 @@ const Welcome = async (props: { params: { username: string } }): Promise<ReactEl
 	if (!posts || !posts.data) return <Container>{posts.message}</Container>
 
 	return (
-		<div>
+		<div className={styles.user}>
 			<UserProfile user={exists<IUser>(user.data)} postsCount={posts.data.length} />
 			<Posts author={user.data} posts={posts.data} />
 		</div>

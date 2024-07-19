@@ -2,7 +2,6 @@ import { getPostById } from '@/services/Prisma/post/getById'
 
 import styles from './page.module.scss'
 
-import { type PostProps } from '@/components/Posts/Post/Post.props'
 import type { ReactElement } from 'react'
 import type { Metadata } from 'next'
 import { exists } from '@/functions/exists'
@@ -31,7 +30,7 @@ const Article = async ({ params }: { params: { id: string } }): Promise<ReactEle
 	return (
 		<div>
 			<BackButton appearance="transparent" icon="arrow_back" className={styles.button}>Назад</BackButton>
-			<Post full {...post as PostProps}></Post>
+			<Post full post={exists(post)} ></Post>
 		</div>
 	)
 }

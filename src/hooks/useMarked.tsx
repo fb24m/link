@@ -3,8 +3,8 @@ import { marked } from 'marked'
 // const marked =
 // import { isPromise } from 'util/types'
 
-export const useMarked = (markdown: string): string => {
-	const [html, setHtml] = useState(markdown)
+export const useMarked = (markdown: string): string | undefined => {
+	const [html, setHtml] = useState<string | undefined>()
 
 	useEffect(() => {
 		const parse = async (): Promise<void> => {

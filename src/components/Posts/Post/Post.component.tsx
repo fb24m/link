@@ -22,14 +22,20 @@ import { checkSavedPost } from '@/services/Prisma/post/checkSaved'
 const maxContentLength = 500
 
 export const Post = async (props: PostProps): Promise<ReactElement> => {
-	const author = props.author ? props.author : (await getUser({ id: props.authorId }, `[Post] rendering, getting user  ${props.authorId}`)).data
+	if (!props.post.authorId && !props.post.writtenBy) return <></>
+
+	const author = props.author
+		? props.author
+		: (await getUser({
+			id: exists(props.post.authorId) ? exists(props.post.authorId) : exists(props.post.writtenBy)
+		}, `[Post] rendering, getting user ${props.post.writtenBy}`)).data
 
 	// let content = props.content
-	let content = props.content.split('<br>').join('\n')
-	const comments = await prisma.comment.findMany({ where: { postId: props.id } })
+	let content = props.post.content.split('<br>').join('\n')
+	const comments = await prisma.comment.findMany({ where: { postId: props.post.id } })
 
 	if (content.includes('<script') || content.includes('<style') || content.includes('<head')) {
-		content = `<span class="${styles.warning}">Этот пост создает угрозу работе сайта. Поэтому он был удален</span>`
+		content = `<span class="${styles.warning}">Этот пост создает угрозу работе сайта, поэтому он был удален</span>`
 	}
 
 	if (content.length >= maxContentLength && !exists(props.full)) {
@@ -49,14 +55,14 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 					<img src={exists(author?.avatar)} className={styles.avatar}></img>
 					<div className={styles.userdata}>
 						<Link href={`/user/${author?.username}`} className={styles.name}>{author?.username}</Link>
-						<span className={styles.date}>{formatDate(props.publishDate)}</span>
+						<span className={styles.date}>{formatDate(props.post.publishDate)}</span>
 					</div>
 					{exists(props.controls) || props.controls === true
 						? <div className={styles.actions}>
-							<Button appearance="transparent" icon="edit" href={`/edit/${props.id}`}></Button>
+							<Button appearance="transparent" icon="edit" href={`/edit/${props.post.id}`}></Button>
 							{props.restore !== true
-								? <ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.id}` }]} action={movePostToDeleted}></ActionButton>
-								: <ActionButton appearance="primary" icon="restore_from_trash" fields={[{ name: 'post-id', value: `${props.id}` }]} action={restorePost}></ActionButton>}
+								? <ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.post.id}` }]} action={movePostToDeleted}></ActionButton>
+								: <ActionButton appearance="primary" icon="restore_from_trash" fields={[{ name: 'post-id', value: `${props.post.id}` }]} action={restorePost}></ActionButton>}
 						</div>
 						: ''}
 				</div>
@@ -64,22 +70,22 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 					{content}
 				</Markdown>
 				{content.length >= maxContentLength && props.full !== true &&
-					<Link className={styles.readMore} href={`/article/${props.id}`}>Читать далее</Link>
+					<Link className={styles.readMore} href={`/article/${props.post.id}`}>Читать далее</Link>
 				}
 
 				<div className={styles.interaction}>
 					<Box gap={8} direction="row" className={styles.interactionButtons}>
 						{props.full !== true &&
-							<Button className={styles.interactionButton} icon="chat" appearance="secondary" href={`/article/${props.id}#comments`}>Комментарии ({comments.length})</Button>
+							<Button className={styles.interactionButton} icon="chat" appearance="secondary" href={`/article/${props.post.id}#comments`}>Комментарии ({comments.length})</Button>
 						}
-						<CopyButton className={styles.interactionButton} success="Ссылка на пост скопирована" text={`https://link.fb24m.ru/article/${props.id}`} icon="share" appearance="secondary">Поделиться</CopyButton>
+						<CopyButton className={styles.interactionButton} success="Ссылка на пост скопирована" text={`https://link.fb24m.ru/article/${props.post.id}`} icon="share" appearance="secondary">Поделиться</CopyButton>
 						{props.self
 							? <ActionButton
 								action={saveArticle}
 								appearance="secondary"
 								icon="save"
-								fields={[{ name: 'post-id', value: `${props.id}` }]}>
-								{(await checkSavedPost(props.self, props.id)) ? 'Удалить из сохраненных' : 'Сохранить'}
+								fields={[{ name: 'post-id', value: `${props.post.id}` }]}>
+								{(await checkSavedPost(props.self, props.post.id)) ? 'Удалить из сохраненных' : 'Сохранить'}
 							</ActionButton>
 							: ''}
 					</Box>
@@ -87,7 +93,7 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 
 			</Card>
 			{props.full === true &&
-				<Comments postId={props.id} />
+				<Comments postId={props.post.id} />
 			}
 		</>
 	)

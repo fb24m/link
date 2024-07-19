@@ -6,6 +6,8 @@ import { exists } from '@/functions/exists'
 import { Post } from './Post/Post.component'
 import { parseUser } from '@/functions/parseUser'
 import type { IUser } from '@/interfaces/IUser.interface'
+import { Card } from '@/ui/components/Card/Card.component'
+import { Button } from '@/ui/components/Button/Button.component'
 
 export const Posts = async (props: { posts: IPost[], controls?: boolean, restore?: boolean, author?: IUser }): Promise<ReactElement> => {
 	const self = await parseUser(false, '[rendering] Posts, parsing self')
@@ -14,9 +16,14 @@ export const Posts = async (props: { posts: IPost[], controls?: boolean, restore
 		<div className={styles.posts}>
 			{props.posts
 				? props.posts?.map((post) =>
-					<Post self={self?.data} key={exists(post.id)} id={post.id} restore={props.restore} controls={props.controls} publishDate={post?.publishDate} writtenBy={post.writtenBy} author={props.author} authorId={exists(post.authorId)} content={post?.content.split('\r\n').join('<br>')} />
+					<Post self={self?.data} key={exists(post.id)} restore={props.restore} controls={props.controls} author={props.author} post={post} />
 				).reverse()
 				: 'Разорвано подключение с базой данных. Сообщите об ошибке по ссылке: github.com/ifb24m/link/issues'}
+			<Card className={styles.end}>
+				<h2 className={styles.title}>Вы дошли до конца</h2>
+				<p className={styles.description}>Вы можете вернуться в ленту, чтобы прочитать новые посты или найти новых пользователей</p>
+				<Button className={styles.homeButton} href="/" appearance="primary">На главную</Button>
+			</Card>
 		</div>
 	)
 }

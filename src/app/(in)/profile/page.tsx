@@ -21,7 +21,7 @@ const Welcome = async (): Promise<ReactElement> => {
 	const posts = await getPosts({ authorId: [exists(user?.data.id)] })
 
 	return (
-		<div>
+		<div className={styles.profile}>
 			<UserProfile postsCount={exists<number>(posts.data?.length)} selfProfile user={user.data} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
 				<Button appearance="primary" icon="person" href="/profile">Профиль</Button>

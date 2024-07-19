@@ -16,8 +16,6 @@ export const createPost = async (formData: FormData): Promise<void> => {
 		? await prisma.community.findUnique({ where: { name: rawData.author } })
 		: await prisma.user.findUnique({ where: { username: rawData.writtenBy } })
 
-	if (rawData.content.includes('<script>') || rawData.content.includes('<style>')) return
-
-	await prisma_createPost(rawData.content, exists<number>(authorId?.id))
+	await prisma_createPost(rawData.content.split('<').join('&lt;').split('>').join('&gt;'), exists<number>(authorId?.id))
 	redirect('/profile')
 }
