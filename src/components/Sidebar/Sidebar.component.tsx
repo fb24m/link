@@ -21,30 +21,22 @@ export const Sidebar = async (): Promise<ReactElement> => {
 
 	return (
 		<Card className={`${styles.sidebar} sidebar`}>
-			<strong className={clsx(styles.title, styles.mainTitle)}>NextLink</strong>
 			<ul className={clsx(styles.menu, styles.list)}>
-				{user?.ok
-					? <>
-						<li><Button className={styles.button} appearance="transparent" href="/" icon="home">Главная</Button></li>
-						<li><Button className={styles.button} appearance="transparent" href="/post" icon="news">Новый пост</Button></li>
-						<li><Button className={styles.button} appearance="transparent" href="/profile" icon="person">Мой профиль</Button></li>
-						<li><Button className={styles.button} appearance="transparent" href="/profile/saved" icon="star">Избранное</Button></li>
-					</>
-					: ''}
+				{user?.ok && <>
+					<li><Button className={styles.button} appearance="transparent" href="/" icon="home">Главная</Button></li>
+					<li><Button className={styles.button} appearance="transparent" href="/post" icon="news">Создать</Button></li>
+					<li><Button className={styles.button} appearance="transparent" href="/profile" icon="person">Профиль</Button></li>
+				</>}
 				<li><Button className={styles.button} appearance="transparent" href="https://github.com/iFB24M/link/issues" target="_blank" icon="error">Нашли ошибку?</Button></li>
 			</ul>
-			{user?.ok
-				? <>
-					<strong className={styles.title}>Подписки</strong>
-					<ul className={clsx(styles.list, styles.subscriptions)}>
-						{subsribedTo.length > 0
-							? subsribedTo.map((item) =>
-								<li key={item}><Username className={styles.button} avatar id={item} /></li>
-							)
-							: ''}
-					</ul>
-				</>
-				: ''}
+			{user?.ok && <>
+				<strong className={styles.title}>Подписки</strong>
+				<ul className={clsx(styles.list, styles.subscriptions)}>
+					{subsribedTo.length > 0 && subsribedTo.map((item) =>
+						<li key={item}><Username className={styles.button} avatar id={item} /></li>
+					)}
+				</ul>
+			</>}
 
 			{ownedCommunities.length > 0 && <>
 				<strong className={styles.title}>Сообщества</strong>
@@ -57,9 +49,10 @@ export const Sidebar = async (): Promise<ReactElement> => {
 			</>}
 
 			{!user?.ok ? <Button appearance="primary" href="/login" className={styles.loginButton}>Войти</Button> : ''}
+
 			<div className={styles.cookies}>
 				<span>🍪</span>NextLink тоже использует Cookies
 			</div>
-		</Card >
+		</Card>
 	)
 }

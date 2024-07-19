@@ -13,13 +13,13 @@ export interface EditorProps {
 	button?: ReactNode
 	publishDate?: Date
 	new?: boolean
+	user?: { name: string | null }
 }
 
 export const Editor = async (props: EditorProps): Promise<ReactElement> => {
-	const user = await parseUser(true)
-
 	const now = typeof props.post?.publishDate !== 'undefined' ? props.post?.publishDate : props.publishDate
 	const date = `${now?.getDate()}.${exists(now?.getMonth()) + 1}.${now?.getFullYear()}`
+	const author = await parseUser(true)
 
 	return (
 		<form action={props.new === true ? createPost : updatePost} className={styles.form}>
@@ -37,8 +37,13 @@ export const Editor = async (props: EditorProps): Promise<ReactElement> => {
 				<div className={styles.sidebarBlock}>
 					<span className={styles.title}>Изменить пост</span>
 				</div>
+				{props.user?.name &&
+					<div className={styles.sidebarBlock}>
+						Публикация: <input type="text" name="author" readOnly value={props.user?.name} />
+					</div>
+				}
 				<div className={styles.sidebarBlock}>
-					Автор: {user?.data?.username}
+					Автор: <input type="text" name="written-by" readOnly value={author?.data?.username} />
 				</div>
 				<div className={styles.sidebarBlock}>
 					Дата публикации: {date}

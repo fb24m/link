@@ -1,0 +1,22 @@
+.notFound {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.buttons {
+	display: flex;
+	margin-top: 16px;
+	gap: 8px;
+}
+
+.error {
+	display: flex;
+	// align-items: center;
+	gap: 16px;
+}
+
+.code {
+	font-size: 32px;
+}

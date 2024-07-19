@@ -12,7 +12,7 @@ export const subscribe = async (formData: FormData): Promise<void> => {
 	const channel = await getUser({ id: +channelId })
 	const user = await parseUser()
 
-	if (await checkSubscription(+channelId) === true) {
+	if (await checkSubscription(+channelId)) {
 		await updateUser(exists(channel?.data?.email), exists<string>(channel?.data?.password), {
 			subscribers: exists(channel?.data?.subscribers) - 1
 		})

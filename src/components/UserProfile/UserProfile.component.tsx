@@ -16,7 +16,6 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 	return (
 		<div className={styles.profile}>
 			<div className={styles.user}>
-				{/* <div className={styles.radial}></div> */}
 				{props.selfProfile
 					? <ChangeAvatarPopup buttonContent={
 						<>
@@ -52,7 +51,7 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 						? <><form action={subscribe}>
 							<input type="text" name="channel-id" readOnly className={styles.channelId} value={props.user?.id} />
 							<SubmitButton>
-								{await checkSubscription(exists<number>(props.user.id)) === true ? 'Отписаться' : 'Подписаться'}
+								{await checkSubscription(exists<number>(props.user.id)) ? 'Отписаться' : 'Подписаться'}
 							</SubmitButton>
 						</form>
 							<Button appearance="secondary" icon="chat" href={`/user/${props.user?.username}/messenger`}></Button>

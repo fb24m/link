@@ -14,7 +14,7 @@ export const Posts = async (props: { posts: IPost[], controls?: boolean, restore
 		<div className={styles.posts}>
 			{props.posts
 				? props.posts?.map((post) =>
-					<Post self={self?.data} key={exists(post.id)} id={post.id} restore={props.restore} controls={props.controls} publishDate={post?.publishDate} author={props.author} authorId={exists(post.authorId)} content={post?.content.split('\r\n').join('<br>')} />
+					<Post self={self?.data} key={exists(post.id)} id={post.id} restore={props.restore} controls={props.controls} publishDate={post?.publishDate} writtenBy={post.writtenBy} author={props.author} authorId={exists(post.authorId)} content={post?.content.split('\r\n').join('<br>')} />
 				).reverse()
 				: 'Разорвано подключение с базой данных. Сообщите об ошибке по ссылке: github.com/ifb24m/link/issues'}
 		</div>
