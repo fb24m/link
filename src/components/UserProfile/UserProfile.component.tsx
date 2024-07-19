@@ -50,7 +50,7 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					{props.selfProfile !== true && cookies().has('link_saved_user')
 						? <><form action={subscribe}>
 							<input type="text" name="channel-id" readOnly className={styles.channelId} value={props.user?.id} />
-							<SubmitButton>
+							<SubmitButton disabled title="Кнопка подписки временно отключена из-за ошибок">
 								{await checkSubscription(exists<number>(props.user.id)) ? 'Отписаться' : 'Подписаться'}
 							</SubmitButton>
 						</form>
