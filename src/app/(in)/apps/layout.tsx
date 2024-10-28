@@ -1,8 +1,8 @@
-import { parseUser } from '@/functions/parseUser'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import type { ReactElement } from 'react'
 
 const AppsLayout = async ({ children }: { children: ReactElement }): Promise<ReactElement> => {
-	const user = await parseUser(false, 'AppsLayour loaded')
+	const user = await getCurrentAuth()
 
 	return (
 		<div>

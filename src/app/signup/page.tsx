@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react'
+import { type ReactElement } from 'react'
 
 import styles from '@/scss/forms.module.scss'
 import { signup } from '@/actions/signup.action'
@@ -25,8 +25,8 @@ const Signup = async (): Promise<ReactElement> => {
 		<Container className={styles.container}>
 			<Card className={styles.card}>
 				<Box className={styles.box} alignItems="center" gap={16}>
-					<Title1 className={styles.title}>Регистрация</Title1>
-					<form className={styles.box} action={signup}>
+					<Title1 className={styles.title}>Регистрация (временно отключена)</Title1>
+					<form className={styles.box}>
 						<Box alignItems="stretch">
 							<Input required type="email" placeholder="Эл. почта" name="email" autoComplete="email" />
 							<Input required type="text" placeholder="Придумайте имя пользователя" name="username" autoComplete="username" />

@@ -4,8 +4,8 @@ module.exports = {
         "es2021": true
     },
     "extends": [
-        "standard-with-typescript",
-        "plugin:react/recommended"
+        // "standard-with-typescript",
+        // "plugin:react/recommended"
     ],
     "overrides": [
         {

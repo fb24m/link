@@ -48,13 +48,13 @@
 
 .content {
 
+	text-wrap: wrap;
+	word-wrap: break-word;
+
 	&,
 	& * {
 		hyphens: auto;
 	}
-
-	text-wrap:wrap;
-	word-wrap:break-word;
 
 	strong {
 		font-weight: 500;
@@ -66,8 +66,6 @@
 		&:hover {
 			color: #000;
 		}
-
-		// color: #0000ff;
 	}
 }
 

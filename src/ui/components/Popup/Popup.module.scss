@@ -1,4 +1,4 @@
-@import "@/scss/vars";
+@use "@/scss/vars";
 
 .wrapper {
 	display: none;
@@ -7,7 +7,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: $window;
+	z-index: vars.$window;
 	background-color: rgba(#000000, 40%);
 }
 

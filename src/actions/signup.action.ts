@@ -11,7 +11,9 @@ const getRandomInt = (min: number, max: number): number => {
 	else return getRandomInt(min, max)
 }
 
-export const signup = async (formData: FormData): Promise<{ ok: boolean, message: string } | null> => {
+export const signup = async (_: unknown, formData: FormData): Promise<{ ok: boolean, message: string } | null> => {
+	const cookie = await cookies()
+
 	const rawData = {
 		email: exists(formData.get('email')) as string,
 		username: exists(formData.get('username')) as string,
@@ -23,12 +25,12 @@ export const signup = async (formData: FormData): Promise<{ ok: boolean, message
 		return { ok: false, message: 'Пароли не совпадают' }
 	}
 
-	const code = `${getRandomInt(100000, 999999)}`
+	const code: string = `${getRandomInt(100000, 999999)}`;
 
-	(await cookies()).set('temp_email', rawData.email)
-	(await cookies()).set('temp_password', rawData.password)
-	(await cookies()).set('temp_username', rawData.username)
-	(await cookies()).set('confirm_code', code)
+	cookie.set('temp_email', rawData.email)
+	cookie.set('temp_password', rawData.password)
+	cookie.set('temp_username', rawData.username)
+	cookie.set('confirm_code', code)
 
 	fetch(`https://fb24m.ru/mail.php?to=${rawData.email}&subject=Подтверждение почты&message=Ваш код подтверждения: ${code}`)
 		.then((data) => data.text())

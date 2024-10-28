@@ -1,12 +1,12 @@
 @use "@/scss/breakpoints.scss";
-@import "@/scss/vars.scss";
+@use "@/scss/vars.scss";
 
 .header {
 	border-bottom: var(--medium-color) 1px solid;
 	position: sticky;
 	top: 0;
 	background-color: var(--background-color);
-	z-index: $fixed;
+	z-index: vars.$fixed;
 
 }
 

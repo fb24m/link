@@ -18,8 +18,6 @@ export const Markdown = ({ children }: { children: string }): ReactElement => {
 
 	const videos = post?.match(/&gt;\[.+\..+\/.+\.mp4\]/gm)
 
-	console.log('match', videos)
-
 	return (typeof post === 'string'
 		? <div className={styles.markdown}
 			dangerouslySetInnerHTML={{

@@ -1,12 +1,12 @@
-import { parseUser } from '@/functions/parseUser'
 import { getAppByOwnerId } from '@/services/Prisma/app/getByOwnerId'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { Title1 } from '@/ui/components/Title1/Title1.component'
 import type { ReactElement } from 'react'
 
 const Apps = async (): Promise<ReactElement> => {
-	const user = await parseUser()
+	const user = await getCurrentAuth()
 
 	if (!user?.ok || !user.data) return <></>
 

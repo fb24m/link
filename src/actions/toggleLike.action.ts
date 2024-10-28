@@ -4,7 +4,7 @@ import { getPostById } from '@/services/Prisma/post/getById'
 import { exists } from '../functions/exists'
 import { prisma } from '@/services/Prisma.service'
 import { revalidatePath } from 'next/cache'
-import { parseUser } from '@/functions/parseUser'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 export const toggleLike = async (formData: FormData): Promise<void> => {
 	const rawData = {
@@ -12,7 +12,7 @@ export const toggleLike = async (formData: FormData): Promise<void> => {
 	}
 
 	const post = await getPostById(rawData.postId)
-	const user = await parseUser()
+	const user = await getCurrentAuth()
 
 	// если в списке людей, которые лайкнули пост, нашелся активный пользователь
 	if (post?.liked?.includes(`/${user?.data?.id}/`) === true) {

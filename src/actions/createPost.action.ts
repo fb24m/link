@@ -9,11 +9,11 @@ export const createPost = async (formData: FormData): Promise<void> => {
 	const rawData = {
 		content: exists(formData.get('content')) as string,
 		writtenBy: exists(formData.get('written-by')) as string,
-		author: formData.get('author')
+		author: formData.get('author') as string
 	}
 
 	const authorId = typeof rawData.author === 'string'
-		? await prisma.community.findUnique({ where: { name: rawData.author } })
+		? await prisma.community.findUnique({ where: { id: 0 } })
 		: await prisma.user.findUnique({ where: { username: rawData.writtenBy } })
 
 	await prisma_createPost(rawData.content.split('<').join('&lt;').split('>').join('&gt;'), exists<number>(authorId?.id))
