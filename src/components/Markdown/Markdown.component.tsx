@@ -5,6 +5,7 @@ import { type ReactElement } from 'react'
 
 import styles from './Markdown.module.scss'
 import { Spinner } from '@/ui/components/Spinner/Spinner.component'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 export const Markdown = ({ children }: { children: string }): ReactElement => {
 	const marked = useMarked(children)
@@ -23,6 +24,10 @@ export const Markdown = ({ children }: { children: string }): ReactElement => {
 			dangerouslySetInnerHTML={{
 				__html: post
 			}}></div>
-		: <Spinner size={32} stroke="#fff" />
+		: <>
+			<Skeleton width="100%" height={20} />
+			<Skeleton width="100%" height={20} />
+			<Skeleton width="100%" height={20} />
+		</>
 	)
 }

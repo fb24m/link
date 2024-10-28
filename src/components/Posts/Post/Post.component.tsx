@@ -1,23 +1,27 @@
 import type { ReactElement } from 'react'
-import styles from './Post.module.scss'
 import type { PostProps } from './Post.props'
 import Link from 'next/link'
-import { formatDate } from './formatDate'
-import { exists } from '@/functions/exists'
 import { movePostToDeleted } from '@/actions/movePostToDeleted.action'
+
 import { restorePost } from '@/actions/restorePost'
+import { exists } from '@/functions/exists'
+
 import { Comments } from './Comments/Comments.component'
-import { prisma } from '@/services/Prisma.service'
 import { Box } from '@/ui/components/Box/Box.component'
 import { Markdown } from '@/components/Markdown/Markdown.component'
-
 import { ActionButton } from '@/components/ActionButton/ActionButton.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { CopyButton } from '@/components/CopyButton/CopyButton.component'
+import { DateFormat } from '@/entities/Date/Date'
+
+import { prisma } from '@/services/Prisma.service'
 import { saveArticle } from '@/actions/saveArticle.action'
 import { checkSavedPost } from '@/services/Prisma/post/checkSaved'
 import { getUser } from '@/services/Prisma/user/get'
+
+
+import styles from './Post.module.scss'
 
 const maxContentLength = 500
 
@@ -53,7 +57,9 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 					<img src={author.avatar ?? ''} className={styles.avatar} />
 					<div className={styles.userdata}>
 						<Link href={`/user/${author?.username}`} className={styles.name}>{author?.username}</Link>
-						<span className={styles.date}>{formatDate(props.post.publishDate)}</span>
+						<span className={styles.date}>
+							<DateFormat {...!props.full && { format: 'relative' }} date={new Date(props.post.publishDate ?? '')} />
+						</span>
 					</div>
 					{exists(props.controls) || props.controls === true
 						? <div className={styles.actions}>

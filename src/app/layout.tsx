@@ -21,14 +21,11 @@ const Layout = async ({ children }: { children: ReactNode }): Promise<ReactEleme
   return (
     <html lang="en">
       <body className={montserrat.className}>
-
         <main className="main">
           {children}
         </main>
 
-        {/* <UserProvider /> */}
         <ShortForm />
-
       </body>
     </html>
   )

@@ -1,5 +1,4 @@
 import { Button } from '@/ui/components/Button/Button.component'
-import { Card } from '@/ui/components/Card/Card.component'
 import type { ReactElement } from 'react'
 import styles from './Sidebar.module.scss'
 import { exists } from '@/functions/exists'
@@ -7,7 +6,6 @@ import { Username } from '../Username/Username.component'
 import { prisma } from '@/services/Prisma.service'
 import { clsx } from '@/functions/clsx'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
-import Link from 'next/link'
 
 export const Sidebar = async (): Promise<ReactElement> => {
 	const user = await getCurrentAuth()
@@ -27,6 +25,7 @@ export const Sidebar = async (): Promise<ReactElement> => {
 					<li><Button className={styles.button} appearance="transparent" href="/" icon="home">Главная</Button></li>
 					<li><Button className={styles.button} appearance="transparent" href="/post" icon="add_circle">Создать</Button></li>
 					<li><Button className={styles.button} appearance="transparent" href="/profile" icon="person">Профиль</Button></li>
+					<li><Button className={styles.button} appearance="transparent" href="/profile/settings" icon="settings">Настройки</Button></li>
 				</>}
 				<li><Button className={styles.button} appearance="transparent" href="https://github.com/iFB24M/link/issues" target="_blank" icon="error">Нашли ошибку?</Button></li>
 			</ul>
