@@ -1,8 +1,8 @@
 'use server'
 
 import { exists } from '@/functions/exists'
-import { parseUser } from '@/functions/parseUser'
-import { updateUser } from '@/services/Prisma/updateUser'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { postUser } from '@/services/Prisma/user/post'
 import { revalidatePath } from 'next/cache'
 
 export const updateBio = async (formData: FormData): Promise<void> => {
@@ -10,12 +10,11 @@ export const updateBio = async (formData: FormData): Promise<void> => {
 		newBio: exists(formData.get('new-bio')) as string
 	}
 
-	const user = await parseUser()
+	const user = await getCurrentAuth()
 
-	const email = user?.data?.email !== null ? user?.data?.email : ''
-	const password = user?.data?.password !== null ? user?.data?.password : ''
+	if (!user.data) return
 
-	await updateUser(exists(email), exists(password), { bio: rawData.newBio })
+	await postUser(user.data.id, { bio: rawData.newBio })
 
 	revalidatePath('/profile')
 }

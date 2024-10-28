@@ -8,11 +8,11 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { redirect } from 'next/navigation'
-import { parseUser } from '@/functions/parseUser'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 const Welcome = async (): Promise<ReactElement> => {
 	console.log('rendering welcome')
-	const user = await parseUser()
+	const user = await getCurrentAuth()
 
 	if (!user) { redirect('/login') }
 

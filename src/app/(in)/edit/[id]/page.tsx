@@ -3,10 +3,11 @@ import type { ReactElement } from 'react'
 import { exists } from '@/functions/exists'
 import { Editor } from '@/components/Editor/Editor.component'
 
-const Post = async ({ params }: { params: { id: string } }): Promise<ReactElement> => {
-	const post = await getPostById(+params.id)
+const Post = async (props: { params: Promise<{ id: string }> }): Promise<ReactElement> => {
+    const params = await props.params;
+    const post = await getPostById(+params.id)
 
-	return (
+    return (
 		<Editor post={exists(post)} />
 	)
 }

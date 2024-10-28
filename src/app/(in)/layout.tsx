@@ -1,7 +1,9 @@
+import { Container } from '@/components/Container/Container.component'
 import { Sidebar } from '@/components/Sidebar/Sidebar.component'
 import type { Metadata } from 'next'
-// import './globals.scss'
 import { type ReactElement, type ReactNode } from 'react'
+import styles from './layout.module.scss'
+import { Header } from '@/components/Header/Header.component'
 
 export const metadata: Metadata = {
 	title: 'NextLink',
@@ -13,13 +15,14 @@ export const metadata: Metadata = {
 	}
 }
 
-const Layout = async ({ children }: { children: ReactNode }): Promise<ReactElement> => {
-	return (
-		<>
-			<Sidebar></Sidebar>
+const Layout = async ({ children }: { children: ReactNode }): Promise<ReactElement> => (
+	<>
+		<Header />
+		<Container className={styles.inContainer}>
+			<Sidebar />
 			{children}
-		</>
-	)
-}
+		</Container>
+	</>
+)
 
 export default Layout

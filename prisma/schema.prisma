@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,16 +9,16 @@ datasource db {
 
 model User {
   id                      Int     @id @default(autoincrement())
-  avatar                  String?
   email                   String  @unique
   username                String  @unique
   password                String
   bio                     String?
+  avatar                  String?
   subscribedTo            String?
-  subscribedToCommunities String?
   subscribers             Int?
   badge                   String?
   savedArticles           String?
+  subscribedToCommunities String?
   apps                    App[]
 }
 
@@ -32,48 +29,52 @@ model Comment {
   content     String    @db.LongText
   postId      Int?
   Post        Post?     @relation(fields: [postId], references: [id])
+
+  @@index([postId], map: "Comment_postId_fkey")
 }
 
 model Post {
-  publishDate DateTime? @default(now())
   id          Int       @id @default(autoincrement())
   title       String    @default("")
   content     String    @db.LongText
   imageUrl    String?
   authorId    Int?      @default(0)
-  writtenBy   Int?      @default(0)
+  publishDate DateTime? @default(now())
   deleted     Boolean?  @default(false)
-  likes       Int?      @default(0)
   liked       String?   @default("")
-  comments    Comment[]
+  likes       Int?      @default(0)
   userId      Int?
+  writtenBy   Int?      @default(0)
+  comments    Comment[]
 }
 
 model Message {
   id       Int      @id @default(autoincrement())
   chatName String
   date     DateTime @default(now())
-  author   String?
   content  String
+  author   String?
 }
 
 model Community {
   id          Int     @id @default(autoincrement())
   avatar      String?
-  name        String? @unique
   bio         String?
   subscribers Int?
   badge       String?
   ownerId     Int
   admins      String
+  name        String?
   visibility  String
 }
 
 model App {
   id          Int    @id @default(autoincrement())
-  User        User?  @relation(fields: [userId], references: [id])
   userId      Int?
   title       String @unique
   description String @db.LongText
   url         String @unique
+  User        User?  @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "App_userId_fkey")
 }

@@ -16,6 +16,10 @@ export const Markdown = ({ children }: { children: string }): ReactElement => {
 		post = post?.split(username).join(`<a href="/user/${username.split('@')[1]}">${username}</a>`)
 	})
 
+	const videos = post?.match(/&gt;\[.+\..+\/.+\.mp4\]/gm)
+
+	console.log('match', videos)
+
 	return (typeof post === 'string'
 		? <div className={styles.markdown}
 			dangerouslySetInnerHTML={{

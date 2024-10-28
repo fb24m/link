@@ -6,7 +6,7 @@ import { createPost } from '../../actions/createPost.action'
 import { exists } from '@/functions/exists'
 import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
 import Link from 'next/link'
-import { parseUser } from '@/functions/parseUser'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 export interface EditorProps {
 	post?: IPost
@@ -19,7 +19,7 @@ export interface EditorProps {
 export const Editor = async (props: EditorProps): Promise<ReactElement> => {
 	const now = typeof props.post?.publishDate !== 'undefined' ? props.post?.publishDate : props.publishDate
 	const date = `${now?.getDate()}.${exists(now?.getMonth()) + 1}.${now?.getFullYear()}`
-	const author = await parseUser(true)
+	const author = await getCurrentAuth()
 
 	return (
 		<form action={props.new === true ? createPost : updatePost} className={styles.form}>

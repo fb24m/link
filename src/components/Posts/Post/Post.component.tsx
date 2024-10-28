@@ -15,20 +15,18 @@ import { ActionButton } from '@/components/ActionButton/ActionButton.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { CopyButton } from '@/components/CopyButton/CopyButton.component'
-import { getUser } from '@/services/Prisma/getUser'
 import { saveArticle } from '@/actions/saveArticle.action'
 import { checkSavedPost } from '@/services/Prisma/post/checkSaved'
+import { getUser } from '@/services/Prisma/user/get'
 
 const maxContentLength = 500
 
 export const Post = async (props: PostProps): Promise<ReactElement> => {
-	if (!props.post.authorId && !props.post.writtenBy) return <></>
+	if (!props.post.authorId) return <></>
 
 	const author = props.author
 		? props.author
-		: (await getUser({
-			id: exists(props.post.authorId) ? exists(props.post.authorId) : exists(props.post.writtenBy)
-		}, `[Post] rendering, getting user ${props.post.writtenBy}`)).data
+		: (await getUser(props.post.authorId))
 
 	// let content = props.content
 	let content = props.post.content.split('<br>').join('\n')
@@ -52,7 +50,7 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 		<>
 			<Card className={styles.post}>
 				<div className={styles.author}>
-					<img src={exists(author?.avatar)} className={styles.avatar}></img>
+					<img src={author.avatar ?? ''} className={styles.avatar} />
 					<div className={styles.userdata}>
 						<Link href={`/user/${author?.username}`} className={styles.name}>{author?.username}</Link>
 						<span className={styles.date}>{formatDate(props.post.publishDate)}</span>
@@ -66,9 +64,9 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 						</div>
 						: ''}
 				</div>
-				<Markdown>
-					{content}
-				</Markdown>
+
+				<Markdown>{content}</Markdown>
+
 				{content.length >= maxContentLength && props.full !== true &&
 					<Link className={styles.readMore} href={`/article/${props.post.id}`}>Читать далее</Link>
 				}

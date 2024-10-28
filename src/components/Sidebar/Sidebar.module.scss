@@ -32,14 +32,17 @@
 }
 
 .loginButton {
-	// margin-top: 8px;
 	margin-bottom: 24px;
 }
 
 .sidebar {
+	transition: max-width .3s;
 	background-color: var(--background-color);
 	max-height: calc(100vh - 120px);
 	overflow-y: auto;
+
+	min-width: 200px;
+	max-width: 200px;
 
 	@media (max-width: 768px) {
 		flex-basis: auto;
@@ -49,7 +52,6 @@
 .cookies {
 	display: flex;
 	gap: 8px;
-	// align-items: center;
 
 	margin-bottom: 16px;
 

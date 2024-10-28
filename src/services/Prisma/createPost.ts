@@ -1,10 +1,10 @@
 'use server'
 
 import { prisma } from '../Prisma.service'
-import { parseUser } from '@/functions/parseUser'
+import { getCurrentAuth } from './user/getCurrentAuth'
 
 export const createPost = async (content: string, authorId: number): Promise<void> => {
-	const author = await parseUser(false, 'createPost')
+	const author = await getCurrentAuth()
 
 	await prisma.post.create({
 		data: {

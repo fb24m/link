@@ -18,19 +18,21 @@ import { prisma } from '@/services/Prisma.service'
 import type { NextRequest } from 'next/server'
 
 // TODO: Fix typization
-export const GET = async (_: NextRequest, props: { params: Promise<{ username: string }> }): Promise<any> => {
-    const params = await props.params
-    const user = await prisma.user.findUnique({
-        where: { username: params.username }
-    })
-    const avatar = await gravatar.getAvatar(user?.email ?? '')
+export const GET = async (request: NextRequest, props: any): Promise<any> => {
+	const queryParams = new URLSearchParams(new URL(request.url).search)
 
-    const safeUser = {
-        ...user,
-        password: undefined,
-        savedArticles: user?.savedArticles?.split('/').map(item => +item).filter(item => item),
-        avatar: avatar.entry[0].thumbnailUrl
-    }
+	const user = await prisma.user.findUnique({
+		where: { id: queryParams.get('id') ? +queryParams.get('id')! : 0 }
+	})
 
-    return Response.json({ ok: true, code: 200, message: 'success', user: safeUser })
+	const avatar = await gravatar.getAvatar(user?.email ?? '')
+
+	const safeUser = {
+		...user,
+		password: undefined,
+		savedArticles: user?.savedArticles?.split('/').map(item => +item).filter(item => item),
+		avatar: avatar.entry?.[0].thumbnailUrl
+	}
+
+	return Response.json({ ok: true, code: 200, message: 'success', data: safeUser })
 }

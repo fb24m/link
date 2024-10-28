@@ -10,13 +10,13 @@ import { UserProfile } from '@/components/UserProfile/UserProfile.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import type { IUser } from '@/interfaces/IUser.interface'
 import { getPosts } from '@/services/Prisma/post/getPosts'
-import { getUser } from '@/services/Prisma/getUser'
 import { redirect } from 'next/navigation'
-import { parseUser } from '@/functions/parseUser'
 import styles from './page.module.scss'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
-export const generateMetadata = async (props: { params: { username: string } }): Promise<Metadata> => {
-	const user = await getUser({ username: props.params.username }, 'profile')
+export const generateMetadata = async (props: { params: Promise<{ username: string }> }): Promise<Metadata> => {
+	const response = await fetch(`http://localhost:3000/api/user/${(await props.params).username}`)
+	const user = (await response.json()).user
 
 	return {
 		title: `Профиль ${user?.data?.username} в NextLink`,
@@ -28,22 +28,29 @@ export const generateMetadata = async (props: { params: { username: string } }):
 	}
 }
 
-const Welcome = async (props: { params: { username: string } }): Promise<ReactElement> => {
-	const user = await getUser({ username: props.params.username })
-	const posts = await getPosts({ authorId: [exists(user?.data?.id)] })
-	const self = await parseUser(false, 'user')
+const Welcome = async (props: { params: Promise<{ username: string }> }): Promise<ReactElement> => {
+	//const user = await getUser({ username: (await props.params).username })
+
+	const userResponse = await fetch(`http://localhost:3000/api/user/${(await props.params).username}`)
+	const user = (await userResponse.json()).user
+
+	const self = await getCurrentAuth()
+
+	const postsResponse = await fetch(`http://localhost:3000/api/posts?authorId=${user.id}`)
+	const posts = (await postsResponse.json()).data
+
 
 	if (self?.data?.username === user.data?.username) {
 		redirect('/profile')
 	}
 
-	if (!user || !user.ok) return <Container>{user.message}</Container>
-	if (!posts || !posts.data) return <Container>{posts.message}</Container>
+	if (!user) return <Container></Container>
+	if (!posts.length) return <Container></Container>
 
 	return (
 		<div className={styles.user}>
-			<UserProfile user={exists<IUser>(user.data)} postsCount={posts.data.length} />
-			<Posts author={user.data} posts={posts.data} />
+			<UserProfile user={user} postsCount={posts.length} />
+			<Posts author={user} posts={posts} />
 		</div>
 	)
 }

@@ -3,7 +3,9 @@ const months = [
 ]
 
 export const formatDate = (date: Date | undefined | null): string => {
-	if (typeof date === 'undefined' || date === null) return '1 янв 1970, 00:00'
+	if (!date) return '1 янв 1970, 00:00'
+
+	date = new Date(date)
 
 	const day = date.getDate()
 	const month = months[date.getMonth()]

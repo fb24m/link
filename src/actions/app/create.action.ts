@@ -1,11 +1,11 @@
 'use server'
 
 import { exists } from '@/functions/exists'
-import { parseUser } from '@/functions/parseUser'
 import { prisma } from '@/services/Prisma.service'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 export const createApp = async (formData: FormData): Promise<void> => {
-	const developer = await parseUser()
+	const developer = await getCurrentAuth()
 
 	const rawData = {
 		developerId: developer?.data?.id,

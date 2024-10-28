@@ -7,23 +7,25 @@ import type { Metadata } from 'next'
 import { exists } from '@/functions/exists'
 import { BackButton } from '@/components/BackButton/BackButton.component'
 import { Post } from '@/components/Posts/Post/Post.component'
-import { getUser } from '@/services/Prisma/getUser'
+import { getUser } from '@/services/Prisma/user/get'
 
-export const generateMetadata = async ({ params }: { params: { id: string } }): Promise<Metadata> => {
+export const generateMetadata = async (props: { params: Promise<{ id: string }> }): Promise<Metadata> => {
+	const params = await props.params;
 	const post = await getPostById(+params.id)
-	const author = await getUser({ id: +exists(post?.authorId) })
+	const author = await getUser(+exists(post?.authorId))
 
 	return {
-		title: `Пост ${author?.data?.username} на NextLink`,
+		title: `Пост ${author?.username} на NextLink`,
 		description: `${post?.content.slice(0, 100).split('\n').join('')}...`,
 		openGraph: {
-			title: `Пост ${author?.data?.username} на NextLink`,
+			title: `Пост ${author?.username} на NextLink`,
 			description: `${post?.content.slice(0, 100).split('\n').join('')}...`
 		}
 	}
 }
 
-const Article = async ({ params }: { params: { id: string } }): Promise<ReactElement> => {
+const Article = async (props: { params: Promise<{ id: string }> }): Promise<ReactElement> => {
+	const params = await props.params;
 	const id = +params.id
 	const post = await getPostById(id)
 

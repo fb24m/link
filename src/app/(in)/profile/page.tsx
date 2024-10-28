@@ -8,28 +8,42 @@ import { Container } from '@/components/Container/Container.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
-import { parseUser } from '@/functions/parseUser'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 
 const Welcome = async (): Promise<ReactElement> => {
-	const user = await parseUser(true)
+	const userData = (await cookies()).get('link_saved_user')?.value
+	const userResponse = await fetch(`http://localhost:3000/api/user/${userData?.split(':')[0]}`)
+
+	if (!userResponse.ok) {
+		const json = await userResponse.json()
+		console.log(json.message)
+
+
+		return <></>
+	}
+
+	const user = (await userResponse.json()).user
 
 	if (!user) { redirect('/login') }
 
-	if (!user.data) return <Container>{user.message}</Container>
+	if (!user) return <Container>{user.message}</Container>
 
-	const posts = await getPosts({ authorId: [exists(user?.data.id)] })
+	const response = await fetch(`http://localhost:3000/api/posts?authorId=${user.id}`)
+	const posts = await response.json()
+
+	console.log(posts.data)
 
 	return (
 		<div className={styles.profile}>
-			<UserProfile postsCount={exists<number>(posts.data?.length)} selfProfile user={user.data} />
+			<UserProfile postsCount={exists<number>(posts.data?.length)} selfProfile user={user} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
 				<Button appearance="primary" icon="person" href="/profile">Профиль</Button>
 				<Button appearance="secondary" icon="delete" href="/profile/deleted">Удаленные</Button>
 				<Button appearance="secondary" icon="star" href="/profile/saved">Избранное</Button>
 				<Button appearance="transparent" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
-			<Posts controls posts={posts.data ? posts.data : []} />
+			<Posts controls author={user} posts={posts.data ? posts.data : []} />
 		</div>
 	)
 }

@@ -5,28 +5,32 @@ import { exists } from '../functions/exists'
 
 import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
-import { parseUser } from '@/functions/parseUser'
 import { Sidebar } from '@/components/Sidebar/Sidebar.component'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { Container } from '@/components/Container/Container.component'
+import { Header } from '@/components/Header/Header.component'
 
 const Home = async (): Promise<ReactElement> => {
-  const user = await parseUser(false)
+  const user = await getCurrentAuth()
+
   const subsribedTo: number[] =
     exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
   const posts = exists<IPost[]>((await getPosts({ authorId: subsribedTo })).data)
 
   console.log('posts')
 
-  console.log(user)
-
   return (
-    <div className="main-container">
-      {typeof user !== 'undefined' ? <Sidebar></Sidebar> : ''}
-      <div className={styles.posts}>
-        {typeof user !== 'undefined'
-          ? <Posts posts={posts} />
-          : 'Войдите, чтобы просматривать посты своих друзей в ленте'}
-      </div>
-    </div>
+    <>
+      <Header />
+      <Container className="main-container">
+        {typeof user !== 'undefined' ? <Sidebar></Sidebar> : ''}
+        <div className={styles.posts}>
+          {typeof user !== 'undefined'
+            ? <Posts posts={posts} />
+            : 'Войдите, чтобы просматривать посты своих друзей в ленте'}
+        </div>
+      </Container>
+    </>
   )
 }
 

@@ -8,9 +8,9 @@ import Textarea from '@/ui/components/Textarea/Textarea.component'
 import { Radio } from '@/ui/components/Radio/Radio'
 import { clsx } from '@/functions/clsx'
 import { prisma } from '@/services/Prisma.service'
-import { getSelf } from '@/services/Prisma/getSelf'
 import Image from 'next/image'
 import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 const createCommunity = async (formData: FormData): Promise<void> => {
 	'use server'
@@ -27,7 +27,7 @@ const createCommunity = async (formData: FormData): Promise<void> => {
 }
 
 const Communities = async (): Promise<ReactElement> => {
-	const user = await getSelf()
+	const user = await getCurrentAuth()
 
 	return (
 		<Container>

@@ -1,15 +1,11 @@
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 
 import styles from '@/scss/forms.module.scss'
-import { Box } from '@/ui/components/Box/Box.component'
-import { login } from '@/actions/login.action'
 import type { Metadata } from 'next'
-import { Container } from '@/components/Container/Container.component'
 import { Card } from '@/ui/components/Card/Card.component'
-import { Title1 } from '@/ui/components/Title1/Title1.component'
-import { Input } from '@/ui/components/Input/Input'
-import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
-import { Button } from '@/ui/components/Button/Button.component'
+import { LoginForm } from '@/features/LoginForm/LoginForm'
+import { Logo } from '@/components/Logo/Logo.component'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
 	title: 'Вход - NextLink',
@@ -20,26 +16,45 @@ export const metadata: Metadata = {
 	}
 }
 
-const Welcome = (): ReactNode => {
+const Welcome = async (): Promise<ReactElement> => {
 	return (
-		<Container className={styles.container}>
-			<Card className={styles.card}>
-				<Box alignItems="center" gap={16}>
-					<Title1 className={styles.title}>Войти</Title1>
-					<form className={styles.box} action={login}>
-						<Box alignItems="stretch">
-							<Input type="email" placeholder="Эл. почта" name="email" autoComplete="email" />
-							<Input type="password" placeholder="Пароль" name="password" autoComplete="current-password" />
-							<SubmitButton icon="login">Войти</SubmitButton>
-						</Box>
-					</form>
-					<Box className={styles.box} direction="row" justifyContent="space-between">
-						<Button appearance="link" href="/signup">Регистрация</Button>
-						<Button appearance="link" href="/restore">Забыли пароль?</Button>
-					</Box>
-				</Box>
-			</Card>
-		</Container>
+		<div className={styles.login}>
+			<div className={styles.content}>
+				<div className={styles.welcome}>
+					<Logo />
+					<h1 className={styles.title}>
+						Добро пожаловать
+					</h1>
+
+					<div className={styles.advantages}>
+						<Card className={styles.advantage}>
+							<h3 className={styles.advantageTitle}>Нет закрытых профилей</h3>
+							<p className={styles.advantageDescription}>Вы можете делиться любыми статьями с&nbsp;друзьями без&nbsp;мыслей о&nbsp;том, сможет ли он ее прочитать</p>
+						</Card>
+						<Card className={styles.advantage}>
+							<h3 className={styles.advantageTitle}>Сообщества</h3>
+							<p className={styles.advantageDescription}>Создавайте сообщества по&nbsp;интересам, распределяйте права как&nbsp;захотите</p>
+						</Card>
+						<Card className={styles.advantage}>
+							<h3 className={styles.advantageTitle}>Мини-приложения</h3>
+							<p className={styles.advantageDescription}>Бесконечный простор для&nbsp;разработки новых возможностей NextLink</p>
+						</Card>
+						<Card className={styles.advantage}>
+							<h3 className={styles.advantageTitle}>Свобода действий</h3>
+							<p className={styles.advantageDescription}>Удаляйте, изменяйте и&nbsp;пишите посты когда захотите, меняйте свой профиль под&nbsp;себя</p>
+						</Card>
+					</div>
+				</div>
+				<p className={styles.author}>
+					<Link href="https://www.fb24m.ru/">NextLink by fb24m</Link>
+				</p>
+			</div>
+			<div className={styles.loginBlock}>
+				<h2 className={styles.loginTitle}>Вход</h2>
+
+				<LoginForm />
+			</div>
+		</div>
 	)
 }
 

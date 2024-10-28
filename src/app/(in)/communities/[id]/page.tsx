@@ -6,22 +6,23 @@ import type { ReactElement } from 'react'
 import { Posts } from '@/components/Posts/Posts.component'
 import type { IPost } from '@/interfaces/IPost.interface'
 
-const CommunityPage = async ({ params }: { params: { id: string } }): Promise<ReactElement> => {
-	const community = await prisma.community.findUnique({
+const CommunityPage = async (props: { params: Promise<{ id: string }> }): Promise<ReactElement> => {
+    const params = await props.params;
+    const community = await prisma.community.findUnique({
 		where: {
 			id: +params.id
 		}
 	})
 
-	if (!community) notFound()
+    if (!community) notFound()
 
-	const posts = await prisma.post.findMany({
+    const posts = await prisma.post.findMany({
 		where: {
 			authorId: +params.id
 		}
 	})
 
-	return (
+    return (
 		<div>
 			Сообщество: {community?.name}
 

@@ -1,6 +1,6 @@
-export const hashValue = async (val: string): Promise<string> =>
+export const hashValue = async (val: string | null): Promise<string> =>
 	await crypto.subtle
-		.digest('SHA-256', new TextEncoder().encode(val))
+		.digest('SHA-256', new TextEncoder().encode(val ?? ''))
 		.then(h => {
 			const hexes = []
 			const view = new DataView(h)

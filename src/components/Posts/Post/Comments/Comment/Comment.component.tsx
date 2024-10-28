@@ -4,10 +4,10 @@ import styles from './Comment.module.scss'
 import { formatContent } from '../../formatContent'
 import { Card } from '@/ui/components/Card/Card.component'
 import { formatDate } from '../../formatDate'
-import { getUser } from '@/services/Prisma/getUser'
+import { getUser } from '@/services/Prisma/user/get'
 
 export const Comment = async (props: CommentProps): Promise<ReactElement> => {
-	const user = (await getUser({ id: props.comment.authorId })).data
+	const user = await getUser(props.comment.authorId)
 
 	return (
 		<Card>

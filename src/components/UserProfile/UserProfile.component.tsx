@@ -14,8 +14,8 @@ import { ChangeAvatarPopup } from './ChangeAvatarPopup/ChangeAvatarPopup'
 
 export const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 	return (
-		<div className={styles.profile}>
-			<div className={styles.user}>
+        (<div className={styles.profile}>
+            <div className={styles.user}>
 				{props.selfProfile
 					? <ChangeAvatarPopup buttonContent={
 						<>
@@ -42,16 +42,16 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					</div>
 				</div>
 			</div>
-			<div className={styles.username}>
+            <div className={styles.username}>
 				<div className={styles.userInfo}>
 					{props.user?.username} {props.user?.badge !== null ? <span className={styles.badge}>{props.user?.badge}</span> : ''}
 				</div>
 				<div className={styles.buttons}>
-					{props.selfProfile !== true && cookies().has('link_saved_user')
+					{props.selfProfile !== true && (await cookies()).has('link_saved_user')
 						? <><form action={subscribe}>
 							<input type="text" name="channel-id" readOnly className={styles.channelId} value={props.user?.id} />
 							<SubmitButton disabled title="Кнопка подписки временно отключена из-за ошибок">
-								{await checkSubscription(exists<number>(props.user.id)) ? 'Отписаться' : 'Подписаться'}
+								{(await checkSubscription(exists<number>(props.user.id))) ? 'Отписаться' : 'Подписаться'}
 							</SubmitButton>
 						</form>
 							<Button appearance="secondary" icon="chat" href={`/user/${props.user?.username}/messenger`}></Button>
@@ -60,7 +60,7 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					<CopyButton success="Ссылка на профиль ($0) скопирована" appearance="secondary" icon="share" text={`https://link.fb24m.ru/user/${props.user?.username}`}>Поделится</CopyButton>
 				</div>
 			</div>
-			<div className={styles.about}>
+            <div className={styles.about}>
 				<Body1 className={styles.bio}>
 					{props.user?.bio}
 				</Body1>
@@ -68,6 +68,6 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					? <ChangeBioPopup currentBio={props.user?.bio} buttonText={props.user?.bio === null || props.user?.bio === '' ? 'Добавить пару строк о себе' : 'Изменить'} />
 					: ''}
 			</div>
-		</div >
-	)
+        </div >)
+    );
 }

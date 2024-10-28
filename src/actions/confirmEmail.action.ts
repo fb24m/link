@@ -18,12 +18,12 @@ export const confirmEmail = async (formData: FormData): Promise<void> => {
 		code: exists(formData.get('code')) as string
 	}
 
-	if (cookies().get('confirm_code')?.value === rawData.code.trim()) {
+	if ((await cookies()).get('confirm_code')?.value === rawData.code.trim()) {
 		await prisma.user.create({
 			data: {
-				email: exists(cookies().get('temp_email')).value,
-				password: exists(cookies().get('temp_password')).value,
-				username: exists(cookies().get('temp_username')).value
+				email: exists((await cookies()).get('temp_email')).value,
+				password: exists((await cookies()).get('temp_password')).value,
+				username: exists((await cookies()).get('temp_username')).value
 			}
 		})
 

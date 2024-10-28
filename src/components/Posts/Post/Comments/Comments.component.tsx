@@ -8,8 +8,8 @@ import { Title1 } from '@/ui/components/Title1/Title1.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { Input } from '@/ui/components/Input/Input'
 import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
-import { parseUser } from '@/functions/parseUser'
 import Link from 'next/link'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 export const Comments = async ({ postId }: { postId: number }): Promise<ReactElement> => {
 	const comments = await prisma.comment.findMany({
@@ -20,7 +20,7 @@ export const Comments = async ({ postId }: { postId: number }): Promise<ReactEle
 		<>
 			<Title1 className={styles.title}>Комментарии</Title1>
 			<Card className={styles.card} id="comments">
-				{(await parseUser(false, 'comments'))?.ok
+				{(await getCurrentAuth())?.ok
 					? <form action={addComment} className={styles.form}>
 						<Input placeholder="Напишите комментарий..." className={styles.input} name="text" />
 						<input name="post-id" value={postId} readOnly style={{ display: 'none' }} />

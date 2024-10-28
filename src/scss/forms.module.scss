@@ -8,13 +8,82 @@
 	padding: 32px !important;
 }
 
-.title {
-	text-align: center;
+
+.login {
+	display: flex;
+	height: 100vh;
+
 }
 
-.container {
+.content {
+	background-color: var(--foreground-color);
+	color: var(--background-color);
+	padding: 64px;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	max-width: 50vw;
+}
+
+.title {
+	font-size: 56px;
+	font-weight: 900;
+	margin-top: 8px;
+}
+
+.welcome {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.author {
+	text-decoration: underline;
+}
+
+.advantages {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 16px;
+	margin-top: 64px;
+
+	&:has(.advantage:hover) .advantage:not(:hover) {
+		filter: blur(4px);
+	}
+}
+
+.advantage {
+	transition: transform .3s, filter .5s;
+
+	&:hover {
+		transform: scale(1.05);
+		user-select: none;
+	}
+}
+
+.advantage.advantage {
+	border-color: var(--negative-medium-color);
+}
+
+.advantageTitle {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.advantageDescription {
+	margin-top: 12px;
+}
+
+.loginBlock {
+	display: flex;
 	align-items: center;
-	height: 100vh;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	padding: 16px;
+}
+
+.loginTitle {
+	font-size: 32px;
+	font-weight: 600;
+	margin-bottom: 16px;
 }

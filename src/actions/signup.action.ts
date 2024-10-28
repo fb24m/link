@@ -25,10 +25,10 @@ export const signup = async (formData: FormData): Promise<{ ok: boolean, message
 
 	const code = `${getRandomInt(100000, 999999)}`
 
-	cookies().set('temp_email', rawData.email)
-	cookies().set('temp_password', rawData.password)
-	cookies().set('temp_username', rawData.username)
-	cookies().set('confirm_code', code)
+	(await cookies()).set('temp_email', rawData.email)
+	(await cookies()).set('temp_password', rawData.password)
+	(await cookies()).set('temp_username', rawData.username)
+	(await cookies()).set('confirm_code', code)
 
 	fetch(`https://fb24m.ru/mail.php?to=${rawData.email}&subject=Подтверждение почты&message=Ваш код подтверждения: ${code}`)
 		.then((data) => data.text())

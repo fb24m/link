@@ -5,27 +5,27 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { exists } from '../functions/exists'
 
-export const login = async (formData: FormData): Promise<false | null> => {
-	const rawData = {
-		email: exists(formData.get('email')) as string,
-		password: exists(formData.get('password')) as string
-	}
+interface Login { ok: boolean, message?: string }
+
+export const login = async (_: Login | null, formData: FormData): Promise<Login | null> => {
+	const username = exists(formData.get('username')) as string
+	const password = exists(formData.get('password')) as string
+
 
 	const user = await prisma.user.findUnique({
 		where: {
-			email: rawData.email,
-			password: rawData.password
+			username, password
 		}
 	})
 
 	if (user === null) {
-		return false
+		return {
+			ok: false,
+			message: 'Неправильная электронная почта или пароль.'
+		}
 	}
 
-	cookies().set('link_saved_user', `${rawData.email}:${rawData.password}`)
+	(await cookies()).set('link_saved_user', `${username}:${password}`)
 
-	if (cookies().has('login_next_page')) {
-		redirect(exists(cookies().get('login_next_page')).value)
-	}
 	redirect('/profile')
 }

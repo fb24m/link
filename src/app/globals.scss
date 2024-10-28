@@ -1,13 +1,15 @@
 @import "@/scss/null";
 
 :root {
-	--medium-color: #ddd;
+	--medium-color: #ccc;
+	--negative-medium-color: #222;
 	--accent-color: #000;
 	--background-color: #fff;
 	--foreground-color: #333;
 
 	@media(prefers-color-scheme: dark) {
 		--medium-color: #222;
+		--negative-medium-color: #ccc;
 		--accent-color: #fff;
 		--background-color: #111;
 		--foreground-color: #eee;

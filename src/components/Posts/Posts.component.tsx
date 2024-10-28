@@ -4,13 +4,13 @@ import type { IPost } from '@/interfaces/IPost.interface'
 import { exists } from '@/functions/exists'
 
 import { Post } from './Post/Post.component'
-import { parseUser } from '@/functions/parseUser'
 import type { IUser } from '@/interfaces/IUser.interface'
 import { Card } from '@/ui/components/Card/Card.component'
 import { Button } from '@/ui/components/Button/Button.component'
+import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 export const Posts = async (props: { posts: IPost[], controls?: boolean, restore?: boolean, author?: IUser }): Promise<ReactElement> => {
-	const self = await parseUser(false, '[rendering] Posts, parsing self')
+	const self = await getCurrentAuth()
 
 	return (
 		<div className={styles.posts}>
