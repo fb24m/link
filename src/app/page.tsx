@@ -9,13 +9,16 @@ import { Sidebar } from '@/components/Sidebar/Sidebar.component'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import { Container } from '@/components/Container/Container.component'
 import { Header } from '@/components/Header/Header.component'
+import { posts } from '@/shared/api/posts'
 
 const Home = async (): Promise<ReactElement> => {
   const user = await getCurrentAuth()
 
   const subsribedTo: number[] =
     exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
-  const posts = exists<IPost[]>((await getPosts({ authorId: subsribedTo })).data)
+  const thisposts = (await posts.getByAuthorsIds(subsribedTo))
+
+  console.log(thisposts)
 
   return (
     <>
@@ -24,7 +27,7 @@ const Home = async (): Promise<ReactElement> => {
         {typeof user !== 'undefined' ? <Sidebar></Sidebar> : ''}
         <div className={styles.posts}>
           {typeof user !== 'undefined'
-            ? <Posts posts={posts} />
+            ? <Posts posts={thisposts} />
             : 'Войдите, чтобы просматривать посты своих друзей в ленте'}
         </div>
       </Container>
