@@ -33,7 +33,8 @@ const Welcome = async (): Promise<ReactElement> => {
 				<Button appearance="secondary" icon="star" href="/profile/saved">Избранное</Button>
 				<Button appearance="transparent" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
-			<Posts controls author={user} posts={posts.data ? posts.data : []} />
+			{/* TODO: fix typization */}
+			<Posts controls author={user} posts={posts.data ? posts.data.filter((post: any) => !post.deleted) : []} />
 		</div>
 	)
 }

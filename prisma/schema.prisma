@@ -7,10 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model UserProfileLink {
+  id     Int     @id @default(autoincrement())
+  User   User?   @relation(fields: [userId], references: [id])
+  userId Int?
+  icon   String?
+  link   String
+}
+
 model User {
-  id                      Int     @id @default(autoincrement())
-  email                   String  @unique
-  username                String  @unique
+  id                      Int               @id @default(autoincrement())
+  email                   String            @unique
+  username                String            @unique
   password                String
   bio                     String?
   avatar                  String?
@@ -20,6 +28,7 @@ model User {
   savedArticles           String?
   subscribedToCommunities String?
   apps                    App[]
+  links                   UserProfileLink[]
 }
 
 model Comment {

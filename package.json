@@ -11,7 +11,7 @@
     "env": "vercel env pull"
   },
   "dependencies": {
-    "@prisma/client": "5.7.0",
+    "@prisma/client": "5.21.1",
     "marked": "^11.1.0",
     "next": "^15.0.1",
     "react": "18.2.0",
@@ -23,7 +23,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18",
     "encoding": "^0.1.13",
-    "prisma": "5.7.0",
+    "prisma": "5.21.1",
     "sass": "^1.80.4",
     "typescript": "^5.3.3"
   }

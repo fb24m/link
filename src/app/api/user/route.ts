@@ -21,9 +21,19 @@ import type { NextRequest } from 'next/server'
 export const GET = async (request: NextRequest, props: any): Promise<any> => {
 	const queryParams = new URLSearchParams(new URL(request.url).search)
 
-	const user = await prisma.user.findUnique({
-		where: { id: queryParams.get('id') ? +queryParams.get('id')! : 0 }
+	const id = queryParams.get('id') ? +queryParams.get('id')! : 0
+	const username = queryParams.get('username') ? queryParams.get('username')! : ''
+
+	const user = await prisma.user.findFirst({
+		where: {
+			...id ? { id } : {},
+			...username ? { username } : {},
+		}
 	})
+
+	if (!user) {
+		return Response.json({ ok: true, code: 404, message: 'Not found' })
+	}
 
 	const avatar = await gravatar.getAvatar(user?.email ?? '')
 

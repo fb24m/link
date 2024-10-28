@@ -1,0 +1,57 @@
+.title2 {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.title.title {
+	margin-top: 8px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.back {
+	display: inline-block;
+	min-width: 0;
+}
+
+.grid {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 16px;
+	margin-top: 10px;
+}
+
+.dangerous {
+	margin-top: 16px;
+
+	transition: border-color .1s, background-color .1s, color .1s;
+
+	&:has(.details[open]) {
+		border-color: red;
+		background-color: #FF000020;
+		color: red;
+	}
+}
+
+.details {}
+
+.details .detailsOpenedTitle {
+	display: none;
+}
+
+.details[open] .detailsClosedTitle {
+	display: none;
+}
+
+.details[open] .detailsOpenedTitle {
+	display: inline-block;
+}
+
+.deleteButton {
+	margin-top: 16px;
+}
