@@ -13,23 +13,17 @@ import { cookies } from 'next/headers'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const userData = (await cookies()).get('link_saved_user')?.value
-	const userResponse = await fetch(`http://localhost:3000/api/user/${userData?.split(':')[0]}`)
+	const userResponse = await fetch(`https://link.fb24m.ru/api/user/${userData?.split(':')[0]}`)
 
-	if (!userResponse.ok) {
-		const json = await userResponse.json()
-		console.log(json.message)
+	const user = (await userResponse.json())
 
+	console.log(user)
 
-		return <></>
-	}
-
-	const user = (await userResponse.json()).user
-
-	if (!user) { redirect('/login') }
+	if (!userResponse.ok || !user || !userData) { redirect('/login') }
 
 	if (!user) return <Container>{user.message}</Container>
 
-	const response = await fetch(`http://localhost:3000/api/posts?authorId=${user.id}`)
+	const response = await fetch(`https://link.fb24m.ru/api/posts?authorId=${user.id}`)
 	const posts = await response.json()
 
 	console.log(posts.data)
