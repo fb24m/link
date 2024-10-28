@@ -31,12 +31,12 @@ export const generateMetadata = async (props: { params: Promise<{ username: stri
 const Welcome = async (props: { params: Promise<{ username: string }> }): Promise<ReactElement> => {
 	//const user = await getUser({ username: (await props.params).username })
 
-	const userResponse = await fetch(`http://localhost:3000/api/user/${(await props.params).username}`)
+	const userResponse = await fetch(`https://link.fb24m.ru/api/user/${(await props.params).username}`)
 	const user = (await userResponse.json()).user
 
 	const self = await getCurrentAuth()
 
-	const postsResponse = await fetch(`http://localhost:3000/api/posts?authorId=${user.id}`)
+	const postsResponse = await fetch(`https://link.fb24m.ru/api/posts?authorId=${user.id}`)
 	const posts = (await postsResponse.json()).data
 
 

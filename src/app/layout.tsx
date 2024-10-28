@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import './globals.scss'
 import { type ReactElement, type ReactNode } from 'react'
 import { Header } from '@/components/Header/Header.component'
+import { ShortForm } from '@/features/ShortForm/ShortForm'
 
 const montserrat = Montserrat({ weight: ['300', '400', '500', '600', '700'], display: 'swap', subsets: ['cyrillic', 'latin'] })
 
@@ -26,6 +27,7 @@ const Layout = async ({ children }: { children: ReactNode }): Promise<ReactEleme
         </main>
 
         {/* <UserProvider /> */}
+        <ShortForm />
 
       </body>
     </html>
