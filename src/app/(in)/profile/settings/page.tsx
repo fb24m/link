@@ -12,6 +12,7 @@ import { Card } from '@/ui/components/Card/Card.component'
 import { Popup } from '@/ui/components/Popup/Popup.component'
 import { DeleteProfilePopup } from '@/features/profile-settings/DeleteProfilePopup/DeleteProfilePopup'
 import { ChangePasswordForm } from '@/features/profile-settings/ChangePasswordForm/ChangePasswordForm'
+import { ChangeUsernameForm } from '@/features/profile-settings/ChangeUsernameForm/ChangeUsernameForm'
 
 const ProfileSetting = async (): Promise<ReactElement> => {
 	const user = (await getCurrentAuth()).data
@@ -37,7 +38,10 @@ const ProfileSetting = async (): Promise<ReactElement> => {
 					</Card>
 				</div>
 				<div className={styles.cards}>
-
+					<Card>
+						<h2 className={styles.title2}>Изменить имя пользователя</h2>
+						<ChangeUsernameForm />
+					</Card>
 				</div>
 			</div>
 			<Card className={styles.dangerous}>
