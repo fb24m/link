@@ -15,7 +15,7 @@ import styles from './page.module.scss'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 export const generateMetadata = async (props: { params: Promise<{ username: string }> }): Promise<Metadata> => {
-	const response = await fetch(`http://localhost:3000/api/user/${(await props.params).username}`)
+	const response = await fetch(`https://link.fb24m.ru/api/user/${(await props.params).username}`)
 	const user = (await response.json()).user
 
 	return {
