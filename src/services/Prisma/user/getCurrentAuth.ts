@@ -11,7 +11,7 @@ export const getCurrentAuth = async (): Promise<IResponse<User>> => {
 
 	const [username] = cookie.get('link_saved_user')!.value.split(':')
 
-	const response = await fetch(`http://localhost:3000/api/user/${username}`)
+	const response = await fetch(`https://link.fb24m.ru/api/user/${username}`)
 	const user = await response.json()
 
 	return {
