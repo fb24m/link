@@ -10,23 +10,21 @@ import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
+import { posts } from '@/shared/api/posts'
+import { users } from '@/shared/api/users'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const userData = (await cookies()).get('link_saved_user')?.value
-	const userResponse = await fetch(`https://link.fb24m.ru/api/user/${userData?.split(':')[0]}`)
 
-	const user = (await userResponse.json()).user
+	const user = await users.getByUsername(userData?.split(':')[0] ?? '')
 
-	if (!userResponse.ok || !user || !userData) { redirect('/login') }
+	if (!user || !userData) { redirect('/login') }
 
-	if (!user) return <Container>{user.message}</Container>
-
-	const response = await fetch(`https://link.fb24m.ru/api/posts?authorId=${user.id}`)
-	const posts = await response.json()
+	const myposts = (await posts.getByAuthorId(user.id))
 
 	return (
 		<div className={styles.profile}>
-			<UserProfile postsCount={exists<number>(posts.data?.length)} selfProfile user={user} />
+			<UserProfile postsCount={exists<number>(myposts?.length)} selfProfile user={user} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
 				<Button appearance="primary" icon="person" href="/profile">Профиль</Button>
 				<Button appearance="secondary" icon="delete" href="/profile/deleted">Удаленные</Button>
@@ -34,7 +32,7 @@ const Welcome = async (): Promise<ReactElement> => {
 				<Button appearance="transparent" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
 			{/* TODO: fix typization */}
-			<Posts controls author={user} posts={posts.data ? posts.data.filter((post: any) => !post.deleted) : []} />
+			<Posts controls author={user} posts={myposts ? myposts.filter((post: any) => !post.deleted) : []} />
 		</div>
 	)
 }
