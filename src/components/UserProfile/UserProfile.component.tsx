@@ -14,13 +14,13 @@ import { ChangeAvatarPopup } from './ChangeAvatarPopup/ChangeAvatarPopup'
 
 export const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 	return (
-        (<div className={styles.profile}>
-            <div className={styles.user}>
+		(<div className={styles.profile}>
+			<div className={styles.user}>
 				{props.selfProfile
 					? <ChangeAvatarPopup buttonContent={
 						<>
-							<img src={exists(props.user?.avatar)} className={styles.avatar}></img>
-							<img src={exists(props.user?.avatar)} className={styles.glow}></img>
+							<img src={props.user?.avatar ?? undefined} className={styles.avatar}></img>
+							<img src={props.user?.avatar ?? undefined} className={styles.glow}></img>
 						</>
 					} />
 					: <>
@@ -42,7 +42,7 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					</div>
 				</div>
 			</div>
-            <div className={styles.username}>
+			<div className={styles.username}>
 				<div className={styles.userInfo}>
 					{props.user?.username} {props.user?.badge !== null ? <span className={styles.badge}>{props.user?.badge}</span> : ''}
 				</div>
@@ -60,7 +60,7 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					<CopyButton success="Ссылка на профиль ($0) скопирована" appearance="secondary" icon="share" text={`https://link.fb24m.ru/user/${props.user?.username}`}>Поделится</CopyButton>
 				</div>
 			</div>
-            <div className={styles.about}>
+			<div className={styles.about}>
 				<Body1 className={styles.bio}>
 					{props.user?.bio}
 				</Body1>
@@ -68,6 +68,6 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					? <ChangeBioPopup currentBio={props.user?.bio} buttonText={props.user?.bio === null || props.user?.bio === '' ? 'Добавить пару строк о себе' : 'Изменить'} />
 					: ''}
 			</div>
-        </div >)
-    );
+		</div >)
+	);
 }

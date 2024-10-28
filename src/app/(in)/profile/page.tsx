@@ -15,9 +15,7 @@ const Welcome = async (): Promise<ReactElement> => {
 	const userData = (await cookies()).get('link_saved_user')?.value
 	const userResponse = await fetch(`https://link.fb24m.ru/api/user/${userData?.split(':')[0]}`)
 
-	const user = (await userResponse.json())
-
-	console.log(user)
+	const user = (await userResponse.json()).user
 
 	if (!userResponse.ok || !user || !userData) { redirect('/login') }
 
@@ -25,8 +23,6 @@ const Welcome = async (): Promise<ReactElement> => {
 
 	const response = await fetch(`https://link.fb24m.ru/api/posts?authorId=${user.id}`)
 	const posts = await response.json()
-
-	console.log(posts.data)
 
 	return (
 		<div className={styles.profile}>

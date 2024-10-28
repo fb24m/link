@@ -14,8 +14,6 @@ export const createApp = async (formData: FormData): Promise<void> => {
 		url: exists(formData.get('url')) as string
 	}
 
-	console.log(rawData)
-
 	await prisma.app.create({
 		data: {
 			userId: rawData.developerId,

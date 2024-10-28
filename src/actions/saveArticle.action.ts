@@ -9,7 +9,6 @@ import { revalidatePath } from 'next/cache'
 export const saveArticle = async (formData: FormData): Promise<void> => {
 	const id = +exists(formData.get('post-id'))
 
-	console.log('saveArticle')
 	const user = await getCurrentAuth()
 
 	if (!user.data) {

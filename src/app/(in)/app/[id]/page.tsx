@@ -5,11 +5,10 @@ import { Title1 } from '@/ui/components/Title1/Title1.component'
 import { Button } from '@/ui/components/Button/Button.component'
 
 const App = async (props: { params: Promise<{ id: number }> }): Promise<ReactElement> => {
-    const params = await props.params;
-    console.log(params.id)
-    const app = await getAppById(+params.id)
+	const params = await props.params;
+	const app = await getAppById(+params.id)
 
-    return (
+	return (
 		<div className={styles.wrapper}>
 			<div className={styles.header}>
 				<Title1>{app.data?.title}</Title1>

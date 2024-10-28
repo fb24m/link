@@ -11,7 +11,6 @@ import { redirect } from 'next/navigation'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 
 const Welcome = async (): Promise<ReactElement> => {
-	console.log('rendering welcome')
 	const user = await getCurrentAuth()
 
 	if (!user) { redirect('/login') }

@@ -7,7 +7,6 @@ import { getUser } from '@/services/Prisma/user/get'
 
 export const Username = async ({ id, avatar, className }: { id: number, avatar?: boolean, className: string }): Promise<ReactElement> => {
 	const user = await getUser(id)
-	console.log('rendering Username')
 
 	return (
 		<Button href={`/user/${user?.username}`} appearance="transparent" className={className}>

@@ -3,8 +3,6 @@ import { User } from '@prisma/client'
 import { cookies } from 'next/headers'
 
 export const getCurrentAuth = async (): Promise<IResponse<User>> => {
-	console.log('getting auth')
-
 	const cookie = await cookies()
 
 	if (!cookie.get('link_saved_user')?.value) return { ok: false, message: 'Cookie link_saved_user not found' }

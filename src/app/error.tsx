@@ -5,8 +5,6 @@ import { Markdown } from '@/components/Markdown/Markdown.component'
 import type { ReactNode } from 'react'
 
 const Error = ({ error }: any): ReactNode => {
-	console.log(error)
-
 	return (
 		<Container>
 			<Markdown>

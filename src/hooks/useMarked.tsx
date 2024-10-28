@@ -12,7 +12,7 @@ export const useMarked = (markdown: string): string | undefined => {
 
 			if (md !== '') setHtml(md)
 		}
-		parse().catch((e) => { console.log(e) })
+		parse().catch((e) => { console.error(e) })
 	}, [])
 
 	return html
