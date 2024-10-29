@@ -4,6 +4,7 @@ export interface IUser {
 	email: string
 	bio?: string | null
 	badge?: string | null
+	pronouns?: string
 	password: string
 	avatar?: string | null
 	subscribedTo?: string | null
