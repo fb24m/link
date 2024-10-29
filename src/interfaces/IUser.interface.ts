@@ -10,6 +10,8 @@ export interface IUser {
 	subscribedTo?: string | null
 	subscribers?: number | null
 	savedArticles?: string | null
+	statusIcon?: string
+	statusTooltip?: string
 }
 
 export interface ISetUser extends Partial<IUser> { }

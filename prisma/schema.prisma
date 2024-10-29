@@ -25,6 +25,8 @@ model User {
   subscribedTo            String?
   subscribers             Int?
   badge                   String?
+  statusIcon              String?
+  statusTooltip           String?
   savedArticles           String?
   subscribedToCommunities String?
   apps                    App[]

@@ -195,3 +195,28 @@
 	font-size: 12px;
 	margin-right: 8px;
 }
+
+
+.avatar {
+	position: relative;
+}
+
+.statusIcon {
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
+	z-index: 4;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	background-color: var(--background-color);
+
+	i {
+		font-size: 16px;
+	}
+}
