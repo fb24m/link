@@ -20,7 +20,6 @@ import { saveArticle } from '@/actions/saveArticle.action'
 import { checkSavedPost } from '@/services/Prisma/post/checkSaved'
 import { getUser } from '@/services/Prisma/user/get'
 
-
 import styles from './Post.module.scss'
 
 const maxContentLength = 500
