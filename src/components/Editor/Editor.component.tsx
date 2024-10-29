@@ -7,6 +7,10 @@ import { exists } from '@/functions/exists'
 import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
 import Link from 'next/link'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { MainHeader } from '../Header/MainHeader/MainHeader.component'
+import { BackButton } from '../BackButton/BackButton.component'
+import { Card } from '@/ui/components/Card/Card.component'
+import { Button } from '@/ui/components/Button/Button.component'
 
 export interface EditorProps {
 	post?: IPost
@@ -22,47 +26,59 @@ export const Editor = async (props: EditorProps): Promise<ReactElement> => {
 	const author = await getCurrentAuth()
 
 	return (
-		<form action={props.new === true ? createPost : updatePost} className={styles.form}>
-			<input type="text" style={{ display: 'none' }} name="id" readOnly value={props.post?.id} />
-			<div className={styles.post}>
-				<textarea
-					className={styles.textarea}
-					name="content"
-					id=""
-					placeholder="Текст поста"
-					defaultValue={props.post?.content.split('<br>').join('\n')}
-				/>
-			</div>
-			<div className={styles.sidebar}>
-				<div className={styles.sidebarBlock}>
-					<span className={styles.title}>Изменить пост</span>
+		<div className={styles.wrapper}>
+			<MainHeader fullWidth />
+			<form action={props.new === true ? createPost : updatePost} className={styles.form}>
+				<input type="text" style={{ display: 'none' }} name="id" readOnly value={props.post?.id} />
+				<div className={styles.post}>
+					<textarea
+						className={styles.textarea}
+						name="content"
+						id=""
+						placeholder="Текст поста"
+						defaultValue={props.post?.content.split('<br>').join('\n')}
+					/>
 				</div>
-				{props.user?.name &&
+				<div className={styles.sidebar}>
+					<BackButton className={styles.backButton} appearance="transparent" icon="arrow_back">Назад</BackButton>
 					<div className={styles.sidebarBlock}>
-						Публикация: <input type="text" name="author" readOnly value={props.user?.name} />
+						<span className={styles.title}>{props.new ? 'Создать' : 'Изменить'} пост</span>
 					</div>
-				}
-				<div className={styles.sidebarBlock}>
-					Автор: <input type="text" name="written-by" readOnly value={author?.data?.username} />
+					{props.user?.name &&
+						<div className={styles.sidebarBlock}>
+							Публикация: {props.user?.name}
+						</div>
+					}
+					<div className={styles.sidebarBlock}>
+						Автор: {author?.data?.username}
+					</div>
+					<div className={styles.sidebarBlock}>
+						Дата публикации: {date}
+					</div>
+					<details className={styles.instruction}>
+						<summary>Форматирование</summary>
+						<Card className={styles.formatingExamples}>
+							<p>
+								**<strong>жирный текст</strong>**
+							</p><p>
+								*<i>курсивный текст</i>*
+							</p><p>
+								~~<del>зачеркнутый текст</del>~~
+							</p>
+							<p>
+								<Link href="/profile/fb24m">@fb24m</Link> - упоминание
+							</p>
+							<p>
+								!(Описание)[ссылка] - вставка картинки
+							</p>
+							<Button appearance="secondary" href="/article/86">Подробнее</Button>
+						</Card>
+					</details>
+					<SubmitButton className={styles.button} icon={props.new === true ? 'add_circle' : 'update'}>
+						{props.new === true ? 'Создать' : 'Изменить'}
+					</SubmitButton>
 				</div>
-				<div className={styles.sidebarBlock}>
-					Дата публикации: {date}
-				</div>
-				<details className={styles.instruction}>
-					<summary>Форматирование</summary>
-					<p>
-						**<strong>жирный текст</strong>**
-					</p><p>
-						*<i>курсивный текст</i>*
-					</p><p>
-						~~<del>зачеркнутый текст</del>~~
-					</p>
-					<Link href="/article/86">Подробнее</Link>
-				</details>
-				<SubmitButton className={styles.button} icon={props.new === true ? 'add_circle' : 'update'}>
-					{props.new === true ? 'Создать' : 'Изменить'}
-				</SubmitButton>
-			</div>
-		</form>
+			</form>
+		</div>
 	)
 }

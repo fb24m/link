@@ -10,26 +10,28 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { redirect } from 'next/navigation'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { posts } from '@/shared/api/posts'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await getCurrentAuth()
 
 	if (!user) { redirect('/login') }
 
-	const posts = await getDeletedPostsByAuthorId([exists(user?.data?.id)])
+	const deletedPosts = (await posts.getByAuthorId(user.data?.id ?? 0))
+		.filter((post: any) => post.deleted)
 
 	if (!user.data) return <Container>{user.message}</Container>
 
 	return (
 		<div>
-			<UserProfile selfProfile user={user.data} postsCount={posts.length} />
+			<UserProfile selfProfile user={user.data} postsCount={deletedPosts.length} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
 				<Button appearance="secondary" icon="person" href="/profile">Профиль</Button>
 				<Button appearance="primary" icon="delete" href="/profile/deleted">Удаленные</Button>
 				<Button appearance="secondary" icon="star" href="/profile/saved">Избранное</Button>
 				<Button appearance="transparent" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
-			<Posts restore controls posts={posts} />
+			<Posts restore controls posts={deletedPosts} />
 		</div>
 	)
 }

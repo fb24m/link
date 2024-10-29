@@ -12,7 +12,10 @@ export const SubmitButton = ({ children, className, ...props }: ButtonProps): Re
 
 	return (
 		<Button className={`${styles.button} ${className}`} appearance="primary" {...props}>
-			{formStatus.pending ? <Spinner stroke="var(--foreground-color)" size={18} /> : ''}
+			{formStatus.pending ?
+				<div className={styles.loader}>
+					<Spinner stroke="var(--background-color)" size={18} />
+				</div> : ''}
 			{children}
 		</Button>
 	)

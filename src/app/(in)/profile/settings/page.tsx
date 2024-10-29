@@ -13,11 +13,14 @@ import { Card } from '@/ui/components/Card/Card.component'
 import { DeleteProfilePopup } from '@/features/profile-settings/DeleteProfilePopup/DeleteProfilePopup'
 import { ChangePasswordForm } from '@/features/profile-settings/ChangePasswordForm/ChangePasswordForm'
 import { ChangeUsernameForm } from '@/features/profile-settings/ChangeUsernameForm/ChangeUsernameForm'
-import { LinksBlock } from '@/features/profile-settings/LinksBlock/LinksBlock'
+import { LogoutPopup } from '@/features/profile-settings/Logout/LogoutPopup/LogoutPopup'
+import { users } from '@/shared/api/users'
+import { LinksPopup } from '@/features/profile-settings/LinksBlock/LinksPopup/LinksPopup'
 
 const ProfileSetting = async (): Promise<ReactElement> => {
 	const user = (await getCurrentAuth()).data
 	const myposts = await posts.getByAuthorId(user?.id ?? 0)
+	const links = await users.getLinksByUsername(user?.username ?? '')
 
 	if (!user) { redirect('/login') }
 
@@ -43,12 +46,18 @@ const ProfileSetting = async (): Promise<ReactElement> => {
 						<h2 className={styles.title2}>Изменить имя пользователя</h2>
 						<ChangeUsernameForm />
 					</Card>
-					<Card>
+					<Card className={styles.block}>
 						<h2 className={styles.title2}>Ссылки</h2>
-						<LinksBlock />
+						<LinksPopup userLinks={links} />
 					</Card>
 				</div>
 			</div>
+			<Card className={styles.logout}>
+				<h2 className={styles.title2}>
+					Выход из аккаунта
+				</h2>
+				<LogoutPopup />
+			</Card>
 			<Card className={styles.dangerous}>
 				<details className={styles.details}>
 					<summary className={styles.title2}>

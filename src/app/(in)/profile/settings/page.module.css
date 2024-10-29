@@ -44,6 +44,12 @@
 	}
 }
 
+.block {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .details {}
 
 .details .detailsOpenedTitle {
@@ -59,5 +65,12 @@
 }
 
 .deleteButton {
+	margin-top: 16px;
+}
+
+.logout {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	margin-top: 16px;
 }

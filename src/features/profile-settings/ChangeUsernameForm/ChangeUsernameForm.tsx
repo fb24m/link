@@ -2,9 +2,9 @@
 
 import { Input } from '@/ui/components/Input/Input'
 import styles from './ChangeUsernameForm.module.css'
-import { Button } from '@/ui/components/Button/Button.component'
 import { useActionState } from 'react'
 import { changeUsername } from './changeUsername'
+import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
 
 export const ChangeUsernameForm = () => {
 	const [message, changeUsernameAction] = useActionState(changeUsername, null)
@@ -19,7 +19,7 @@ export const ChangeUsernameForm = () => {
 			/>
 			<div className={styles.buttons}>
 				{message}
-				<Button appearance="primary">Сохранить</Button>
+				<SubmitButton appearance="primary">Сохранить</SubmitButton>
 			</div>
 		</form>
 	)

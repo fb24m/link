@@ -1,0 +1,47 @@
+.title {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 2px 0;
+}
+
+.linkTag {
+	padding: 8px;
+	display: flex;
+	border: var(--medium-color) 1px solid;
+	border-radius: 8px;
+	min-width: 0;
+	max-width: 100%;
+
+	& label {
+		white-space: nowrap;
+	}
+}
+
+.links {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	margin-top: 16px;
+	gap: 8px;
+}
+
+.input {
+	flex-grow: 1;
+	min-width: 0;
+	border: none;
+	outline: none;
+}
+
+.label {
+	margin-top: 16px;
+	font-size: 14px;
+	opacity: 0.5;
+}

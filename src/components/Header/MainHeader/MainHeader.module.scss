@@ -20,6 +20,10 @@
 	padding-block: 8px;
 }
 
+.container.fullWidth {
+	max-width: 9999px;
+}
+
 .menu {
 	display: flex;
 	gap: 16px 16px;
