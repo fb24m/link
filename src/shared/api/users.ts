@@ -3,12 +3,8 @@ import { API } from './helpers/env'
 import { cookies } from 'next/headers'
 
 export const users = {
-	getById: async (id: number) => request(`${API}/user?id=${id}`, {
-		next: { revalidate: 3600 }
-	}),
-	getByUsername: async (username: string) => (await request(`${API}/user?username=${username}`, {
-		next: { revalidate: 3600 }
-	})).data,
+	getById: async (id: number) => request(`${API}/user?id=${id}`),
+	getByUsername: async (username: string) => (await request(`${API}/user?username=${username}`)).data,
 	getLinksByUsername: async (username: string) => (await request(`${API}/user/${username}/links`)).data,
 	updatePassword: async (newPassword: string) => {
 		const cookie = await cookies()

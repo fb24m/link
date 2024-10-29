@@ -72,6 +72,8 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 				</div>
 			</div>
 			<div className={styles.about}>
+				{props.user?.pronouns && <>
+					<span className={styles.pronouns}>{props.user?.pronouns}</span></>}
 				<Body1 className={styles.bio}>{props.user?.bio}</Body1>
 
 				{props.selfProfile &&

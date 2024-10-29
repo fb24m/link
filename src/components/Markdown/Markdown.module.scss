@@ -5,6 +5,30 @@
 	word-wrap: break-word;
 	line-height: 150%;
 
+	* {
+		transition: opacity .3s;
+	}
+
+	&:has(img:active) * {
+		opacity: 0.5
+	}
+
+	p:has(img:active),
+	img:hover {
+		opacity: 1;
+	}
+
+	img {
+		display: inline-block;
+		max-height: 500px;
+		transition: box-shadow .3s, transform .3s;
+
+		&:active {
+			box-shadow: var(--medium-color) 0 0 100px;
+			transform: scale(1.01);
+		}
+	}
+
 	div:has(table) {
 		overflow-x: auto;
 	}

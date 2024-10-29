@@ -18,6 +18,12 @@
 	min-width: 0;
 }
 
+.cards {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
 .grid {
 	width: 100%;
 	display: grid;

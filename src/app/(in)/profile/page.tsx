@@ -4,10 +4,8 @@ import styles from './page.module.scss'
 import { Box } from '@/ui/components/Box/Box.component'
 import { exists } from '@/functions/exists'
 import { UserProfile } from '@/components/UserProfile/UserProfile.component'
-import { Container } from '@/components/Container/Container.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
-import { getPosts } from '@/services/Prisma/post/getPosts'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import { posts } from '@/shared/api/posts'
@@ -17,6 +15,8 @@ const Welcome = async (): Promise<ReactElement> => {
 	const userData = (await cookies()).get('link_saved_user')?.value
 
 	const user = await users.getByUsername(userData?.split(':')[0] ?? '')
+
+	console.log(user)
 
 	if (!user || !userData) { redirect('/login') }
 

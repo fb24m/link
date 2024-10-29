@@ -41,7 +41,8 @@ export const GET = async (request: NextRequest, props: any): Promise<any> => {
 		...user,
 		password: undefined,
 		savedArticles: user?.savedArticles?.split('/').map(item => +item).filter(item => item),
-		avatar: avatar.entry?.[0].thumbnailUrl
+		avatar: avatar.entry?.[0].thumbnailUrl,
+		pronouns: avatar.entry?.[0].pronouns
 	}
 
 	return Response.json({ ok: true, code: 200, message: 'success', data: safeUser })

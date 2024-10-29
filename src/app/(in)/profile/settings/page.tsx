@@ -1,18 +1,19 @@
 import type { ReactElement } from 'react'
 
-import { UserProfile } from '@/components/UserProfile/UserProfile.component'
 import { redirect } from 'next/navigation'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import { posts } from '@/shared/api/posts'
-import { Title1 } from '@/ui/components/Title1/Title1.component'
 import styles from './page.module.css'
-import { Input } from '@/ui/components/Input/Input'
+
+import { UserProfile } from '@/components/UserProfile/UserProfile.component'
+import { Title1 } from '@/ui/components/Title1/Title1.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
-import { Popup } from '@/ui/components/Popup/Popup.component'
+
 import { DeleteProfilePopup } from '@/features/profile-settings/DeleteProfilePopup/DeleteProfilePopup'
 import { ChangePasswordForm } from '@/features/profile-settings/ChangePasswordForm/ChangePasswordForm'
 import { ChangeUsernameForm } from '@/features/profile-settings/ChangeUsernameForm/ChangeUsernameForm'
+import { LinksBlock } from '@/features/profile-settings/LinksBlock/LinksBlock'
 
 const ProfileSetting = async (): Promise<ReactElement> => {
 	const user = (await getCurrentAuth()).data
@@ -42,6 +43,10 @@ const ProfileSetting = async (): Promise<ReactElement> => {
 						<h2 className={styles.title2}>Изменить имя пользователя</h2>
 						<ChangeUsernameForm />
 					</Card>
+					<Card>
+						<h2 className={styles.title2}>Ссылки</h2>
+						<LinksBlock />
+					</Card>
 				</div>
 			</div>
 			<Card className={styles.dangerous}>
@@ -56,7 +61,6 @@ const ProfileSetting = async (): Promise<ReactElement> => {
 					</div>
 
 				</details>
-
 			</Card>
 		</div>
 	)

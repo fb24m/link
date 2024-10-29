@@ -18,8 +18,6 @@ const Home = async (): Promise<ReactElement> => {
     exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
   const thisposts = (await posts.getByAuthorsIds(subsribedTo))
 
-  console.log(thisposts)
-
   return (
     <>
       <Header />
