@@ -1,3 +1,5 @@
+'use client'
+
 import { useContext, type HTMLAttributes, type ReactNode } from 'react'
 import { PopupContext } from '../Popup/Popup.component'
 

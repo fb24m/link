@@ -13,6 +13,9 @@ const nextConfig = {
 				pathname: '/**/*'
 			}
 		]
+	},
+	sassOptions: {
+		api: 'modern-compiler'
 	}
 }
 

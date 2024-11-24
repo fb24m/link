@@ -5,4 +5,34 @@
 	width: 100%;
 	border-radius: 8px;
 	border: var(--medium-color) 1px solid;
+	overflow-y: auto;
+	max-height: calc(100vh - 64px);
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.popupHeader {
+	display: flex;
+	justify-content: flex-end;
+	// padding: 8px;
+	border-bottom: rgba(#000, 5%) 1px solid;
+}
+
+
+.topCloseButton {
+	position: absolute;
+	right: 0;
+	padding: 4px 16px;
+	border-radius: 0 !important;
+	transition: background-color .1s;
+
+	&:hover {
+		background-color: rgba(#000, 10%);
+	}
+
+	i {
+		color: #000;
+	}
 }

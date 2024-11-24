@@ -1,8 +1,8 @@
 'use server'
 
-import type { IPost } from '@/interfaces/IPost.interface'
+import type { IPost } from '@/shared/interfaces/IPost.interface'
 import { prisma } from '../../Prisma.service'
-import type { IResponse } from '@/interfaces/IResponse.interface'
+import type { IResponse } from '@/shared/interfaces/IResponse.interface'
 
 interface IPostWhere {
 	authorId?: number[]

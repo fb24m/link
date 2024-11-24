@@ -1,4 +1,4 @@
-import type { IMessage } from '@/interfaces/Message.interface'
+import type { IMessage } from '@/shared/interfaces/Message.interface'
 import { prisma } from '@/services/Prisma.service'
 
 export const addMessage = async (data: IMessage): Promise<void> => {

@@ -1,4 +1,4 @@
-import type { IUser } from '@/interfaces/IUser.interface'
+import type { IUser } from '@/shared/interfaces/IUser.interface'
 
 export const checkSavedPost = async (user: IUser, id: number): Promise<boolean> => {
 	if (!user || !user.id) console.error('checkSavedPost: user is not valid')

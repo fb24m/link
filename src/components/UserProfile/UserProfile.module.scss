@@ -58,8 +58,6 @@
 	position: relative;
 }
 
-.userInfo {}
-
 .username {
 	font-size: 20px;
 	font-weight: 500;
@@ -121,13 +119,6 @@
 		top: 0px;
 		background: lightblue;
 	}
-}
-
-.glow {
-	position: absolute;
-	left: 0;
-	top: 0;
-	filter: blur(24px);
 }
 
 .bio {
@@ -218,5 +209,79 @@
 
 	i {
 		font-size: 16px;
+	}
+}
+
+.header,
+.headerGlow {
+	width: 100%;
+	height: 150px;
+	margin-bottom: 16px;
+	overflow: hidden;
+	border-radius: 16px;
+
+	img {
+		width: 100%;
+		height: 200%;
+		transform: rotateZ(10deg) translateY(-25%);
+		animation-name: headerAnimation;
+		animation-duration: 10s;
+		animation-iteration-count: infinite;
+	}
+}
+
+.headerGlow {
+	overflow: visible;
+	margin-top: -36px;
+
+	height: 20px;
+
+	animation-name: glowAnimation;
+	animation-duration: 10s;
+	animation-iteration-count: infinite;
+
+	img {
+		transform: none;
+
+		animation-name: glowImageAnimation;
+	}
+}
+
+@keyframes headerAnimation {
+	0% {
+		filter: blur(60px);
+	}
+
+	25% {
+		filter: blur(60px) saturate(2) contrast(1);
+	}
+
+	75% {
+		filter: blur(60px) saturate(1) contrast(4);
+	}
+
+	100% {
+		filter: blur(60px);
+	}
+}
+
+@keyframes glowImageAnimation {
+	25% {
+		filter: saturate(2) contrast(1);
+	}
+
+	75% {
+		filter: saturate(1) contrast(4);
+	}
+
+}
+
+@keyframes glowAnimation {
+	0% {
+		filter: blur(20px);
+	}
+
+	100% {
+		filter: blur(20px);
 	}
 }

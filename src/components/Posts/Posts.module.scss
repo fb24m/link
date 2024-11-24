@@ -29,3 +29,34 @@
 		margin-top: 8px;
 	}
 }
+
+.newDesignReview {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.googleFormIframe {
+	border: none;
+	outline: none;
+	padding: 10px 0 !important;
+	// width: calc(100% + 32px);
+	width: 100%;
+
+	&::-webkit-scrollbar {
+		width: 0;
+	}
+}
+
+.googleFormPopup {
+	background-color: #fff;
+	max-width: 600px;
+	padding: 0;
+	border-radius: 12px;
+
+	&::-webkit-scrollbar {
+		width: 0;
+	}
+}

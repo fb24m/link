@@ -1,7 +1,7 @@
 import styles from './Editor.module.scss'
 import { updatePost } from '@/actions/updatePost.action'
 import type { ReactElement, ReactNode } from 'react'
-import type { IPost } from '@/interfaces/IPost.interface'
+import type { IPost } from '@/shared/interfaces/IPost.interface'
 import { createPost } from '../../actions/createPost.action'
 import { exists } from '@/functions/exists'
 import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'

@@ -6,10 +6,15 @@ import styles from './Popup.module.scss'
 export const PopupContext = createContext({
 	togglePopupClassList: (): void => { },
 	popupClassList: '',
-	wrapperClassName: ''
+	wrapperClassName: '',
+	topCloseButton: false
 })
 
-export const Popup = ({ className, ...props }: HTMLAttributes<HTMLDivElement>): ReactNode => {
+export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
+	topCloseButton?: boolean
+}
+
+export const Popup = ({ className, topCloseButton = false, ...props }: PopupProps): ReactNode => {
 	const [popupClassList, setPopupClassList] = useState('')
 
 	const togglePopupClassList = (): void => {
@@ -17,7 +22,7 @@ export const Popup = ({ className, ...props }: HTMLAttributes<HTMLDivElement>): 
 	}
 
 	return (
-		<PopupContext.Provider value={{ togglePopupClassList, popupClassList, wrapperClassName: styles.wrapper }}>
+		<PopupContext.Provider value={{ togglePopupClassList, popupClassList, wrapperClassName: styles.wrapper, topCloseButton }}>
 			<div className={`${styles.popup} ${className} ${popupClassList}`} {...props}></div>
 		</PopupContext.Provider>
 	)

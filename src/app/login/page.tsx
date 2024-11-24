@@ -21,10 +21,12 @@ const Welcome = async (): Promise<ReactElement> => {
 		<div className={styles.login}>
 			<div className={styles.content}>
 				<div className={styles.welcome}>
-					<Logo />
-					<h1 className={styles.title}>
-						Добро пожаловать
-					</h1>
+					<div className={styles.greeting}>
+						<Logo />
+						<h1 className={styles.title}>
+							Добро пожаловать
+						</h1>
+					</div>
 
 					<div className={styles.advantages}>
 						<Card className={styles.advantage}>

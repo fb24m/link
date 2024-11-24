@@ -1,5 +1,5 @@
-import type { IPost } from '@/interfaces/IPost.interface'
-import type { IUser } from '@/interfaces/IUser.interface'
+import type { IPost } from '@/shared/interfaces/IPost.interface'
+import type { IUser } from '@/shared/interfaces/IUser.interface'
 
 export interface PostProps {
 	author?: IUser

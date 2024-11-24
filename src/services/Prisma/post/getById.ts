@@ -1,6 +1,6 @@
 'use server'
 
-import type { IPost } from '@/interfaces/IPost.interface'
+import type { IPost } from '@/shared/interfaces/IPost.interface'
 import { prisma } from '@/services/Prisma.service'
 
 export const getPostById = async (id: number): Promise<IPost | null> => {

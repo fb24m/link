@@ -1,6 +1,6 @@
 import { Button } from '@/ui/components/Button/Button.component'
 import type { ReactElement } from 'react'
-import styles from './Sidebar.module.scss'
+import styles from './Sidebar.module.css'
 import { exists } from '@/functions/exists'
 import { Username } from '../Username/Username.component'
 import { prisma } from '@/services/Prisma.service'

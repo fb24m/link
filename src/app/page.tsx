@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import styles from './page.module.scss'
+import styles from './page.module.css'
 import { exists } from '../functions/exists'
 
 import { Posts } from '@/components/Posts/Posts.component'
@@ -16,7 +16,8 @@ const Home = async (): Promise<ReactElement> => {
 
   const subsribedTo: number[] =
     exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
-  const thisposts = (await posts.getByAuthorsIds(subsribedTo.length ? subsribedTo : [0]))
+
+  const thisposts = await posts.getByAuthorsIds(subsribedTo && subsribedTo.length ? subsribedTo : [0])
 
   return (
     <>
@@ -24,7 +25,7 @@ const Home = async (): Promise<ReactElement> => {
       <Container className="main-container">
         {typeof user !== 'undefined' ? <Sidebar></Sidebar> : ''}
         <div className={styles.posts}>
-          {thisposts.length
+          {thisposts && thisposts.length
             ? <Posts posts={thisposts} />
             : <Card className={styles.login}>
               Войдите, чтобы просматривать посты своих друзей в ленте

@@ -23,23 +23,21 @@ import Icon from '@/ui/components/Icon/Icon.component'
 export const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 	const links = await users.getLinksByUsername(props.user.username)
 
-	console.log(props.user)
-
 	return (
 		(<div className={styles.profile}>
+			<div className={styles.header}>
+				<img src={props.user?.avatar ?? undefined} className={styles.headerImage}></img>
+			</div>
+			<div className={styles.headerGlow}>
+				<img src={props.user?.avatar ?? undefined} className={styles.headerImage}></img>
+			</div>
 			<div className={styles.user}>
 				<div className={styles.avatar}>
 					{props.selfProfile
 						? <ChangeAvatarPopup buttonContent={
-							<>
-								<img src={props.user?.avatar ?? undefined} className={styles.avatar}></img>
-								<img src={props.user?.avatar ?? undefined} className={styles.glow}></img>
-							</>
+							<img src={props.user?.avatar ?? undefined} className={styles.avatar}></img>
 						} />
-						: <>
-							<img src={exists(props.user?.avatar)} className={styles.avatar}></img>
-							<img src={exists(props.user?.avatar)} className={styles.glow}></img>
-						</>}
+						: <img src={exists(props.user?.avatar)} className={styles.avatar}></img>}
 					{props.user?.statusIcon && props.user.statusTooltip && <div className={styles.statusIcon}>
 						<Icon title={props.user.statusTooltip} icon={props.user?.statusIcon} />
 					</div>}

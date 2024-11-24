@@ -1,4 +1,4 @@
-import type { IUser } from '@/interfaces/IUser.interface'
+import type { IUser } from '@/shared/interfaces/IUser.interface'
 
 export interface UserProfileProps {
 	addPostButton?: boolean

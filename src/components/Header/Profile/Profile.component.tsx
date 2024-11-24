@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import styles from './Profile.module.scss'
+import styles from './Profile.module.css'
 import { Button } from '@/ui/components/Button/Button.component'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 

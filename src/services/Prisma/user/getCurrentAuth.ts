@@ -1,5 +1,5 @@
-import { IResponse } from '@/interfaces/IResponse.interface'
-import { IUser } from '@/interfaces/IUser.interface'
+import { IResponse } from '@/shared/interfaces/IResponse.interface'
+import { IUser } from '@/shared/interfaces/IUser.interface'
 import { cookies } from 'next/headers'
 
 export const getCurrentAuth = async (): Promise<IResponse<IUser>> => {

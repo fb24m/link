@@ -1,4 +1,3 @@
-import { exists } from '@/functions/exists'
 import type { ReactElement } from 'react'
 import styles from './Username.module.scss'
 import { Button } from '@/ui/components/Button/Button.component'

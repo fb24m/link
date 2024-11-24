@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import type { PostProps } from './Post.props'
-import Link from 'next/link'
+import { Link } from '@/shared/ui/Link/Link'
 import { movePostToDeleted } from '@/actions/movePostToDeleted.action'
 
 import { restorePost } from '@/actions/restorePost'

@@ -1,19 +1,20 @@
 .primary,
 .secondary,
 .transparent {
-	padding: 8px 10px;
-	font-size: 14px;
+	padding: 6px 8px;
+	font-size: 12px;
 
 	&.icon {
-		padding: 5px 7px;
+		padding: 2px 6px;
 	}
 }
 
 .button {
+	transition: background-color .3s;
 	display: flex;
 	white-space: nowrap;
 	align-items: center;
-	gap: 6px;
+	gap: 4px;
 	background-color: transparent;
 	border: 0;
 	outline: 0;
@@ -28,32 +29,20 @@
 		border: var(--medium-color) 1px solid;
 		color: var(--foreground-color);
 
-		&::before {
-			transition: opacity .3s;
-
-			content: '';
-			position: absolute;
-			inset: 0;
-			width: 100%;
-			height: 100%;
-			background-color: var(--foreground-color);
-			opacity: 0;
-		}
-
-		&:hover::before {
+		&:hover {
 			@media(hover: hover) {
-				opacity: .1;
+				background-color: var(--content-layer-hover);
 			}
 		}
 
-		&:active::before {
-			opacity: .2;
+		&:active {
+			background-color: var(--content-layer-hover);
 		}
 	}
 
 	&.primary {
 		transition: opacity .3s;
-		background-color: var(--accent-color);
+		background-image: linear-gradient(45deg, var(--accent-color), var(--accent-color-2));
 		color: var(--background-color);
 
 		&:hover {
@@ -71,26 +60,14 @@
 	&.transparent {
 		color: var(--foreground-color);
 
-		&::before {
-			transition: opacity .3s;
-
-			content: '';
-			position: absolute;
-			inset: 0;
-			width: 100%;
-			height: 100%;
-			background-color: var(--foreground-color);
-			opacity: 0;
-		}
-
-		&:hover::before {
+		&:hover {
 			@media(hover: hover) {
-				opacity: .1;
+				background-color: var(--content-layer-hover);
 			}
 		}
 
-		&:active::before {
-			opacity: .2;
+		&:active {
+			background-color: var(--content-layer-hover);
 		}
 	}
 

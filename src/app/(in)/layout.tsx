@@ -20,7 +20,7 @@ const Layout = async ({ children }: { children: ReactNode }): Promise<ReactEleme
 		<Header />
 		<Container className={styles.inContainer}>
 			<Sidebar />
-			<div className={styles.main}>
+			<div data-main className={styles.main}>
 				{children}
 			</div>
 		</Container>

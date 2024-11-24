@@ -1,7 +1,7 @@
 // 'use client'
 
 import { type ReactNode } from 'react'
-import styles from './Header.module.scss'
+import styles from './Header.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Container } from '../Container/Container.component'

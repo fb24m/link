@@ -8,11 +8,14 @@
 	padding: 32px !important;
 }
 
-
 .login {
 	display: flex;
 	height: 100vh;
 
+	@media (max-width: 640px) {
+		flex-direction: column;
+		height: auto;
+	}
 }
 
 .content {
@@ -22,12 +25,49 @@
 	display: flex;
 	flex-direction: column;
 	max-width: 50vw;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		width: 0;
+	}
+
+	@media (max-width: 1024px) {
+		padding: 32px 20px;
+	}
+
+	@media (max-width: 640px) {
+		max-width: 100%;
+		overflow: visible;
+		padding: 20px;
+	}
+
+	@media (max-width: 475px) {
+		padding: 15px;
+	}
 }
 
 .title {
-	font-size: 56px;
+	font-size: 50px;
 	font-weight: 900;
 	margin-top: 8px;
+
+	@media (max-width: 1024px) {
+		font-size: 40px;
+	}
+
+	@media (max-width: 992px) {
+		font-size: 32px;
+	}
+
+	@media (max-width: 640px) {
+		margin-top: 0;
+		border-left: var(--negative-medium-color) 1px solid;
+		padding-left: 16px;
+	}
+
+	@media (max-width: 475px) {
+		padding-left: 10px;
+	}
 }
 
 .welcome {
@@ -36,8 +76,42 @@
 	flex-direction: column;
 }
 
+.greeting {
+	@media (max-width: 640px) {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+	}
+
+	@media (max-width: 475px) {
+		gap: 10px;
+	}
+
+	* {
+		@media (max-width: 640px) {
+			font-size: 24px !important;
+		}
+
+		@media (max-width: 475px) {
+			font-size: 18px !important;
+		}
+	}
+
+	img {
+		@media (max-width: 475px) {
+			height: 20px;
+			width: 20px;
+		}
+	}
+}
+
 .author {
 	text-decoration: underline;
+	margin-top: 24px;
+
+	@media (max-width: 640px) {
+		display: none;
+	}
 }
 
 .advantages {
@@ -48,6 +122,23 @@
 
 	&:has(.advantage:hover) .advantage:not(:hover) {
 		filter: blur(4px);
+	}
+
+	@media (max-width: 1024px) {
+		gap: 8px;
+	}
+
+	@media (max-width: 992px) {
+		grid-template-columns: 1fr;
+		margin-top: 20px;
+	}
+
+	@media (max-width: 640px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (max-width: 475px) {
+		margin-top: 16px;
 	}
 }
 
@@ -62,15 +153,51 @@
 
 .advantage.advantage {
 	border-color: var(--negative-medium-color);
+
+	@media (max-width: 1024px) {
+		padding: 15px 14px;
+	}
+
+	@media (max-width: 640px) {
+		padding: 12px 14px;
+	}
+
+	@media (max-width: 475px) {
+		padding: 10px 12px;
+	}
 }
 
 .advantageTitle {
 	font-size: 20px;
 	font-weight: 600;
+
+	@media (max-width: 1024px) {
+		font-size: 16px;
+	}
+
+	@media (max-width: 640px) {
+		font-size: 14px;
+	}
+
+	@media (max-width: 475px) {
+		font-size: 14px;
+	}
 }
 
 .advantageDescription {
 	margin-top: 12px;
+
+	@media (max-width: 1024px) {
+		font-size: 14px;
+	}
+
+	@media (max-width: 640px) {
+		margin-top: 6px;
+	}
+
+	@media (max-width: 475px) {
+		font-size: 13px;
+	}
 }
 
 .loginBlock {
