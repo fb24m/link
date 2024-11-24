@@ -225,7 +225,7 @@
 		height: 200%;
 		transform: rotateZ(10deg) translateY(-25%);
 		animation-name: headerAnimation;
-		animation-duration: 30s;
+		animation-duration: 60s;
 		animation-iteration-count: infinite;
 	}
 }
@@ -237,7 +237,7 @@
 	height: 20px;
 
 	animation-name: glowAnimation;
-	animation-duration: 30s;
+	animation-duration: 60s;
 	animation-iteration-count: infinite;
 
 	img {
