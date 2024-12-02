@@ -2,28 +2,37 @@
 .secondary,
 .transparent {
 	padding: 6px 8px;
-	font-size: 12px;
+
+	font-size: 14px;
 
 	&.icon {
 		padding: 2px 6px;
+	}
+
+	i {
+		font-size: 20px;
 	}
 }
 
 .button {
 	transition: background-color .3s;
 	display: flex;
-	white-space: nowrap;
 	align-items: center;
 	gap: 4px;
+	font-weight: 500;
+
+	white-space: nowrap;
 	background-color: transparent;
 	border: 0;
 	outline: 0;
-	font-weight: 500;
 	overflow: hidden;
 	position: relative;
 	cursor: pointer;
-	justify-content: center;
-	border-radius: 8px;
+	border-radius: var(--border-radius-md);
+
+	border-width: var(--button-border-width);
+	border-color: var(--button-border-color);
+	border-style: var(--button-border-style);
 
 	&.secondary {
 		border: var(--medium-color) 1px solid;

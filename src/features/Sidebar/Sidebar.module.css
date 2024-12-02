@@ -1,5 +1,4 @@
 .button {
-	padding: 4px !important;
 	justify-content: flex-start !important;
 	width: 100%;
 }
@@ -10,25 +9,10 @@
 	margin-bottom: 16px;
 }
 
-@media (max-width: 768px) {
-	.subscriptions {
-		flex-direction: row;
-		gap: 8px;
-		flex-wrap: wrap;
-	}
-}
-
 .title {
 	margin-left: 4px;
 	margin-bottom: 8px;
 	display: inline-block;
-
-}
-
-@media (max-width: 768px) {
-	.mainTitle {
-		display: none;
-	}
 }
 
 .loginButton {
@@ -46,6 +30,7 @@
 
 	@media (max-width: 768px) {
 		flex-basis: auto;
+		position: absolute;
 	}
 }
 
@@ -60,14 +45,28 @@
 	font-size: 20px;
 }
 
-
 @media (max-width: 768px) {
+
+	.mainTitle,
+	.title {
+		display: none;
+	}
+
+	.list {
+		flex-direction: row;
+		gap: 4px;
+		margin-bottom: 0;
+		flex-shrink: 0;
+	}
+
+	.list li {
+		flex-shrink: 0;
+	}
+
 	.cookies {
 		display: none;
 	}
-}
 
-@media (max-width: 768px) {
 	.menu {
 		position: fixed;
 		bottom: 0;
@@ -77,22 +76,22 @@
 		justify-content: space-evenly;
 		background-color: var(--background-color);
 		margin-bottom: 0;
-		padding-block: 8px;
+		padding-block: 4px;
 		border-top: var(--medium-color) 1px solid;
-		z-index: 999;
+		z-index: 100;
 	}
 
-	.menu li a {
-		@media (max-width: 768px) {
-			font-size: 10px;
-			display: flex;
-			flex-direction: column;
-		}
+	.sidebar .button {
+		font-size: 10px;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.menu li i {
-		@media (max-width: 768px) {
-			font-size: 24px;
-		}
+		font-size: 22px;
+	}
+
+	.subscriptions li a {
+		flex-direction: row;
 	}
 }

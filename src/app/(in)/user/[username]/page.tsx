@@ -2,43 +2,41 @@
 
 import type { ReactElement } from 'react'
 
-import { exists } from '@/functions/exists'
-
 import type { Metadata } from 'next'
 import { Container } from '@/components/Container/Container.component'
-import { UserProfile } from '@/components/UserProfile/UserProfile.component'
+import { UserProfile } from '@/widgets/UserProfile/UserProfile.component'
 import { Posts } from '@/components/Posts/Posts.component'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import styles from './page.module.scss'
 import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import { users } from '@/shared/api/users'
 import { posts } from '@/shared/api/posts'
 
 export const generateMetadata = async (props: { params: Promise<{ username: string }> }): Promise<Metadata> => {
-	const response = await fetch(`https://link.fb24m.ru/api/user/${(await props.params).username}`)
-	const user = (await response.json()).user
+	const { username } = await props.params
+	const { bio } = await users.getByUsername(username)
 
 	return {
-		title: `Профиль ${user?.username} в NextLink`,
-		description: `${exists(user?.bio) !== '' ? user?.data?.bio : 'Описание отсутствует'}`,
+		title: `Профиль ${username} в NextLink`,
+		description: bio ?? 'Описание отсутствует',
 		openGraph: {
-			title: `Профиль ${user?.username} в NextLink`,
-			description: `${exists(user?.bio) !== '' ? user?.data?.bio : 'Описание отсутствует'}`
+			title: `Профиль ${username} в NextLink`,
+			description: bio ?? 'Описание отсутствует'
 		}
 	}
 }
 
 const Welcome = async (props: { params: Promise<{ username: string }> }): Promise<ReactElement> => {
 	const user = await users.getByUsername((await props.params).username)
+
+	if (!user) notFound()
+
 	const self = await getCurrentAuth()
 	const myposts = await posts.getByAuthorId(user.id)
 
-	if (self?.data?.username === user.data?.username) {
-		redirect('/profile')
-	}
+	if (self?.data?.username === user.data?.username) redirect('/profile')
 
-	if (!users) return <Container></Container>
-	if (!myposts.length) return <Container></Container>
+	if (!myposts.length) return <Container />
 
 	return (
 		<div className={styles.user}>

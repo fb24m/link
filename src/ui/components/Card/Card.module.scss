@@ -1,5 +1,16 @@
 .card {
 	padding: 16px;
-	border-radius: 8px;
+	border-radius: var(--border-radius-md);
 	background-color: var(--content-layer);
+	border-width: var(--card-border-width);
+	border-color: var(--card-border-color);
+	border-style: var(--card-border-style);
+}
+
+@media (max-width: 640px) {
+	.card.mobileShrink {
+		padding: 0;
+		background: transparent;
+		border-radius: 0;
+	}
 }

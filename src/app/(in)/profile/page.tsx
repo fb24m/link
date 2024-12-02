@@ -3,7 +3,7 @@ import styles from './page.module.scss'
 
 import { Box } from '@/ui/components/Box/Box.component'
 import { exists } from '@/functions/exists'
-import { UserProfile } from '@/components/UserProfile/UserProfile.component'
+import { UserProfile } from '@/widgets/UserProfile/UserProfile.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { redirect } from 'next/navigation'
@@ -16,11 +16,9 @@ const Welcome = async (): Promise<ReactElement> => {
 
 	const user = await users.getByUsername(userData?.split(':')[0] ?? '')
 
-	console.log(user)
-
 	if (!user || !userData) { redirect('/login') }
 
-	const myposts = (await posts.getByAuthorId(user.id))
+	const myposts = await posts.getByAuthorId(user.id)
 
 	return (
 		<div className={styles.profile}>

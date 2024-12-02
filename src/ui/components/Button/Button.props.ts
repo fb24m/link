@@ -7,4 +7,5 @@ export interface ButtonProps extends HTMLAttributes<HTMLElement> {
 	target?: '_blank'
 	disabled?: boolean
 	type?: 'submit' | 'button' | 'reset'
+	size?: 'sm' | 'md' | 'lg'
 }

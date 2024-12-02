@@ -13,7 +13,7 @@ export interface CustomPopupProps {
 	buttonContent: ReactNode
 }
 
-export const ChangeAvatarPopup = (props: CustomPopupProps): ReactNode => {
+const ChangeAvatarPopup = (props: CustomPopupProps): ReactNode => {
 	return (
 		<Popup className={styles.popup}>
 			<PopupWrapper>
@@ -37,3 +37,5 @@ export const ChangeAvatarPopup = (props: CustomPopupProps): ReactNode => {
 		</Popup>
 	)
 }
+
+export default ChangeAvatarPopup

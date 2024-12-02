@@ -5,7 +5,8 @@
 	border-bottom: var(--medium-color) 1px solid;
 	position: sticky;
 	top: 0;
-	background-color: var(--background-color);
+	background-color: var(--background-opaque);
+	backdrop-filter: blur(64px);
 	z-index: vars.$fixed;
 
 }
@@ -35,7 +36,6 @@
 		max-width: 320px;
 		width: 100%;
 		align-items: center;
-		// justify-content: center;
 	}
 }
 

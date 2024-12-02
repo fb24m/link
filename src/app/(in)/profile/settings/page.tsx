@@ -5,7 +5,7 @@ import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import { posts } from '@/shared/api/posts'
 import styles from './page.module.css'
 
-import { UserProfile } from '@/components/UserProfile/UserProfile.component'
+import { UserProfile } from '@/widgets/UserProfile/UserProfile.component'
 import { Title1 } from '@/ui/components/Title1/Title1.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'

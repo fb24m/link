@@ -9,7 +9,7 @@ export const createPost = async (content: string, authorId: number): Promise<voi
 	await prisma.post.create({
 		data: {
 			content: content.split('\r\n').join('<br>'),
-			authorId,
+			authorId: author?.data?.id,
 			writtenBy: author?.data?.id
 		}
 	})

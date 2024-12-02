@@ -1,5 +1,5 @@
 import { Container } from '@/components/Container/Container.component'
-import { Sidebar } from '@/components/Sidebar/Sidebar.component'
+import { Sidebar } from '@/features/Sidebar/Sidebar.component'
 import type { Metadata } from 'next'
 import { type ReactElement, type ReactNode } from 'react'
 import styles from './layout.module.scss'

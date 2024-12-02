@@ -4,10 +4,10 @@ import { useMarked } from '@/hooks/useMarked'
 import { type ReactElement } from 'react'
 
 import styles from './Markdown.module.scss'
-import { Spinner } from '@/ui/components/Spinner/Spinner.component'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { clsx } from '@/functions/clsx'
 
-export const Markdown = ({ children }: { children: string }): ReactElement => {
+export const Markdown = ({ children, className }: { children: string, className?: string }): ReactElement => {
 	const marked = useMarked(children)
 	let post = marked?.split('<table>').join('<div><table>').split('</table>').join('</div></table>')
 
@@ -20,7 +20,7 @@ export const Markdown = ({ children }: { children: string }): ReactElement => {
 	const videos = post?.match(/&gt;\[.+\..+\/.+\.mp4\]/gm)
 
 	return (typeof post === 'string'
-		? <div className={styles.markdown}
+		? <div className={clsx(styles.markdown, className)}
 			dangerouslySetInnerHTML={{
 				__html: post
 			}}></div>

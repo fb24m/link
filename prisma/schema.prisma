@@ -16,21 +16,25 @@ model UserProfileLink {
 }
 
 model User {
-  id                      Int               @id @default(autoincrement())
-  email                   String            @unique
-  username                String            @unique
-  password                String
-  bio                     String?
-  avatar                  String?
-  subscribedTo            String?
-  subscribers             Int?
-  badge                   String?
-  statusIcon              String?
-  statusTooltip           String?
-  savedArticles           String?
-  subscribedToCommunities String?
-  apps                    App[]
-  links                   UserProfileLink[]
+  id            Int               @id @default(autoincrement())
+  email         String            @unique
+  username      String            @unique
+  password      String
+  bio           String?
+  avatar        String?
+  badge         String?
+  statusIcon    String?
+  statusTooltip String?
+  savedArticles String?
+  apps          App[]
+  links         UserProfileLink[]
+  pinned        Int?
+}
+
+model Subscription {
+  id   Int @id @default(autoincrement())
+  from Int
+  to   Int
 }
 
 model Comment {

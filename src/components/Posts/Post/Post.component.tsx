@@ -4,7 +4,6 @@ import { Link } from '@/shared/ui/Link/Link'
 import { movePostToDeleted } from '@/actions/movePostToDeleted.action'
 
 import { restorePost } from '@/actions/restorePost'
-import { exists } from '@/functions/exists'
 
 import { Comments } from './Comments/Comments.component'
 import { Box } from '@/ui/components/Box/Box.component'
@@ -18,86 +17,75 @@ import { DateFormat } from '@/entities/Date/Date'
 import { prisma } from '@/services/Prisma.service'
 import { saveArticle } from '@/actions/saveArticle.action'
 import { checkSavedPost } from '@/services/Prisma/post/checkSaved'
-import { getUser } from '@/services/Prisma/user/get'
 
 import styles from './Post.module.scss'
+import { ReadMore } from '@/entities/post/ReadMore'
+import { users } from '@/shared/api/users'
+import { pin } from '../pin.action'
 
 const maxContentLength = 500
 
-export const Post = async (props: PostProps): Promise<ReactElement> => {
-	if (!props.post.authorId) return <></>
+export const Post = async ({ full, post, restore, controls, ...props }: PostProps): Promise<ReactElement> => {
+	const { id, authorId, content: rawContent, publishDate } = post
 
-	const author = props.author
-		? props.author
-		: (await getUser(props.post.authorId))
+	if (!authorId) return <></>
 
-	// let content = props.content
-	let content = props.post.content.split('<br>').join('\n')
-	const comments = await prisma.comment.findMany({ where: { postId: props.post.id } })
+	const author = props.author ?? (await users.getById(authorId)).data
 
-	if (content.includes('<script') || content.includes('<style') || content.includes('<head')) {
-		content = `<span class="${styles.warning}">Этот пост создает угрозу работе сайта, поэтому он был удален</span>`
-	}
+	let content = rawContent.split('<br>').join('\n')
+	const comments = await prisma.comment.findMany({ where: { postId: id } })
 
-	if (content.length >= maxContentLength && !exists(props.full)) {
+	if (content.match(/(<script|<style|<head|style=)/g))
+		return <hr style={{ borderColor: 'var(--medium-color)' }} />
+
+	const isIncomplete = content.length > maxContentLength && !full
+
+	if (isIncomplete)
 		content = content.substring(0, maxContentLength) + '...'
-	}
-
-	if (content.includes('style=')) {
-		content = `<span class="${styles.warning}">
-		Запрещено использовать аттрибут style в постах!
-		</span>`
-	}
 
 	return (
 		<>
-			<Card className={styles.post}>
+			<Card mobileShrink className={styles.post} id={`post-${id}`}>
 				<div className={styles.author}>
-					<img src={author.avatar ?? ''} className={styles.avatar} />
+					<img src={author?.avatar ?? undefined} className={styles.avatar} />
 					<div className={styles.userdata}>
 						<Link href={`/user/${author?.username}`} className={styles.name}>{author?.username}</Link>
 						<span className={styles.date}>
-							<DateFormat {...!props.full && { format: 'relative' }} date={new Date(props.post.publishDate ?? '')} />
+							<DateFormat format={!full ? 'relative' : undefined} date={new Date(publishDate ?? '')} />
 						</span>
 					</div>
-					{exists(props.controls) || props.controls === true
-						? <div className={styles.actions}>
-							<Button appearance="transparent" icon="edit" href={`/edit/${props.post.id}`}></Button>
-							{props.restore !== true
-								? <ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.post.id}` }]} action={movePostToDeleted}></ActionButton>
-								: <ActionButton appearance="primary" icon="restore_from_trash" fields={[{ name: 'post-id', value: `${props.post.id}` }]} action={restorePost}></ActionButton>}
-						</div>
-						: ''}
+					{controls && <div className={styles.actions}>
+						<Button appearance="transparent" icon="edit" href={`/edit/${id}`}></Button>
+						<ActionButton appearance="transparent" icon="keep" fields={[{ name: 'id', value: id }]} action={pin} />
+						{restore
+							? <ActionButton appearance="primary" icon="restore_from_trash" fields={[{ name: 'post-id', value: id }]} action={restorePost} />
+							: <ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: id }]} action={movePostToDeleted} />}
+					</div>}
 				</div>
 
 				<Markdown>{content}</Markdown>
 
-				{content.length >= maxContentLength && props.full !== true &&
-					<Link className={styles.readMore} href={`/article/${props.post.id}`}>Читать далее</Link>
-				}
+				<ReadMore className={styles.readMore} show={isIncomplete} postId={id}>Читать далее</ReadMore>
 
 				<div className={styles.interaction}>
 					<Box gap={8} direction="row" className={styles.interactionButtons}>
-						{props.full !== true &&
-							<Button className={styles.interactionButton} icon="chat" appearance="secondary" href={`/article/${props.post.id}#comments`}>Комментарии ({comments.length})</Button>
+						{!full &&
+							<Button className={styles.interactionButton} icon="chat" appearance="secondary" href={`/article/${id}#comments`}>Комментарии ({comments.length})</Button>
 						}
-						<CopyButton className={styles.interactionButton} success="Ссылка на пост скопирована" text={`https://link.fb24m.ru/article/${props.post.id}`} icon="share" appearance="secondary">Поделиться</CopyButton>
-						{props.self
-							? <ActionButton
+						<CopyButton className={styles.interactionButton} success="Ссылка на пост скопирована" text={`https://link.fb24m.ru/article/${id}`} icon="share" appearance="secondary">Поделиться</CopyButton>
+						{props.self &&
+							<ActionButton
 								action={saveArticle}
 								appearance="secondary"
 								icon="save"
-								fields={[{ name: 'post-id', value: `${props.post.id}` }]}>
-								{(await checkSavedPost(props.self, props.post.id)) ? 'Удалить из сохраненных' : 'Сохранить'}
-							</ActionButton>
-							: ''}
+								fields={[{ name: 'post-id', value: id }]}>
+								{(await checkSavedPost(props.self, id)) ? 'Удалить из сохраненных' : 'Сохранить'}
+							</ActionButton>}
 					</Box>
 				</div>
 
 			</Card>
-			{props.full === true &&
-				<Comments postId={props.post.id} />
-			}
+			{full && <Comments postId={id} />}
 		</>
 	)
 }

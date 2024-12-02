@@ -1,24 +1,47 @@
 @import "@/scss/null";
 
-:root {
+html {
 	--medium-color: #ccc;
 	--negative-medium-color: #222;
 	// --accent-color: #000;
 	--background-color: #fff;
+	--background-opaque: rgb(24, 24, 24, 50%);
 	--foreground-color: #333;
 	--content-layer: rgba(60, 60, 60, .02);
 	--content-layer-hover: rgba(60, 60, 60, .05);
 	--accent-color: #18a8ff;
 	--accent-color-2: #18a8ff;
 
+	--border-radius-md: 8px;
+
 	@media(prefers-color-scheme: dark) {
 		--medium-color: #252525;
 		--negative-medium-color: #ccc;
 		// --accent-color: #fff;
 		--background-color: #181818;
+		--background-opaque: rgb(24, 24, 24, 80%);
 		--foreground-color: #eee;
 		--content-layer: #1d1d1d;
 		--content-layer-hover: rgba(255, 255, 255, .05);
+	}
+
+	&[data-theme=classic] {
+		--background-color: #c3c3c3;
+		--foreground-color: #000;
+		--accent-color: #c3c3c3;
+
+		--card-border-width: 2px;
+		--card-border-color: #333 #fff #fff #333;
+		--card-border-style: solid;
+
+		--button-border-width: 2px;
+		--button-border-color: #fff #333 #333 #fff;
+		--button-border-style: solid;
+
+		--content-layer: rgba(60, 60, 60, .02);
+		--content-layer-hover: rgba(60, 60, 60, .05);
+
+		--border-radius-md: 0;
 	}
 }
 

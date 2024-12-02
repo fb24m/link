@@ -1,10 +1,10 @@
 import { prisma } from '@/services/Prisma.service'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
 export const GET = async (request: NextRequest) => {
 	const queryParams = new URLSearchParams(new URL(request.url).search)
 
-	const authorId = +queryParams.get('authorId')!
+	const authorId = queryParams.get('authorId')!
 
 	if (!authorId) return Response.json({
 		ok: false,
@@ -14,7 +14,11 @@ export const GET = async (request: NextRequest) => {
 
 	const posts = await prisma.post.findMany({
 		where: {
-			authorId
+			authorId: authorId.includes(',')
+				? {
+					in: authorId.split(',').map(i => +i)
+				}
+				: +authorId
 		}
 	})
 

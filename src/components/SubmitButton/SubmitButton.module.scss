@@ -14,4 +14,19 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	animation-name: appearLoader;
+	animation-duration: .3s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes appearLoader {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 100%;
+	}
 }

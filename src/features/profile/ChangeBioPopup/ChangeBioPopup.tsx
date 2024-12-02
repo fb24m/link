@@ -16,7 +16,7 @@ export interface CustomPopupProps {
 	currentBio: string | null | undefined
 }
 
-export const ChangeBioPopup = (props: CustomPopupProps): ReactNode => {
+const ChangeBioPopup = (props: CustomPopupProps): ReactNode => {
 	return (
 		<Popup className={styles.popup}>
 			<PopupWrapper>
@@ -33,3 +33,5 @@ export const ChangeBioPopup = (props: CustomPopupProps): ReactNode => {
 		</Popup>
 	)
 }
+
+export default ChangeBioPopup

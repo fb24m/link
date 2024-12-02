@@ -6,11 +6,12 @@ import type { ButtonProps } from './Button.props'
 import Icon from '../Icon/Icon.component'
 import { exists } from '@/functions/exists'
 import Link from 'next/link'
+import { clsx } from '@/functions/clsx'
 
 export const Button = ({ appearance, className, href, icon, children, target, disabled, ...props }: ButtonProps): ReactNode => {
 	const defaultProps = {
-		className: `${styles.button} ${typeof appearance !== 'undefined' ? styles[appearance] : ''} ${className} ${exists(icon) !== '' ? styles.icon : ''}`,
-		children: <>{exists(icon) !== '' ? <Icon icon={exists(icon)} /> : ''} {children}</>,
+		className: clsx(styles.button, appearance && styles[appearance], className, icon && styles.icon),
+		children: <>{icon && <Icon icon={icon} />} {children}</>,
 		...props
 	}
 

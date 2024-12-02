@@ -1,0 +1,15 @@
+.sidebarItem {
+	font-size: 14px;
+	justify-content: flex-start;
+}
+
+.sidebarItem.sidebarItem.sidebarItem i {
+	font-size: 18px;
+}
+
+@media (max-width: 640px) {
+	.sidebarItem.sidebarItem {
+		font-size: 10px;
+		flex-direction: column;
+	}
+}

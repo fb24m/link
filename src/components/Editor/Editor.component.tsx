@@ -11,6 +11,7 @@ import { MainHeader } from '../Header/MainHeader/MainHeader.component'
 import { BackButton } from '../BackButton/BackButton.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { Button } from '@/ui/components/Button/Button.component'
+import { EditorArea } from '@/entities/editor/EditorArea/EditorArea'
 
 export interface EditorProps {
 	post?: IPost
@@ -28,16 +29,10 @@ export const Editor = async (props: EditorProps): Promise<ReactElement> => {
 	return (
 		<div className={styles.wrapper}>
 			<MainHeader fullWidth />
-			<form action={props.new === true ? createPost : updatePost} className={styles.form}>
+			<form action={props.new ? createPost : updatePost} className={styles.form}>
 				<input type="text" style={{ display: 'none' }} name="id" readOnly value={props.post?.id} />
 				<div className={styles.post}>
-					<textarea
-						className={styles.textarea}
-						name="content"
-						id=""
-						placeholder="Текст поста"
-						defaultValue={props.post?.content.split('<br>').join('\n')}
-					/>
+					<EditorArea defaultValue={props.post?.content.split('<br>').join('\n')} />
 				</div>
 				<div className={styles.sidebar}>
 					<BackButton className={styles.backButton} appearance="transparent" icon="arrow_back">Назад</BackButton>

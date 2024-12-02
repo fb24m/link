@@ -7,12 +7,12 @@ import type { Metadata } from 'next'
 import { exists } from '@/functions/exists'
 import { BackButton } from '@/components/BackButton/BackButton.component'
 import { Post } from '@/components/Posts/Post/Post.component'
-import { getUser } from '@/services/Prisma/user/get'
+import { users } from '@/shared/api/users'
 
 export const generateMetadata = async (props: { params: Promise<{ id: string }> }): Promise<Metadata> => {
 	const params = await props.params;
 	const post = await getPostById(+params.id)
-	const author = await getUser(+exists(post?.authorId))
+	const author = await users.getById(+exists(post?.authorId))
 
 	return {
 		title: `Пост ${author?.username} на NextLink`,
@@ -25,9 +25,8 @@ export const generateMetadata = async (props: { params: Promise<{ id: string }> 
 }
 
 const Article = async (props: { params: Promise<{ id: string }> }): Promise<ReactElement> => {
-	const params = await props.params;
-	const id = +params.id
-	const post = await getPostById(id)
+	const { id } = await props.params
+	const post = await getPostById(+id)
 
 	return (
 		<div>
