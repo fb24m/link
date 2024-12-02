@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 
 export const unpin = async () => {
-	await fetch(`${API}/user/fb24m/pin`, {
+	await fetch(`${API}/user/${(await cookies()).get('link_saved_user')?.value.split(':')[0]}/pin`, {
 		method: 'post',
 		body: JSON.stringify({ id: undefined }),
 		headers: {

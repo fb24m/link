@@ -12,7 +12,7 @@ export const pin = async (formData: FormData) => {
 		return
 	}
 
-	const response = await fetch(`${API}/user/fb24m/pin`, {
+	const response = await fetch(`${API}/user/${(await cookies()).get('link_saved_user')?.value.split(':')[0]}/pin`, {
 		method: 'post',
 		body: JSON.stringify({ id: +id }),
 		headers: {
