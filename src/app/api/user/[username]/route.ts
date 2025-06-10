@@ -11,6 +11,8 @@ export const GET = async (_: NextRequest, props: { params: Promise<{ username: s
     }
   })
 
+  if (!user) return Response.json({ ok: false, code: 404, message: 'not found' })
+
   if (!user?.last_gravatar_query || (new Date().getTime() - user?.last_gravatar_query.getTime()) > 60000 * 15) {
     const avatar = await gravatar.getAvatar(user?.email ?? '')
 
