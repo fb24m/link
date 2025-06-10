@@ -1,10 +1,10 @@
 import type { ReactElement } from 'react'
 import styles from './Profile.module.css'
 import { Button } from '@/ui/components/Button/Button.component'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 
 export const Profile = async (): Promise<ReactElement> => {
-	const user = await getCurrentAuth()
+	const user = await users.getMe()
 
 	return (
 		<Button appearance="transparent" icon="account_circle" href="/profile" className={styles.profile}>

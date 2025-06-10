@@ -1,8 +1,8 @@
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 import type { ReactElement } from 'react'
 
 const AppsLayout = async ({ children }: { children: ReactElement }): Promise<ReactElement> => {
-	const user = await getCurrentAuth()
+	const user = await users.getMe()
 
 	return (
 		<div>

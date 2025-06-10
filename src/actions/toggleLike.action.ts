@@ -4,7 +4,7 @@ import { getPostById } from '@/services/Prisma/post/getById'
 import { exists } from '../functions/exists'
 import { prisma } from '@/services/Prisma.service'
 import { revalidatePath } from 'next/cache'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 
 export const toggleLike = async (formData: FormData): Promise<void> => {
 	const rawData = {
@@ -12,7 +12,7 @@ export const toggleLike = async (formData: FormData): Promise<void> => {
 	}
 
 	const post = await getPostById(rawData.postId)
-	const user = await getCurrentAuth()
+	const user = await users.getMe()
 
 	// если в списке людей, которые лайкнули пост, нашелся активный пользователь
 	if (post?.liked?.includes(`/${user?.data?.id}/`) === true) {
@@ -25,7 +25,7 @@ export const toggleLike = async (formData: FormData): Promise<void> => {
 				// вычитаем один лайк
 				likes: exists(post.likes) - 1
 			}
-		}) // иначе
+		})
 	} else {
 		await prisma.post.update({
 			where: { id: post?.id },

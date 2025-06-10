@@ -1,10 +1,10 @@
 'use server'
 
+import { users } from '@/shared/api/users'
 import { prisma } from '../Prisma.service'
-import { getCurrentAuth } from './user/getCurrentAuth'
 
 export const createPost = async (content: string, authorId: number): Promise<void> => {
-	const author = await getCurrentAuth()
+	const author = await users.getMe()
 
 	await prisma.post.create({
 		data: {

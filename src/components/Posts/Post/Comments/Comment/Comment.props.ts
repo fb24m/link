@@ -1,5 +1,5 @@
-import type { IComment } from '@/shared/interfaces/IComment.interface'
+import { Comment } from '@prisma/client'
 
 export interface CommentProps {
-	comment: IComment
+	comment: Comment
 }

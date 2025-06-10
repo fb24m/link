@@ -1,7 +1,6 @@
 import type { ReactElement } from 'react'
 
 import { redirect } from 'next/navigation'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import { posts } from '@/shared/api/posts'
 import styles from './page.module.css'
 
@@ -18,15 +17,15 @@ import { users } from '@/shared/api/users'
 import { LinksPopup } from '@/features/profile-settings/LinksBlock/LinksPopup/LinksPopup'
 
 const ProfileSetting = async (): Promise<ReactElement> => {
-	const user = (await getCurrentAuth()).data
-	const myposts = await posts.getByAuthorId(user?.id ?? 0)
+	const user = await users.getMe()
+	const myPosts = await posts.getByAuthorId(user?.id ?? 0)
 	const links = await users.getLinksByUsername(user?.username ?? '')
 
 	if (!user) { redirect('/login') }
 
 	return (
 		<div>
-			<UserProfile selfProfile user={user} postsCount={myposts.length} />
+			<UserProfile selfProfile user={user} postsCount={myPosts.length} />
 
 			<div className={styles.header}>
 				<Button className={styles.back} appearance="transparent" icon="arrow_back" href="/profile">В профиль</Button>

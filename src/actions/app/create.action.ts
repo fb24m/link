@@ -2,10 +2,10 @@
 
 import { exists } from '@/functions/exists'
 import { prisma } from '@/services/Prisma.service'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 
 export const createApp = async (formData: FormData): Promise<void> => {
-	const developer = await getCurrentAuth()
+	const developer = await users.getMe()
 
 	const rawData = {
 		developerId: developer?.data?.id,

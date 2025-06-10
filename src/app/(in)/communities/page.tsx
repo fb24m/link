@@ -10,7 +10,7 @@ import { clsx } from '@/functions/clsx'
 import { prisma } from '@/services/Prisma.service'
 import Image from 'next/image'
 import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 
 const createCommunity = async (formData: FormData): Promise<void> => {
 	'use server'
@@ -27,7 +27,7 @@ const createCommunity = async (formData: FormData): Promise<void> => {
 }
 
 const Communities = async (): Promise<ReactElement> => {
-	const user = await getCurrentAuth()
+	const user = await users.getMe()
 
 	return (
 		<Container>

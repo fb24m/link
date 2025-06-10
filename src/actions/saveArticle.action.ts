@@ -2,14 +2,14 @@
 
 import { exists } from '@/functions/exists'
 import { checkSavedPost } from '@/services/Prisma/post/checkSaved'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import { postUser } from '@/services/Prisma/user/post'
+import { users } from '@/shared/api/users'
 import { revalidatePath } from 'next/cache'
 
 export const saveArticle = async (formData: FormData): Promise<void> => {
 	const id = +exists(formData.get('post-id'))
 
-	const user = await getCurrentAuth()
+	const user = await users.getMe()
 
 	if (!user.data) {
 		console.error('user does not exist in saveArticle in saveArticle.action.ts')

@@ -1,6 +1,6 @@
 'use server'
 
-import type { IPost } from '@/shared/interfaces/IPost.interface'
+import { Post } from '@prisma/client'
 import { prisma } from '../../Prisma.service'
 import type { IResponse } from '@/shared/interfaces/IResponse.interface'
 
@@ -9,9 +9,9 @@ interface IPostWhere {
 	id?: number[]
 }
 
-export const getPosts = async (where: IPostWhere, maxPosts: number = 100): Promise<IResponse<IPost[]>> => {
+export const getPosts = async (where: IPostWhere, maxPosts: number = 100): Promise<IResponse<Post[]>> => {
 	try {
-		const posts: IPost[] = await prisma.post.findMany({
+		const posts = await prisma.post.findMany({
 			where: {
 				authorId: { in: where.authorId },
 				id: {

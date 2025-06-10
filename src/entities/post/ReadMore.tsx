@@ -1,6 +1,7 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/shared/ui/Link/Link'
+// import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnchorHTMLAttributes } from 'react'
 

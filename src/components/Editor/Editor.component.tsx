@@ -1,20 +1,20 @@
 import styles from './Editor.module.scss'
 import { updatePost } from '@/actions/updatePost.action'
 import type { ReactElement, ReactNode } from 'react'
-import type { IPost } from '@/shared/interfaces/IPost.interface'
 import { createPost } from '../../actions/createPost.action'
 import { exists } from '@/functions/exists'
 import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
 import Link from 'next/link'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 import { MainHeader } from '../Header/MainHeader/MainHeader.component'
 import { BackButton } from '../BackButton/BackButton.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { EditorArea } from '@/entities/editor/EditorArea/EditorArea'
+import { Post } from '@prisma/client'
 
 export interface EditorProps {
-	post?: IPost
+	post?: Post
 	button?: ReactNode
 	publishDate?: Date
 	new?: boolean
@@ -24,7 +24,7 @@ export interface EditorProps {
 export const Editor = async (props: EditorProps): Promise<ReactElement> => {
 	const now = typeof props.post?.publishDate !== 'undefined' ? props.post?.publishDate : props.publishDate
 	const date = `${now?.getDate()}.${exists(now?.getMonth()) + 1}.${now?.getFullYear()}`
-	const author = await getCurrentAuth()
+	const author = await users.getMe()
 
 	return (
 		<div className={styles.wrapper}>

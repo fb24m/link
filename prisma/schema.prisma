@@ -16,19 +16,22 @@ model UserProfileLink {
 }
 
 model User {
-  id            Int               @id @default(autoincrement())
-  email         String            @unique
-  username      String            @unique
-  password      String
-  bio           String?
-  avatar        String?
-  badge         String?
-  statusIcon    String?
-  statusTooltip String?
-  savedArticles String?
-  apps          App[]
-  links         UserProfileLink[]
-  pinned        Int?
+  id                  Int               @id @default(autoincrement())
+  email               String            @unique
+  username            String            @unique
+  password            String
+  bio                 String?
+  avatar              String?
+  pronouns            String?
+  badge               String?
+  statusIcon          String?
+  statusTooltip       String?
+  savedArticles       String?
+  apps                App[]
+  links               UserProfileLink[]
+  pinned              Int?
+  last_gravatar_query DateTime?
+  suspended           Boolean?
 }
 
 model Subscription {
@@ -49,18 +52,19 @@ model Comment {
 }
 
 model Post {
-  id          Int       @id @default(autoincrement())
-  title       String    @default("")
-  content     String    @db.LongText
-  imageUrl    String?
-  authorId    Int?      @default(0)
-  publishDate DateTime? @default(now())
-  deleted     Boolean?  @default(false)
-  liked       String?   @default("")
-  likes       Int?      @default(0)
-  userId      Int?
-  writtenBy   Int?      @default(0)
-  comments    Comment[]
+  id              Int       @id @default(autoincrement())
+  title           String    @default("")
+  content         String    @db.LongText
+  imageUrl        String?
+  authorId        Int?      @default(0)
+  publishDate     DateTime? @default(now())
+  deleted         Boolean?  @default(false)
+  liked           String?   @default("")
+  likes           Int?      @default(0)
+  userId          Int?
+  writtenBy       Int?      @default(0)
+  comments        Comment[]
+  commentsEnabled Boolean   @default(true)
 }
 
 model Message {

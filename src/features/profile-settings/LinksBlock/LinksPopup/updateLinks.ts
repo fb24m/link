@@ -1,6 +1,5 @@
 'use server'
 
-import { API } from '@/shared/api/helpers/env'
 import { cookies } from 'next/headers'
 
 const allLinks: Record<string, string> = {

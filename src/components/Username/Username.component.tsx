@@ -6,7 +6,7 @@ import { clsx } from '@/functions/clsx'
 import { users } from '@/shared/api/users'
 
 export const Username = async ({ id, avatar, className }: { id: number, avatar?: boolean, className?: string }): Promise<ReactElement> => {
-	const user = await users.getById(id)
+	const user = await users.get(id)
 
 	return (
 		<Button href={`/user/${user?.username}`} appearance="transparent" className={clsx(className, styles.button)}>

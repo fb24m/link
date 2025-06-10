@@ -1,14 +1,13 @@
-import type { IPost } from '@/shared/interfaces/IPost.interface'
-import type { IUser } from '@/shared/interfaces/IUser.interface'
+import { Post, User } from '@prisma/client'
 
 export interface PostProps {
-	author?: IUser
+	author?: User
 	authorAvatarUrl?: string | undefined
 	imageUrl?: string | undefined
 	controls?: boolean | undefined
 	full?: boolean | undefined
 	restore?: boolean | undefined
 	likes?: number | undefined
-	self?: IUser
-	post: IPost
+	self?: User
+	post: Post
 }

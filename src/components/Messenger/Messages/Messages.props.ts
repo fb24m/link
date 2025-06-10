@@ -1,7 +1,7 @@
-import type { IUser } from '@/shared/interfaces/IUser.interface'
 import type { IDisplayMessage } from './DisplayMessage.interface'
+import type { User } from '@prisma/client'
 
 export interface MessagesProps {
 	messages: IDisplayMessage[]
-	user: IUser
+	user: User
 }

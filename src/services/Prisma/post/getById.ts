@@ -1,9 +1,9 @@
 'use server'
 
-import type { IPost } from '@/shared/interfaces/IPost.interface'
 import { prisma } from '@/services/Prisma.service'
+import { Post } from '@prisma/client'
 
-export const getPostById = async (id: number): Promise<IPost | null> => {
+export const getPostById = async (id: number): Promise<Post | null> => {
 	const post = await prisma.post.findUnique({
 		where: { id }
 	})

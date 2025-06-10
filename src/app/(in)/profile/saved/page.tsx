@@ -8,16 +8,16 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { redirect } from 'next/navigation'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 
 const Welcome = async (): Promise<ReactElement> => {
-	const user = await getCurrentAuth()
+	const user = await users.getMe()
 
 	if (!user) { redirect('/login') }
 
 	const savedPosts = user.data?.savedArticles?.split('/')
-	const items = savedPosts?.map((item) => +item.replace('/', ''))
-		.filter((item) => !isNaN(item))
+	const items = savedPosts?.map((item: string) => +item.replace('/', ''))
+		.filter((item: number) => !isNaN(item))
 
 	const posts = await getPosts(typeof items !== 'undefined' ? { id: items } : { id: [0] })
 

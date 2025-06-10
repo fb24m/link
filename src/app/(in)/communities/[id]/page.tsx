@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'
 // import styles from './page.module.scss'
 import { Posts } from '@/components/Posts/Posts.component'
-import type { IPost } from '@/shared/interfaces/IPost.interface'
 
 const CommunityPage = async (props: { params: Promise<{ id: string }> }): Promise<ReactElement> => {
 	const params = await props.params;
@@ -28,7 +27,7 @@ const CommunityPage = async (props: { params: Promise<{ id: string }> }): Promis
 
 			<Button icon="create" appearance="primary" href={`/communities/${params.id}/post`}>Новый пост</Button>
 
-			<Posts posts={posts as IPost[]} />
+			<Posts posts={posts} />
 		</div>
 	)
 }

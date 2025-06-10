@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import styles from './Button.module.scss'
 import type { ButtonProps } from './Button.props'
 import Icon from '../Icon/Icon.component'
-import { exists } from '@/functions/exists'
 import Link from 'next/link'
 import { clsx } from '@/functions/clsx'
 

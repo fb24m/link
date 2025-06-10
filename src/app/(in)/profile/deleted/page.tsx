@@ -9,11 +9,11 @@ import { UserProfile } from '@/widgets/UserProfile/UserProfile.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { redirect } from 'next/navigation'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 import { posts } from '@/shared/api/posts'
 
 const Welcome = async (): Promise<ReactElement> => {
-	const user = await getCurrentAuth()
+	const user = await users.getMe()
 
 	if (!user) { redirect('/login') }
 

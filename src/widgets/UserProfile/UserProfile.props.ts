@@ -1,9 +1,9 @@
-import { IUser } from '@/shared/interfaces/IUser.interface'
+import { User } from '@prisma/client'
 
 export interface UserProfileProps {
 	addPostButton?: boolean
 	subscribeButton?: boolean
 	selfProfile?: boolean
 	postsCount: number
-	user: IUser
+	user: User
 }

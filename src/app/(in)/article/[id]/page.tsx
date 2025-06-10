@@ -12,7 +12,7 @@ import { users } from '@/shared/api/users'
 export const generateMetadata = async (props: { params: Promise<{ id: string }> }): Promise<Metadata> => {
 	const params = await props.params;
 	const post = await getPostById(+params.id)
-	const author = await users.getById(+exists(post?.authorId))
+	const author = await users.get(+exists(post?.authorId))
 
 	return {
 		title: `Пост ${author?.username} на NextLink`,

@@ -1,14 +1,17 @@
-import { API } from './env'
+import { cookies } from 'next/headers'
 
-export const request = async (url: string, init?: RequestInit) => {
-	const response = await fetch(`${API}${url}`, {
+export const request = async<T = any>(url: string, init?: RequestInit): Promise<T> => {
+	const response = await fetch(`${process.env.API}/${url}`, {
 		...init,
+		headers: {
+			Cookie: (await cookies()).toString()
+		},
 		next: {
-			revalidate: 60,
-			tags: [url]
+			tags: [url],
+			revalidate: 999999
 		}
 	})
-	const json = await response.json()
+	const json: T = await response.json()
 
 	return json
 }

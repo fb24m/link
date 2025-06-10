@@ -1,9 +1,9 @@
 'use server'
 
 import { exists } from '@/functions/exists'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
 import { prisma } from '@/services/Prisma.service'
 import { revalidatePath } from 'next/cache'
+import { users } from '@/shared/api/users'
 
 export const addComment = async (formData: FormData): Promise<void> => {
 	const rawData = {
@@ -11,8 +11,8 @@ export const addComment = async (formData: FormData): Promise<void> => {
 		post: exists(formData.get('post-id'))
 	}
 
-	const user = await getCurrentAuth()
-	getCurrentAuth
+	const user = await users.getMe()
+
 	await prisma.comment.create({
 		data: {
 			postId: +rawData.post,

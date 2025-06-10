@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type HTMLAttributes, type ReactNode, createContext } from 'react'
+import React, { useState, type HTMLAttributes, type ReactNode, createContext } from 'react'
 import styles from './Popup.module.scss'
 
 export const PopupContext = createContext({
@@ -21,9 +21,7 @@ export const Popup = ({ className, topCloseButton = false, ...props }: PopupProp
 		popupClassList === '' ? setPopupClassList(styles.opened) : setPopupClassList('')
 	}
 
-	return (
-		<PopupContext.Provider value={{ togglePopupClassList, popupClassList, wrapperClassName: styles.wrapper, topCloseButton }}>
-			<div className={`${styles.popup} ${className} ${popupClassList}`} {...props}></div>
-		</PopupContext.Provider>
-	)
+	return <PopupContext.Provider value={{ togglePopupClassList, popupClassList, wrapperClassName: styles.wrapper, topCloseButton }}>
+		<div className={`${styles.popup} ${className} ${popupClassList}`} {...props}></div>
+	</PopupContext.Provider>
 }

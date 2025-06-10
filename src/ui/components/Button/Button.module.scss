@@ -1,6 +1,7 @@
 .primary,
 .secondary,
-.transparent {
+.transparent,
+.filled_secondary {
 	padding: 6px 8px;
 
 	font-size: 14px;
@@ -78,6 +79,11 @@
 		&:active {
 			background-color: var(--content-layer-hover);
 		}
+	}
+
+	&.filled_secondary {
+		background-color: var(--medium-color);
+		opacity: 80%;
 	}
 
 

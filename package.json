@@ -13,12 +13,13 @@
   "dependencies": {
     "@prisma/client": "5.22.0",
     "marked": "^11.1.0",
-    "next": "^15.0.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "next": "^15.3.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "timeago-react": "^3.0.6",
     "timeago.js": "^4.0.2",
-    "vercel": "^33.4.1"
+    "vercel": "^33.4.1",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -26,7 +27,7 @@
     "@types/react-dom": "^18",
     "encoding": "^0.1.13",
     "prisma": "5.22.0",
-    "sass": "^1.81.0",
+    "sass": "^1.89.1",
     "typescript": "^5.3.3"
   }
 }

@@ -30,7 +30,7 @@ export const Post = async ({ full, post, restore, controls, ...props }: PostProp
 
 	if (!authorId) return <></>
 
-	const author = props.author ?? (await users.getById(authorId)).data
+	const author = props.author ?? (await users.get(authorId)).data
 
 	let content = rawContent.split('<br>').join('\n')
 	const comments = await prisma.comment.findMany({ where: { postId: id } })

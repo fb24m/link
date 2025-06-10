@@ -7,16 +7,13 @@ import { UserProfile } from '@/widgets/UserProfile/UserProfile.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Posts } from '@/components/Posts/Posts.component'
 import { redirect } from 'next/navigation'
-import { cookies } from 'next/headers'
 import { posts } from '@/shared/api/posts'
 import { users } from '@/shared/api/users'
 
 const Welcome = async (): Promise<ReactElement> => {
-	const userData = (await cookies()).get('link_saved_user')?.value
+	const user = await users.getMe()
 
-	const user = await users.getByUsername(userData?.split(':')[0] ?? '')
-
-	if (!user || !userData) { redirect('/login') }
+	if (!user) { redirect('/login') }
 
 	const myposts = await posts.getByAuthorId(user.id)
 
@@ -29,7 +26,7 @@ const Welcome = async (): Promise<ReactElement> => {
 				<Button appearance="secondary" icon="star" href="/profile/saved">Избранное</Button>
 				<Button appearance="transparent" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
-			{/* TODO: fix typization */}
+			{/* TODO: fix typification */}
 			<Posts controls author={user} posts={myposts ? myposts.filter((post: any) => !post.deleted) : []} />
 		</div>
 	)

@@ -1,28 +1,37 @@
 import type { ReactElement } from 'react'
 import styles from './Posts.module.scss'
-import type { IPost } from '@/shared/interfaces/IPost.interface'
 
 import { Post } from './Post/Post.component'
-import type { IUser } from '@/shared/interfaces/IUser.interface'
 import { Card } from '@/ui/components/Card/Card.component'
 import { Button } from '@/ui/components/Button/Button.component'
-import { getCurrentAuth } from '@/services/Prisma/user/getCurrentAuth'
+import { users } from '@/shared/api/users'
 import { Popup } from '@/ui/components/Popup/Popup.component'
 import { PopupTrigger } from '@/ui/components/PopupTrigger/PopupTrigger.component'
 import { PopupWrapper } from '@/ui/components/PopupWrapper/PopupWrapper.component'
-import { posts } from '@/shared/api/posts'
 import Icon from '@/ui/components/Icon/Icon.component'
 import Link from 'next/link'
-import { SubmitButton } from '../SubmitButton/SubmitButton.component'
 import { Markdown } from '../Markdown/Markdown.component'
 import { ActionButton } from '../ActionButton/ActionButton.component'
 import { unpin } from './unpin.action'
+import { Post as PostType, User } from '@prisma/client'
+import { posts } from '@/shared/api/posts'
+import { prisma } from '@/services/Prisma.service'
 
-export const Posts = async ({ author, posts: Posts, controls, restore }: { posts: IPost[], controls?: boolean, restore?: boolean, author?: IUser }): Promise<ReactElement> => {
-	const self = await getCurrentAuth()
+export const Posts = async ({ author, posts: Posts, controls, restore }: { posts: PostType[], controls?: boolean, restore?: boolean, author?: User }): Promise<ReactElement> => {
+	const self = await users.getMe()
 
 	const pinnedPostId = author && author?.pinned
 	const [pinnedPost] = await posts.getById(pinnedPostId ?? 0)
+
+	let getAuthor = (_: number) => author
+
+	if (!author) {
+		const authors = await prisma.user.findMany({
+			where: { id: { in: Array.from(new Set(Posts.map(p => p.authorId ?? 0))) } }
+		})
+
+		getAuthor = (id: number) => author ?? authors.filter(a => a.id === id)[0]
+	}
 
 	return (
 		<div className={styles.posts}>
@@ -38,14 +47,10 @@ export const Posts = async ({ author, posts: Posts, controls, restore }: { posts
 				</Popup>
 			</Card>
 
-			{!pinnedPost && (self.data?.id === author?.id) && <Card className={styles.pinPost}>
+			{!pinnedPost && (self.id === author?.id) && <Card className={styles.pinPost}>
 				<div className={styles.content}>
-					<span>
-						Расскажите о себе при помощи закрепленного поста
-					</span>
-					<span className={styles.pinPostSmallText}>
-						эту рекомендацию видите только вы
-					</span>
+					<span>Расскажите о себе при помощи закрепленного поста</span>
+					<span className={styles.pinPostSmallText}>эту рекомендацию видите только вы</span>
 				</div>
 				<Button appearance="primary" href="/article/190">Подробнее</Button>
 			</Card>}
@@ -62,14 +67,13 @@ export const Posts = async ({ author, posts: Posts, controls, restore }: { posts
 				</div>
 			</Card>}
 
-			{
-				Posts && Posts?.map((post) =>
-					<Post self={self?.data} key={post.id} restore={restore} controls={controls} author={author} post={post} />
-				).reverse()
-			}
+			{Posts && (Posts?.map((post) =>
+				<Post self={self.data} key={post.id} restore={restore} controls={controls} author={getAuthor(post.authorId ?? 0)} post={post} />
+			)).reverse()}
+
 			<Card className={styles.end}>
-				<h2 className={styles.title}>Вы дошли до конца</h2>
-				<p className={styles.description}>Вы можете вернуться в ленту, чтобы прочитать новые посты или найти новых пользователей</p>
+				<h2 className={styles.title}>{Posts.length !== 0 ? 'Вы дошли до конца' : 'Тут пока нет постов'}</h2>
+				<p className={styles.description}>{Posts.length !== 0 ? 'Вы можете вернуться в ленту, чтобы прочитать новые посты или найти новых пользователей' : 'Начните писать сами или подпишитесь на кого-нибудь из пользователей, чтобы читать его посты в ленте'}</p>
 				<Button className={styles.homeButton} href="/" appearance="primary">На главную</Button>
 			</Card>
 		</div >

@@ -2,10 +2,10 @@
 
 import { exists } from '@/functions/exists'
 import { prisma } from '../Prisma.service'
-import type { IPost } from '@/shared/interfaces/IPost.interface'
+import { Post } from '@prisma/client'
 
-export const getDeletedPostsByAuthorId = async (id: number[], maxPosts: number | false = false): Promise<IPost[]> => {
-	const posts: IPost[] = await prisma.post.findMany({
+export const getDeletedPostsByAuthorId = async (id: number[], maxPosts: number | false = false): Promise<Post[]> => {
+	const posts = await prisma.post.findMany({
 		where: {
 			authorId: {
 				in: id

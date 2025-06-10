@@ -1,7 +1,6 @@
 import { prisma } from '@/services/Prisma.service'
 
-export const GET = async (request: Request, props: { params: Promise<{ username: string }> }) => {
-	const queryParams = new URLSearchParams(request.url)
+export const GET = async (_: Request, props: { params: Promise<{ username: string }> }) => {
 	const { username } = await props.params
 
 	const links = await prisma.userProfileLink.findMany({
