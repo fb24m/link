@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model UserProfileLink {
+  id     Int     @id @default(autoincrement())
+  User   User?   @relation(fields: [userId], references: [id])
+  userId Int?
+  icon   String?
+  link   String
+}
+
+model User {
+  id                  Int               @id @default(autoincrement())
+  email               String            @unique
+  username            String            @unique
+  password            String
+  bio                 String?
+  avatar              String?
+  pronouns            String?
+  badge               String?
+  statusIcon          String?
+  statusTooltip       String?
+  savedArticles       String?
+  apps                App[]
+  links               UserProfileLink[]
+  pinned              Int?
+  last_gravatar_query DateTime?
+  suspended           Boolean?
+}
+
+model Subscription {
+  id   Int @id @default(autoincrement())
+  from Int
+  to   Int
+}
+
+model Comment {
+  publishDate DateTime? @default(now())
+  id          Int       @id @default(autoincrement())
+  authorId    Int
+  content     String    @db.LongText
+  postId      Int?
+  Post        Post?     @relation(fields: [postId], references: [id])
+
+  @@index([postId], map: "Comment_postId_fkey")
+}
+
+model Post {
+  id              Int       @id @default(autoincrement())
+  title           String    @default("")
+  content         String    @db.LongText
+  imageUrl        String?
+  authorId        Int?      @default(0)
+  publishDate     DateTime? @default(now())
+  deleted         Boolean?  @default(false)
+  liked           String?   @default("")
+  likes           Int?      @default(0)
+  userId          Int?
+  writtenBy       Int?      @default(0)
+  comments        Comment[]
+  commentsEnabled Boolean   @default(true)
+}
+
+model Message {
+  id       Int      @id @default(autoincrement())
+  chatName String
+  date     DateTime @default(now())
+  content  String
+  author   String?
+}
+
+model Community {
+  id          Int     @id @default(autoincrement())
+  avatar      String?
+  bio         String?
+  subscribers Int?
+  badge       String?
+  ownerId     Int
+  admins      String
+  name        String?
+  visibility  String
+}
+
+model App {
+  id          Int    @id @default(autoincrement())
+  userId      Int?
+  title       String @unique
+  description String @db.LongText
+  url         String @unique
+  User        User?  @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "App_userId_fkey")
+}

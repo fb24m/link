@@ -1,0 +1,28 @@
+.messages {
+	padding-bottom: 64px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.message {
+	padding: 8px;
+	border-radius: 8px;
+	border: var(--medium-color) 1px solid;
+
+
+}
+
+.messageWrapper {
+	display: flex;
+
+	&.self {
+		justify-content: flex-end;
+	}
+}
+
+.date {
+	font-size: 12px;
+	color: #999;
+	margin-left: 8px;
+}

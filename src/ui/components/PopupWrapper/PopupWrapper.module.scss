@@ -1,0 +1,55 @@
+.window {
+	padding: 32px;
+	background-color: var(--background-color);
+	max-width: 600px;
+	width: 100%;
+	border-radius: 8px;
+	border: var(--medium-color) 1px solid;
+	overflow-y: auto;
+	max-height: calc(100vh - 64px);
+	transition: transform .8s, opacity .3s;
+	// opacity: 0;
+
+	transform: translateY(100vh);
+
+	[class*="opened-popup"] & {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		background-color: rgba(#222, 20%);
+		border-radius: 24px;
+		border: rgba(#fff, 13%) 1px solid;
+		backdrop-filter: blur(14px);
+		color: #fff;
+	}
+}
+
+
+.popupHeader {
+	display: flex;
+	justify-content: flex-end;
+	border-bottom: rgba(#000, 5%) 1px solid;
+}
+
+
+.topCloseButton {
+	position: absolute;
+	right: 0;
+	padding: 4px 16px;
+	border-radius: 0 !important;
+	transition: background-color .1s;
+
+	&:hover {
+		background-color: rgba(#000, 10%);
+	}
+
+	i {
+		color: #000;
+	}
+}

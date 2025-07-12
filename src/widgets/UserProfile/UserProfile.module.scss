@@ -1,0 +1,330 @@
+.counters {
+	display: flex;
+	gap: 16px;
+
+	@media (max-width: 560px) {
+		gap: 8px;
+	}
+}
+
+.counter {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: center;
+	width: 100px;
+
+	@media (max-width: 560px) {
+		width: 72px;
+	}
+}
+
+.buttons {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.count {
+	font-size: 32px;
+}
+
+.description {
+	font-size: 14px;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
+	text-align: center;
+
+	@media (max-width: 560px) {
+		font-size: 12px;
+	}
+}
+
+.about {
+	align-items: center;
+	gap: 8px;
+}
+
+.user {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 16px;
+	position: relative;
+}
+
+.username {
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 8px;
+
+	display: flex;
+	gap: 16px 8px;
+	align-items: center;
+	flex-wrap: wrap;
+
+	div {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+}
+
+.avatar {
+	position: relative;
+	z-index: 1;
+}
+
+.avatar,
+.glow {
+	width: 96px;
+	height: 96px;
+	border-radius: 16px;
+
+	@media (max-width: 375px) {
+		width: 80px;
+		height: 80px;
+	}
+}
+
+.radial {
+	left: -20px;
+	top: -20px;
+	background: crimson;
+
+	&,
+	&::before,
+	&::after {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		background-color: #fff;
+		width: 40px;
+		height: 40px;
+		border-radius: 999px;
+		filter: blur(30px)
+	}
+
+	&::before {
+		left: 30px;
+		top: 70px;
+		background: lime;
+	}
+
+	&::after {
+		left: 70px;
+		top: 0px;
+		background: lightblue;
+	}
+}
+
+.bio {
+	display: inline-block;
+	margin-right: 8px;
+}
+
+.profile {
+	margin-bottom: 16px;
+}
+
+.addPostButton {
+	margin-bottom: 16px;
+}
+
+.channelId {
+	display: none;
+}
+
+.badge {
+	padding: 4px 8px;
+	border-radius: 8px;
+	background-color: var(--foreground-color);
+	color: var(--background-color);
+	font-size: 14px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	cursor: pointer;
+
+	@media (prefers-color-scheme: dark) {
+		padding: 6px 10px;
+		padding-right: 8px;
+		border-radius: 999px;
+		border: rgba(#fff, 80%) 1px solid;
+	}
+
+	&.nextLink {
+		transition: background-position 1s;
+		background: linear-gradient(90deg,
+				#f7c0ec,
+				#a9bfea,
+				#a9eaac,
+				#dba9ea,
+				#eaa9a9,
+			);
+		background-size: 400%;
+		background-repeat: no-repeat;
+		background-position-x: 0;
+
+		&:hover {
+			background-position-x: 100%;
+		}
+	}
+
+	i {
+		font-size: 14px;
+		background-color: #fff;
+		flex-basis: 16px;
+		flex-shrink: 0;
+		height: 16px;
+		border-radius: 999px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transform: translateY(-1px);
+	}
+}
+
+.links {
+	display: flex;
+	gap: 8px;
+	margin-top: 8px;
+
+	.link {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		padding: 6px 8px;
+		border: var(--medium-color) 1px solid;
+		border-radius: 6px;
+
+		font-weight: 500;
+		font-size: 14px;
+
+		&:hover {
+			background-color: var(--medium-color);
+		}
+
+		svg {
+			width: 16px;
+			height: 16px;
+
+			fill: var(--foreground-color);
+		}
+	}
+
+}
+
+.pronouns {
+	padding: 2px 4px;
+	border: var(--medium-color) 1px solid;
+	border-radius: 6px;
+	color: var(--foreground-color);
+	font-weight: 500;
+	font-size: 12px;
+	margin-right: 8px;
+}
+
+
+.avatar {
+	position: relative;
+}
+
+.statusIcon {
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
+	z-index: 4;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	background-color: var(--background-color);
+
+	i {
+		font-size: 16px;
+	}
+}
+
+.header,
+.headerGlow {
+	width: 100%;
+	height: 150px;
+	margin-bottom: 16px;
+	overflow: hidden;
+	border-radius: 16px;
+
+	img {
+		width: 100%;
+		height: 200%;
+		transform: rotateZ(10deg) translateY(-25%);
+		animation-name: headerAnimation;
+		animation-duration: 60s;
+		animation-iteration-count: infinite;
+	}
+}
+
+.headerGlow {
+	overflow: visible;
+	margin-top: -36px;
+
+	height: 20px;
+
+	animation-name: glowAnimation;
+	animation-duration: 60s;
+	animation-iteration-count: infinite;
+
+	img {
+		transform: none;
+
+		animation-name: glowImageAnimation;
+	}
+}
+
+@keyframes headerAnimation {
+	0% {
+		filter: blur(60px);
+	}
+
+	25% {
+		filter: blur(60px) saturate(2) contrast(1);
+	}
+
+	75% {
+		filter: blur(60px) saturate(1) contrast(4);
+	}
+
+	100% {
+		filter: blur(60px);
+	}
+}
+
+@keyframes glowImageAnimation {
+	25% {
+		filter: saturate(2) contrast(1);
+	}
+
+	75% {
+		filter: saturate(1) contrast(4);
+	}
+
+}
+
+@keyframes glowAnimation {
+	0% {
+		filter: blur(20px);
+	}
+
+	100% {
+		filter: blur(20px);
+	}
+}
