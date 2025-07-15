@@ -1,32 +1,32 @@
 .window {
 	padding: 32px;
-	background-color: var(--background-color);
 	max-width: 600px;
 	width: 100%;
-	border-radius: 8px;
-	border: var(--medium-color) 1px solid;
 	overflow-y: auto;
 	max-height: calc(100vh - 64px);
 	transition: transform .8s, opacity .3s;
-	// opacity: 0;
 
 	transform: translateY(100vh);
 
+	background-color: rgba(#222, 20%);
+	border-radius: 24px;
+	border: rgba(#fff, 13%) 1px solid;
+	backdrop-filter: blur(14px);
+	color: #fff;
+
+	@media(prefers-color-scheme: light) {
+	    background-color: rgba(#fff, 20%);
+		border-color: rgba(#555, 8%);
+		box-shadow: rgba(#333, 12%) 0 0 24px;
+		color: #333;
+	}
+
 	[class*="opened-popup"] & {
 		transform: translateY(0);
-		opacity: 1;
 	}
 
 	&::-webkit-scrollbar {
 		display: none;
-	}
-
-	@media (prefers-color-scheme: dark) {
-		background-color: rgba(#222, 20%);
-		border-radius: 24px;
-		border: rgba(#fff, 13%) 1px solid;
-		backdrop-filter: blur(14px);
-		color: #fff;
 	}
 }
 

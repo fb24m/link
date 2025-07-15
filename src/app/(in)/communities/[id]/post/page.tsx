@@ -9,7 +9,7 @@ const CommunitiesPost = async (props: { params: Promise<{ id: string }> }): Prom
   const community = await prisma.community.findUnique({ where: { id: +params.id } })
   const user = await users.getMe()
 
-  if (community?.ownerId !== user?.data?.id) notFound()
+  if (community?.ownerId !== user?.id) notFound()
 
   return (
     <Editor publishDate={new Date()} user={community as any} new />

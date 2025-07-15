@@ -16,7 +16,7 @@ export const addComment = async (formData: FormData): Promise<void> => {
 	await prisma.comment.create({
 		data: {
 			postId: +rawData.post,
-			authorId: exists(user?.data?.id),
+			authorId: exists(user.id),
 			content: rawData.text
 		}
 	})

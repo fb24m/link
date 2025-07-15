@@ -4,7 +4,6 @@ import { useActionState, useEffect } from 'react';
 import { subscribe } from './subscribe'
 import { Button } from '@/ui/components/Button/Button.component'
 import { useSubscriptions } from '@/shared/store/Subscriptions.store';
-import { revalidateTag } from 'next/cache';
 
 export const SubscribeButton = ({ from, to, username }: { from: number, to: number, username: string }) => {
 	const { subscriptions, updateSubscriptions } = useSubscriptions()

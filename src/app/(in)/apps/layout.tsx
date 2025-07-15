@@ -6,7 +6,7 @@ const AppsLayout = async ({ children }: { children: ReactElement }): Promise<Rea
 
 	return (
 		<div>
-			{user?.ok ? children : 'Вы должны войти в аккаунт, чтобы использовать приложения!'}
+			{children}
 		</div>
 	)
 }

@@ -2,21 +2,12 @@
 .secondary,
 .transparent,
 .filled_secondary {
-	padding: 6px 8px;
-
+    padding: 6px 12px;
 	font-size: 14px;
-
-	@media (prefers-color-scheme: dark) {
-		padding: 6px 12px;
-		border-radius: 999px;
-	}
+	border-radius: 9999px;
 
 	&.icon {
-		padding: 2px 6px;
-
-		@media (prefers-color-scheme: dark) {
-			padding: 4px 10px;
-		}
+	    padding: 4px 10px;
 	}
 
 	i {
@@ -48,10 +39,11 @@
 		color: var(--foreground-color);
 		position: relative;
 
+		backdrop-filter: blur(4px);
+		background-color: rgba(#999, 10%);
+
 		@media (prefers-color-scheme: dark) {
 			background-color: rgba(#fff, 4%);
-			backdrop-filter: blur(4px);
-			border-radius: 9999px;
 		}
 
 		&:hover {

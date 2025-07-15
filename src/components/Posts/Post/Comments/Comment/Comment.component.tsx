@@ -12,7 +12,7 @@ export const Comment = async (props: CommentProps): Promise<ReactElement> => {
 	return (
 		<Card>
 			<strong className={styles.username}>
-				{user?.data?.username} <span className={styles.date}>{formatDate(props.comment.publishDate)}</span>
+				{user?.username} <span className={styles.date}>{formatDate(props.comment.publishDate)}</span>
 			</strong>
 			<p className={styles.content} dangerouslySetInnerHTML={{ __html: formatContent(props.comment.content) }}></p>
 		</Card>

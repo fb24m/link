@@ -21,7 +21,7 @@ export const Comments = async ({ postId }: { postId: number }): Promise<ReactEle
 		<>
 			<Title1 className={styles.title}>Комментарии</Title1>
 			<Card className={styles.card} id="comments">
-				{(await users.getMe())?.ok
+				{(await users.getMe())
 					? <form action={addComment} className={styles.form}>
 						<Input placeholder="Напишите комментарий..." className={styles.input} name="text" />
 						<input name="post-id" value={postId} readOnly style={{ display: 'none' }} />

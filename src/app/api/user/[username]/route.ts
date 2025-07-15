@@ -18,7 +18,9 @@ export const GET = async (_: NextRequest, props: { params: Promise<{ username: s
 
     if (avatar) {
       await prisma.user.update({
-        where: { username: params.username },
+        where: {
+          ...!/^\d+$/.test(params.username) ? { username: params.username } : { id: +params.username }
+        },
         data: {
           last_gravatar_query: new Date(),
           avatar: avatar.entry?.[0].thumbnailUrl,

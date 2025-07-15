@@ -3,7 +3,7 @@
   "version": "0.5.0-beta.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,11 +11,12 @@
     "env": "vercel env pull"
   },
   "dependencies": {
-    "@prisma/client": "5.22.0",
+    "@prisma/client": "6.12.0",
     "marked": "^11.1.0",
     "next": "^15.3.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hot-toast": "^2.5.2",
     "timeago-react": "^3.0.6",
     "timeago.js": "^4.0.2",
     "vercel": "^33.4.1",
@@ -26,7 +27,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18",
     "encoding": "^0.1.13",
-    "prisma": "5.22.0",
+    "prisma": "6.12.0",
     "sass": "^1.89.1",
     "typescript": "^5.3.3"
   }

@@ -1,7 +1,6 @@
 'use client'
 
 import { Link } from '@/shared/ui/Link/Link'
-// import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnchorHTMLAttributes } from 'react'
 
@@ -13,9 +12,6 @@ export interface ReadMoreProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 export const ReadMore = ({ show, postId, ...props }: ReadMoreProps) => {
 	const pathname = usePathname()
 
-	return (
-		<>
-			{show && <Link href={`/article/${postId}?prev=${pathname}`} {...props} />}
-		</>
-	)
+	return show && <Link href={`/article/${postId}?prev=${pathname}`} {...props} />
 }
+

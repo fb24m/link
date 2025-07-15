@@ -15,7 +15,7 @@ export const Button = ({ appearance, className, href, icon, children, target, di
 	}
 
 	if (typeof href !== 'undefined') {
-		return <Link prefetch={false} href={href} target={target} {...defaultProps}></Link>
+		return <Link prefetch={true} href={href} target={target} {...defaultProps}></Link>
 	} else {
 		return <button {...{ disabled }} {...defaultProps}></button>
 	}

@@ -1,14 +1,11 @@
 import { request } from '@/shared/api/helpers/request'
+import { User } from '@prisma/client'
 import { cookies } from 'next/headers'
 
 export const users = {
-	getMe: async () => (await request(`user`)).data,
+	getMe: async (): Promise<User> => (await request(`user`)).data,
 	getLinksByUsername: async (username: string) => (await request(`user/${username}/links`)).data,
-
-	get: async (selector: string | number) => {
-		if (typeof selector === 'string') return (await request(`user/${selector}`)).data
-		else if (typeof selector === 'number') return (await request(`user/${selector}`)).data
-	},
+	get: async (selector: string | number): Promise<User> => (await request(`user/${selector}`)).data,
 
 	updatePassword: async (newPassword: string) => {
 		const cookie = await cookies()

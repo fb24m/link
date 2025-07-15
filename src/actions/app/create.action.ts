@@ -8,7 +8,7 @@ export const createApp = async (formData: FormData): Promise<void> => {
 	const developer = await users.getMe()
 
 	const rawData = {
-		developerId: developer?.data?.id,
+		developerId: developer?.id,
 		name: exists(formData.get('name')) as string,
 		description: exists(formData.get('description')) as string,
 		url: exists(formData.get('url')) as string

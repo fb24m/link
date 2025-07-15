@@ -56,13 +56,13 @@ const Communities = async (): Promise<ReactElement> => {
 					<div className={styles.block}>
 						<h3 className={clsx(styles.title, styles.smallBlock)}>Владелец сообщества:</h3>
 						<div className={styles.owner}>
-							<Image src={user?.data?.avatar ? user?.data?.avatar : ''} alt="" width={32} height={32} />
-							{user?.data?.username}
-							<span className={styles.badge}>{user?.data?.badge}</span>
+							<Image src={user?.avatar ? user?.avatar : ''} alt="" width={32} height={32} />
+							{user?.username}
+							<span className={styles.badge}>{user?.badge}</span>
 						</div>
 					</div>
 
-					<input style={{ display: 'none' }} name="owner-id" readOnly value={user?.data?.id} type="text" required />
+					<input style={{ display: 'none' }} name="owner-id" readOnly value={user?.id} type="text" required />
 
 					<span className={styles.buttonBg}>
 						<SubmitButton className={styles.button} appearance="primary">Начнём</SubmitButton>

@@ -1,16 +1,15 @@
-'use server'
+"use server";
 
-import { users } from '@/shared/api/users'
-import { prisma } from '../Prisma.service'
+import { users } from "@/shared/api/users";
+import { prisma } from "../Prisma.service";
+import { Post, User } from "@prisma/client";
 
-export const createPost = async (content: string, authorId: number): Promise<void> => {
-	const author = await users.getMe()
-
-	await prisma.post.create({
-		data: {
-			content: content.split('\r\n').join('<br>'),
-			authorId: author?.data?.id,
-			writtenBy: author?.data?.id
-		}
-	})
-}
+export const createPost = async (content: string, me: User): Promise<Post> => {
+  return await prisma.post.create({
+    data: {
+      content: content.split("\r\n").join("<br>"),
+      authorId: me.id,
+      writtenBy: me.id,
+    },
+  });
+};

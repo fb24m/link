@@ -11,6 +11,7 @@ export const BackButton = (props: ButtonProps): ReactElement => {
 	return (
 		<div onClick={() => { router.back() }}>
 			<Button {...props}></Button>
+      
 		</div>
 	)
 }

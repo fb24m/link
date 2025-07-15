@@ -8,9 +8,9 @@ import type { ReactElement } from 'react'
 const Apps = async (): Promise<ReactElement> => {
 	const user = await users.getMe()
 
-	if (!user?.ok || !user.data) return <></>
+	if (!user) return <></>
 
-	const apps = await getAppByOwnerId(user?.data?.id)
+	const apps = await getAppByOwnerId(user?.id)
 
 	return (
 		<div>

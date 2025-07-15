@@ -32,6 +32,16 @@ model User {
   pinned              Int?
   last_gravatar_query DateTime?
   suspended           Boolean?
+  likes   PostLike[]
+  mentions PostMention[]
+}
+
+model PostLike {
+    user User @relation(fields: [userId], references: [id])
+    userId Int
+    post Post @relation(fields: [postId], references: [id])
+    postId Int
+    @@id([userId, postId])
 }
 
 model Subscription {
@@ -60,11 +70,22 @@ model Post {
   publishDate     DateTime? @default(now())
   deleted         Boolean?  @default(false)
   liked           String?   @default("")
-  likes           Int?      @default(0)
   userId          Int?
   writtenBy       Int?      @default(0)
   comments        Comment[]
   commentsEnabled Boolean   @default(true)
+  mentions PostMention[]
+  likes   PostLike[]
+}
+
+model PostMention {
+  postId      Int
+  userId      Int
+  Post        Post     @relation(fields: [postId], references: [id])
+  User        User     @relation(fields: [userId], references: [id])
+
+  @@id([postId, userId])
+
 }
 
 model Message {

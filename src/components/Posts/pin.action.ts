@@ -1,5 +1,6 @@
 'use server'
 
+import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
 
 export const pin = async (formData: FormData) => {
@@ -22,4 +23,6 @@ export const pin = async (formData: FormData) => {
 	const json = await response.json()
 
 	console.log(json)
+
+	revalidateTag('user')
 }

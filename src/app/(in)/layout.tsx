@@ -3,7 +3,7 @@ import { Sidebar } from '@/features/Sidebar/Sidebar.component'
 import type { Metadata } from 'next'
 import { type ReactElement, type ReactNode } from 'react'
 import styles from './layout.module.scss'
-import { Header } from '@/components/Header/Header.component'
+import { Header } from '@/widgets/Header/Header'
 
 export const metadata: Metadata = {
 	title: 'NextLink',
