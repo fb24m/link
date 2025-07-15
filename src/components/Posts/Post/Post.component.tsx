@@ -23,6 +23,15 @@ import { pin } from "../pin.action";
 
 const maxContentLength = 500;
 
+function stringToNumber255(input: string): number {
+  let sum = 0;
+  for (let i = 0; i < input.length; i++) {
+    sum += input.charCodeAt(i);
+  }
+  // приводим к диапазону 1..255
+  return sum % 255 || 1;
+}
+
 export const Post = async ({
   full,
   post,
@@ -50,7 +59,16 @@ export const Post = async ({
     <>
       <Card mobileShrink className={styles.post} id={`post-${id}`}>
         <div className={styles.author}>
-          <img src={author?.avatar ?? undefined} className={styles.avatar} />
+          <img
+            src={author?.avatar ?? undefined}
+            alt={author?.username[0].toUpperCase()}
+            className={styles.avatar}
+            style={{
+              ...(!author?.avatar && {
+                backgroundColor: `hsl(${stringToNumber255(author?.username)}, 100%, 50%)`,
+              }),
+            }}
+          />
           <div className={styles.userdata}>
             <Link href={`/user/${author?.username}`} className={styles.name}>
               {author?.username}
