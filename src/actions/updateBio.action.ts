@@ -1,21 +1,22 @@
-'use server'
+"use server";
 
-import { exists } from '@/functions/exists'
-import { postUser } from '@/services/Prisma/user/post'
-import { users } from '@/shared/api/users'
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { exists } from "@/functions/exists";
+import { postUser } from "@/services/Prisma/user/post";
+import { users } from "@/shared/api/users";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export const updateBio = async (formData: FormData): Promise<void> => {
-	const rawData = {
-		newBio: exists(formData.get('new-bio')) as string
-	}
+  const rawData = {
+    newBio: exists(formData.get("new-bio")) as string,
+  };
 
-	const user = await users.getMe()
+  const user = await users.getMe();
 
-	if (!user) return
+  if (!user) return;
 
-	await postUser(user.id, { bio: rawData.newBio })
+  await postUser(user.id, { bio: rawData.newBio });
 
-	revalidateTag('user')
-	revalidatePath('/profile')
-}
+  revalidateTag("user");
+  revalidatePath("/profile");
+  revalidatePath(`/user/${user.username}`);
+};
