@@ -4,6 +4,7 @@ import { exists } from "@/functions/exists";
 import { prisma } from "@/services/Prisma.service";
 import { createPost as prisma_createPost } from "@/services/Prisma/createPost";
 import { users } from "@/shared/api/users";
+import { revalidatePath } from "next/cache";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -45,5 +46,7 @@ export const createPost = async (formData: FormData): Promise<void> => {
   }
 
   revalidateTag(`posts?authorId=${me.id}`);
+  revalidatePath("/profile");
+  revalidatePath(`/user/${me.username}`);
   redirect("/profile");
 };

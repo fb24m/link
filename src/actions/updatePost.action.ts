@@ -3,6 +3,8 @@
 import { exists } from "@/functions/exists";
 import { prisma } from "@/services/Prisma.service";
 import { updatePost as prisma_updatePost } from "@/services/Prisma/post/update";
+import { users } from "@/shared/api/users";
+import { revalidatePath } from "next/cache";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -48,5 +50,7 @@ export const updatePost = async (formData: FormData): Promise<void> => {
   }
 
   revalidateTag(`posts?authorId=${post.authorId}`);
+  revalidatePath("/profile");
+  revalidatePath(`/user/${(await users.get(+post.authorId!)).username}`);
   redirect("/profile");
 };
