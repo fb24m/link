@@ -34,7 +34,7 @@ export const setAvatar = async (_: unknown, formData: FormData): Promise<string>
   revalidatePath('/profile', 'layout')
   revalidatePath(`/user/${me.username}`, 'layout')
   revalidateTag(`user/${me.id}`)
-  revalidateTag(`usger/${me.username}`)
+  revalidateTag(`user/${me.username}`)
 
   return 'finished'
 }
