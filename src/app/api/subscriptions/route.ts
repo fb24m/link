@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 
 export const GET = async () => {
   const cookie = await cookies()
-  const userId = await users.getId()
+  const { userId } = await users.getId()
 
   const lastUpdated = cookie.get('subscriptions.last_updated')?.value
 

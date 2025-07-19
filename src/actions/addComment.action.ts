@@ -8,11 +8,9 @@ import { users } from '@/shared/api/users'
 export const addComment = async (formData: FormData): Promise<void> => {
   const rawData = { text: exists<string>(formData.get('text') as string), post: exists(formData.get('post-id')) }
 
-  const authorId = await users.getId()
+  const { userId } = await users.getId()
 
-  if (!authorId) return
-
-  await prisma.comment.create({ data: { postId: +rawData.post, authorId, content: rawData.text } })
+  await prisma.comment.create({ data: { postId: +rawData.post, authorId: userId, content: rawData.text } })
 
   revalidatePath(`/article/${+rawData.post}`)
 }

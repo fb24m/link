@@ -11,7 +11,7 @@ const CommunitiesPost = async (props: { params: Promise<{ id: string }> }): Prom
 
   if (community?.ownerId !== user?.id) notFound()
 
-  return <Editor publishDate={new Date()} user={community as any} new />
+  return <Editor publishDate={new Date()} user={community} new />
 }
 
 export default CommunitiesPost

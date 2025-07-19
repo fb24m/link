@@ -10,7 +10,7 @@ import styles from './UserProfile.module.scss'
 import Link from 'next/link'
 import Icon from '@/ui/components/Icon/Icon.component'
 import dynamic from 'next/dynamic'
-import { SubscribeButton } from '@/entities/profile/SubscribeButton'
+// import { SubscribeButton } from '@/entities/profile/SubscribeButton'
 import { clsx } from '@/functions/clsx'
 import { PopupTrigger } from '@/ui/components/PopupTrigger/PopupTrigger.component'
 import { PopupFooter } from '@/ui/components/PopupFooter/PopupFooter.component'
@@ -30,9 +30,9 @@ function stringToNumber255(input: string): number {
 }
 
 export const UserProfile = async ({ user, ...props }: UserProfileProps) => {
-  const { id, username, avatar, statusIcon, statusTooltip, badge, bio, pronouns } = user
+  const { /*id,*/ username, avatar, statusIcon, statusTooltip, badge, bio, pronouns } = user
 
-  const self = await users.getMe()
+  // const self = await users.getMe()
 
   const links = await users.getLinksByUsername(username)
 
@@ -100,7 +100,7 @@ export const UserProfile = async ({ user, ...props }: UserProfileProps) => {
           )}
         </div>
         <div className={styles.buttons}>
-          {!props.selfProfile && !user.suspended && <SubscribeButton from={self.id} to={id} username={username} />}
+          {/* {!props.selfProfile && !user.suspended && <SubscribeButton from={self.id} to={id} username={username} />} */}
           <CopyButton
             success='Ссылка на профиль ($0) скопирована'
             appearance='secondary'

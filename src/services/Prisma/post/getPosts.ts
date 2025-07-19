@@ -9,23 +9,12 @@ interface IPostWhere {
   id?: number[]
 }
 
-export const getPosts = async (
-  where: IPostWhere,
-  maxPosts: number = 100
-): Promise<IResponse<Post[]>> => {
+export const getPosts = async (where: IPostWhere, maxPosts: number = 100): Promise<IResponse<Post[]>> => {
   try {
     const posts = await prisma.post.findMany({
-      where: {
-        authorId: { in: where.authorId },
-        id: {
-          in: where.id,
-        },
-        deleted: false,
-      },
-      take: 100,
-      orderBy: {
-        publishDate: 'asc',
-      },
+      where: { authorId: { in: where.authorId }, id: { in: where.id }, deleted: false },
+      take: maxPosts,
+      orderBy: { publishDate: 'asc' },
     })
 
     return { ok: true, message: 'success', code: 200, data: posts }

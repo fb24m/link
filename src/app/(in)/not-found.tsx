@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react'
 import styles from './not-found.module.scss'
-import { Button } from '@/ui/components/Button/Button.component'
 import { LButton } from '@/shared/ui/LButton/LButton'
 
 const NotFound = (): ReactNode => {

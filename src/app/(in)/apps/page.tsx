@@ -7,7 +7,7 @@ import { Title1 } from '@/ui/components/Title1/Title1.component'
 import type { ReactElement } from 'react'
 
 const Apps = async (): Promise<ReactElement> => {
-  const userId = await users.getId()
+  const { userId } = await users.getId()
 
   const apps = await getAppByOwnerId(userId)
 

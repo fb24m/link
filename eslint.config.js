@@ -19,6 +19,7 @@ export default defineConfig([
   {
     rules: {
       'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off'
     },
   },
   globalIgnores(['node_modules', 'dist', '.next'])

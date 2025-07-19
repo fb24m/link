@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react'
 
-import styles from '@/scss/forms.module.scss'
+import styles from '@/shared/styles/forms.module.scss'
 import { Box } from '@/ui/components/Box/Box.component'
 import type { Metadata } from 'next'
 import { Container } from '@/components/Container/Container.component'

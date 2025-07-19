@@ -1,1 +1,1 @@
-export const confirmEmail = async (formData: FormData) => {}
+export const confirmEmail = async () => {}
