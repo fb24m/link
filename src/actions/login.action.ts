@@ -1,31 +1,28 @@
 'use server'
 
 import { prisma } from '@/services/Prisma.service'
+import { exists } from '../functions/exists'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { exists } from '../functions/exists'
 
-interface Login { ok: boolean, message?: string }
+interface Login {
+  ok: boolean
+  message?: string
+}
 
 export const login = async (_: Login | null, formData: FormData): Promise<Login | null> => {
-	const username = exists(formData.get('username')) as string
-	const password = exists(formData.get('password')) as string
+  const email = exists(formData.get('email')) as string
+  const cookie = await cookies()
 
+  const user = await prisma.user.findUnique({ where: { email } })
 
-	const user = await prisma.user.findUnique({
-		where: {
-			username, password
-		}
-	})
+  cookie.set('temp_email', email)
 
-	if (user === null) {
-		return {
-			ok: false,
-			message: 'Неправильная электронная почта или пароль.'
-		}
-	}
+  if (!user) {
+    await prisma.tempCode.create({ data: { email, code: 99999 + Math.floor(Math.random() * 900000) } })
+  }
 
-	(await cookies()).set('link_saved_user', `${username}:${password}`)
+  redirect('/auth')
 
-	redirect('/profile')
+  return null
 }

@@ -1,7 +1,7 @@
-import { cookies } from 'next/headers'
+import { users } from '@/shared/api/users'
 
 export const GET = async () => {
-	const username = (await cookies()).get('link_saved_user')?.value.split(':')[0]
+  const { userId } = await users.getId()
 
-	return Response.json(await fetch(`${process.env.API}/user/${username}`).then(r => r.json()))
+  return Response.json(await fetch(`${process.env.API}/user/${userId}`).then(r => r.json()))
 }

@@ -1,49 +1,49 @@
 .input,
 .textarea {
-	padding: 8px;
-	outline: 0;
-	width: 100%;
-	border: 0;
-	background: transparent;
-	resize: none;
-	color: var(--foreground-color);
-	border-radius: 8px;
+  padding: 8px;
+  outline: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  resize: none;
+  color: var(--foreground-color);
+  border-radius: 8px;
 }
 
 .wrapper {
-	box-sizing: content-box;
-	display: flex;
-	position: relative;
-	overflow: hidden;
+  box-sizing: content-box;
+  display: flex;
+  position: relative;
+  overflow: hidden;
 
-	border-radius: 8px;
-	outline: 0;
-	border: var(--content-layer-hover) 1px solid;
-	border-bottom: var(--content-layer-hover) 2px solid;
+  border-radius: 8px;
+  outline: 0;
+  border: var(--content-layer-hover) 1px solid;
+  border-bottom: var(--content-layer-hover) 2px solid;
 
-	&::before {
-		content: '';
+  &::before {
+    content: '';
 
-		position: absolute;
-		bottom: 0;
-		z-index: 10;
-		left: 50%;
-		width: 0;
-		height: 2px;
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    left: 50%;
+    width: 0;
+    height: 2px;
 
-		background-color: var(--accent-color);
-		border-radius: 8px;
-	}
+    background-color: var(--accent-color);
+    border-radius: 8px;
+  }
 
-	&:has(input:focus),
-	&:has(textarea:focus) {
-		border-color: var(--medium-color);
-		border-bottom-width: 0;
-		padding-bottom: 2px;
+  &:has(input:focus),
+  &:has(textarea:focus) {
+    border-color: var(--medium-color);
+    border-bottom-width: 0;
+    padding-bottom: 2px;
 
-		&::before {
-			width: calc(100% - 4px);
-			left: 2px;
-		}
-	}
+    &::before {
+      width: calc(100% - 4px);
+      left: 2px;
+    }
+  }
 }

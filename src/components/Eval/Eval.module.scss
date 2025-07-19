@@ -1,28 +1,28 @@
 .eval {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-	a {
-		text-decoration: underline;
-	}
+  a {
+    text-decoration: underline;
+  }
 
-	ol {
-		counter-reset: ol-numbers;
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
+  ol {
+    counter-reset: ol-numbers;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 
-		li {
-			text-indent: -22px;
-			margin-left: 22px;
+    li {
+      text-indent: -22px;
+      margin-left: 22px;
 
-			&::before {
-				counter-increment: ol-numbers;
-				content: counter(ol-numbers) '. ';
-				margin-left: 8px;
-				font-weight: 500;
-			}
-		}
-	}
+      &::before {
+        counter-increment: ol-numbers;
+        content: counter(ol-numbers) '. ';
+        margin-left: 8px;
+        font-weight: 500;
+      }
+    }
+  }
 }

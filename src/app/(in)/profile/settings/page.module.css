@@ -1,76 +1,80 @@
 .title2 {
-	font-size: 20px;
-	font-weight: 500;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .title.title {
-	margin-top: 8px;
+  margin-top: 8px;
 }
 
 .header {
-	display: flex;
-	align-items: center;
-	gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .back {
-	display: inline-block;
-	min-width: 0;
+  display: inline-block;
+  min-width: 0;
 }
 
 .cards {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .grid {
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 16px;
-	margin-top: 10px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 10px;
 }
 
 .dangerous {
-	margin-top: 16px;
+  margin-top: 16px;
 
-	transition: border-color .1s, background-color .1s, color .1s;
+  transition:
+    border-color 0.1s,
+    background-color 0.1s,
+    color 0.1s;
 
-	&:has(.details[open]) {
-		border-color: red;
-		background-color: #FF000020;
-		color: red;
-	}
+  &:has(.details[open]) {
+    border-color: red;
+    background-color: #ff000020;
+    color: red;
+  }
 }
 
 .block {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.details {}
+.details {
+}
 
 .details .detailsOpenedTitle {
-	display: none;
+  display: none;
 }
 
 .details[open] .detailsClosedTitle {
-	display: none;
+  display: none;
 }
 
 .details[open] .detailsOpenedTitle {
-	display: inline-block;
+  display: inline-block;
 }
 
 .deleteButton {
-	margin-top: 16px;
+  margin-top: 16px;
 }
 
 .logout {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
 }

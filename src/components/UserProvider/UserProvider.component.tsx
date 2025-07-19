@@ -1,8 +1,9 @@
 'use client'
 
-// import { saveSessionUser } from '@/actions/saveSessionUser'
-import { useEffect, type ReactElement } from 'react'
+import { ReactNode } from 'react'
 
-export const UserProvider = (): ReactElement => {
-	return (<></>)
+// import { saveSessionUser } from '@/actions/saveSessionUser'
+
+export const UserProvider = (): ReactNode => {
+  return <></>
 }

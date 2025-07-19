@@ -1,50 +1,54 @@
 .wrapper {
-	width: 100%;
+  width: 100%;
 }
 
 .input {
-	border: none;
-	outline: none;
-	padding: 16px;
-	width: 100%;
-	height: 100%;
-	margin-bottom: 8px;
+  border: none;
+  outline: none;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 8px;
 }
 
 .inputWrapper {
-	position: relative;
+  position: relative;
 
-	&::before,
-	&::after {
-		content: '';
-		position: absolute;
-		bottom: 1px;
-		width: 100%;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    width: 100%;
 
-		display: block;
-		height: 1px;
-		background-color: var(--medium-color);
-	}
+    display: block;
+    height: 1px;
+    background-color: var(--medium-color);
+  }
 
-	&::after {
-		transition: width .3s, left .3s;
-		background-color: var(--foreground-color);
-		width: 0;
-		left: 50%;
-	}
+  &::after {
+    transition:
+      width 0.3s,
+      left 0.3s;
+    background-color: var(--foreground-color);
+    width: 0;
+    left: 50%;
+  }
 
-	&:has(input:focus)::after {
-		width: 100%;
-		left: 0;
-	}
+  &:has(input:focus)::after {
+    width: 100%;
+    left: 0;
+  }
 }
 
 .button.button {
-	margin-top: 16px;
-	padding: 16px;
-	font-size: 16px;
+  margin-top: 16px;
+  padding: 16px;
+  font-size: 16px;
+  text-align: center;
+  justify-content: center;
 }
 
 .box {
-	margin-top: 16px;
+  margin-top: 16px;
 }

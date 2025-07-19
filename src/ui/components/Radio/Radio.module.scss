@@ -1,46 +1,49 @@
 .radio {
-	display: none;
+  display: none;
 
-	&+label {
-		display: flex;
-		gap: 8px;
-		margin-top: 2px;
+  & + label {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
 
-		position: relative;
+    position: relative;
 
-		&::before {
-			content: '';
-			display: inline-block;
-			border-radius: 999px;
-			width: 20px;
-			height: 20px;
-			border: var(--medium-color) 1px solid;
+    &::before {
+      content: '';
+      display: inline-block;
+      border-radius: 999px;
+      width: 20px;
+      height: 20px;
+      border: var(--medium-color) 1px solid;
 
-			margin-top: -2px;
-		}
+      margin-top: -2px;
+    }
 
-		&::after {
-			transition: width .3s, height .3s, left .3s, top .3s;
-			content: '';
-			display: inline-block;
-			width: 0;
-			height: 0;
-			border-radius: 999px;
-			background-color: var(--foreground-color);
+    &::after {
+      transition:
+        width 0.3s,
+        height 0.3s,
+        left 0.3s,
+        top 0.3s;
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-radius: 999px;
+      background-color: var(--foreground-color);
 
-			position: absolute;
-			left: 10px;
-			top: 50%;
-		}
-	}
+      position: absolute;
+      left: 10px;
+      top: 50%;
+    }
+  }
 
-	&:checked+label {
-
-		&::after {
-			width: 10px;
-			height: 10px;
-			top: 4px;
-			left: 6px;
-		}
-	}
+  &:checked + label {
+    &::after {
+      width: 10px;
+      height: 10px;
+      top: 4px;
+      left: 6px;
+    }
+  }
 }

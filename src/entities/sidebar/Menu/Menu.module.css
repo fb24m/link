@@ -43,41 +43,40 @@
 	}
 } */
 
-
 .menu {
-	display: grid;
-	grid-template-rows: 0fr;
-	transition: grid-template-rows .2s;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.2s;
 }
 
-.menu>* {
-	overflow: hidden;
+.menu > * {
+  overflow: hidden;
 }
 
 .menu.opened {
-	grid-template-rows: 1fr;
+  grid-template-rows: 1fr;
 }
 
 .menu.desktopOpened {
-	grid-template-rows: 1fr;
+  grid-template-rows: 1fr;
 }
 
 @media (max-width: 640px) {
-	.menu {
-		position: fixed;
-		left: 0;
-		bottom: 60px;
-		background-color: var(--content-layer);
-		padding: 12px;
-		padding-block: 0;
-		width: 100%;
-	}
+  .menu {
+    position: fixed;
+    left: 0;
+    bottom: 60px;
+    background-color: var(--content-layer);
+    padding: 12px;
+    padding-block: 0;
+    width: 100%;
+  }
 
-	.menu.opened {
-		padding-block: 8px;
-	}
+  .menu.opened {
+    padding-block: 8px;
+  }
 
-	.menu.desktopOpened:not(.opened) {
-		grid-template-rows: 0fr;
-	}
+  .menu.desktopOpened:not(.opened) {
+    grid-template-rows: 0fr;
+  }
 }

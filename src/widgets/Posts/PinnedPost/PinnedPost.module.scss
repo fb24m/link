@@ -1,0 +1,60 @@
+.pinned {
+	position: relative;
+	overflow: hidden;
+}
+
+.blurredAvatar {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	filter: blur(16px);
+	transform: rotate(5deg) scale(3);
+}
+
+.pinnedContent {
+	position: relative;
+	z-index: 1;
+
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.pinnedContentTitle {
+	font-size: 18px;
+	font-weight: 500;
+	flex-grow: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.pinnedLink {
+	display: contents;
+}
+
+.pinPost {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.content {
+		display: flex;
+		flex-direction: column;
+	}
+
+	span {
+		font-weight: 600;
+		font-size: 18px;
+	}
+
+	.pinPostSmallText {
+		display: block;
+		font-size: 14px;
+		font-weight: 400;
+		opacity: 30%;
+		margin-top: 4px;
+		user-select: none;
+	}
+}

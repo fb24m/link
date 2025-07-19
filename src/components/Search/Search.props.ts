@@ -1,3 +1,3 @@
 export interface SearchProps {
-	only: string
+  only: string
 }

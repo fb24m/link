@@ -1,75 +1,78 @@
 .card {
-	max-width: 560px;
-	margin-top: 16px;
+  max-width: 560px;
+  margin-top: 16px;
 }
 
 .form {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .block {
-	display: flex;
-	gap: 16px;
+  display: flex;
+  gap: 16px;
 }
 
 .title {
-	flex-basis: 240px;
-	font-weight: 500;
-	font-size: 18px;
-	margin-top: 6px;
+  flex-basis: 240px;
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 6px;
 }
 
 .inputBlock {
-	flex-grow: 1;
+  flex-grow: 1;
 
-	&.flex {
-		display: flex;
-		gap: 12px;
-		flex-wrap: wrap;
-	}
+  &.flex {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
 }
 
 .buttonBg {
-	transition: box-shadow .5s;
-	background-image: url('/yellow.gif');
-	background-size: 100%;
-	padding: 2px;
-	border-radius: 10px;
-	box-shadow: #fff 0 0 4px;
+  transition: box-shadow 0.5s;
+  background-image: url('/yellow.gif');
+  background-size: 100%;
+  padding: 2px;
+  border-radius: 10px;
+  box-shadow: #fff 0 0 4px;
 
-	margin-top: 8px;
+  margin-top: 8px;
 
-	&:hover {
-		box-shadow: #fff 0 0 0;
-	}
+  &:hover {
+    box-shadow: #fff 0 0 0;
+  }
 }
 
 .button.button.button {
-	transition: background-color .5s, color .5s, box-shadow .5s;
-	font-weight: 600 !important;
-	width: 100%;
-	position: relative;
+  transition:
+    background-color 0.5s,
+    color 0.5s,
+    box-shadow 0.5s;
+  font-weight: 600 !important;
+  width: 100%;
+  position: relative;
 
-	&:hover {
-		opacity: 1 !important;
-		box-shadow: #fff 0 0 12px;
-	}
+  &:hover {
+    opacity: 1 !important;
+    box-shadow: #fff 0 0 12px;
+  }
 }
 
 .owner {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-	font-size: 14px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 14px;
 }
 
 .badge {
-	background-color: var(--foreground-color);
-	color: var(--background-color);
-	font-weight: 500;
-	padding: 3px 7px;
-	border-radius: 8px;
-	font-size: 14px;
+  background-color: var(--foreground-color);
+  color: var(--background-color);
+  font-weight: 500;
+  padding: 3px 7px;
+  border-radius: 8px;
+  font-size: 14px;
 }

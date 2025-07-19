@@ -1,14 +1,14 @@
 import type { ReactElement } from 'react'
 import styles from './Profile.module.css'
-import { Button } from '@/ui/components/Button/Button.component'
 import { users } from '@/shared/api/users'
+import { LButton } from '@/shared/ui/LButton/LButton'
 
 export const Profile = async (): Promise<ReactElement> => {
-	const user = await users.getMe()
+  const { username } = await users.getId()
 
-	return (
-		<Button appearance="transparent" icon="account_circle" href="/profile" className={styles.profile}>
-			{user?.username ?? 'Войти'}
-		</Button>
-	)
+  return (
+    <LButton appearance='transparent' icon='account_circle' href='/profile' className={styles.profile}>
+      {username ?? 'Войти'}
+    </LButton>
+  )
 }

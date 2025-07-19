@@ -14,19 +14,19 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 export const confirmEmail = async (formData: FormData): Promise<void> => {
-	const rawData = {
-		code: exists(formData.get('code')) as string
-	}
+  const rawData = {
+    code: exists(formData.get('code')) as string,
+  }
 
-	if ((await cookies()).get('confirm_code')?.value === rawData.code.trim()) {
-		await prisma.user.create({
-			data: {
-				email: exists((await cookies()).get('temp_email')).value,
-				password: exists((await cookies()).get('temp_password')).value,
-				username: exists((await cookies()).get('temp_username')).value
-			}
-		})
+  if ((await cookies()).get('confirm_code')?.value === rawData.code.trim()) {
+    await prisma.user.create({
+      data: {
+        email: exists((await cookies()).get('temp_email')).value,
+        password: exists((await cookies()).get('temp_password')).value,
+        username: exists((await cookies()).get('temp_username')).value,
+      },
+    })
 
-		redirect('/login')
-	}
+    redirect('/login')
+  }
 }

@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
@@ -32,16 +33,23 @@ model User {
   pinned              Int?
   last_gravatar_query DateTime?
   suspended           Boolean?
-  likes   PostLike[]
-  mentions PostMention[]
+  likes               PostLike[]
+  mentions            PostMention[]
+}
+
+model TempCode {
+  id    Int    @id @default(autoincrement())
+  code  Int
+  email String
 }
 
 model PostLike {
-    user User @relation(fields: [userId], references: [id])
-    userId Int
-    post Post @relation(fields: [postId], references: [id])
-    postId Int
-    @@id([userId, postId])
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  post   Post @relation(fields: [postId], references: [id])
+  postId Int
+
+  @@id([userId, postId])
 }
 
 model Subscription {
@@ -62,29 +70,28 @@ model Comment {
 }
 
 model Post {
-  id              Int       @id @default(autoincrement())
-  title           String    @default("")
-  content         String    @db.LongText
+  id              Int           @id @default(autoincrement())
+  title           String        @default("")
+  content         String        @db.LongText
   imageUrl        String?
-  authorId        Int?      @default(0)
-  publishDate     DateTime? @default(now())
-  deleted         Boolean?  @default(false)
+  authorId        Int?          @default(0)
+  publishDate     DateTime?     @default(now())
+  deleted         Boolean?      @default(false)
   userId          Int?
-  writtenBy       Int?      @default(0)
+  writtenBy       Int?          @default(0)
   comments        Comment[]
-  commentsEnabled Boolean   @default(true)
-  mentions PostMention[]
-  likes   PostLike[]
+  commentsEnabled Boolean       @default(true)
+  mentions        PostMention[]
+  likes           PostLike[]
 }
 
 model PostMention {
-  postId      Int
-  userId      Int
-  Post        Post     @relation(fields: [postId], references: [id])
-  User        User     @relation(fields: [userId], references: [id])
+  postId Int
+  userId Int
+  Post   Post @relation(fields: [postId], references: [id])
+  User   User @relation(fields: [userId], references: [id])
 
   @@id([postId, userId])
-
 }
 
 model Message {

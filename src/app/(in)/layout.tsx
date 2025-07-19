@@ -6,25 +6,29 @@ import styles from './layout.module.scss'
 import { Header } from '@/widgets/Header/Header'
 
 export const metadata: Metadata = {
-	title: 'NextLink',
-	description: 'NextLink - здесь есть только лучшие люди',
-	openGraph: {
-		title: 'NextLink',
-		description: 'NextLink - здесь есть только лучшие люди',
-		images: ['/logo.png']
-	}
+  title: 'NextLink',
+  description: 'NextLink - здесь есть только лучшие люди',
+  openGraph: {
+    title: 'NextLink',
+    description: 'NextLink - здесь есть только лучшие люди',
+    images: ['/logo.png'],
+  },
 }
 
-const Layout = async ({ children }: { children: ReactNode }): Promise<ReactElement> => (
-	<>
-		<Header />
-		<Container className={styles.inContainer}>
-			<Sidebar />
-			<div data-main className={styles.main}>
-				{children}
-			</div>
-		</Container>
-	</>
+const Layout = async ({
+  children,
+}: {
+  children: ReactNode
+}): Promise<ReactElement> => (
+  <>
+    <Header />
+    <Container className={styles.inContainer}>
+      <Sidebar />
+      <div data-main className={styles.main}>
+        {children}
+      </div>
+    </Container>
+  </>
 )
 
 export default Layout

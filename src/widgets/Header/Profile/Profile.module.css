@@ -1,14 +1,14 @@
 .profile {
-	font-weight: 500;
-	font-size: 14px;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 @media (max-width: 768px) {
-	.profile {
-		font-size: 12px;
-	}
+  .profile {
+    font-size: 12px;
+  }
 
-	.profile i {
-		font-size: 16px;
-	}
+  .profile i {
+    font-size: 16px;
+  }
 }

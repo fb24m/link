@@ -1,0 +1,64 @@
+.loginBlock {
+	max-width: 330px;
+}
+
+.wrapper {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.loginTitle {
+	font-size: 32px;
+	font-weight: 600;
+	margin-bottom: 32px;
+	text-align: center;
+}
+
+.input.input.input.input {
+	transform: scale(1.2);
+
+
+	&.confirmation input {
+		text-align: center;
+	}
+
+	&.confirmation::after {
+		content: '······';
+		font-size: 32px;
+		font-weight: 800;
+		position: absolute;
+		opacity: 30%;
+		top: 50%;
+		left: 50%;
+		display: inline-block;
+		transform: translate(-50%, -55%);
+		transition: transform 1s;
+		pointer-events: none;
+	}
+
+
+	&:has(input:focus)::after {
+		transform: translate(-50%, 100%) rotateZ(60deg);
+		// top: 100%;
+	}
+}
+
+.button {
+	max-width: 330px;
+	width: 100%;
+	transform: scale(1.2);
+	margin-top: 24px;
+	justify-content: center;
+}
+
+.message {
+	display: inline-block;
+	margin-top: 16px;
+}
+
+.description {
+	margin-top: -16px;
+	margin-bottom: 24px;
+}

@@ -16,19 +16,22 @@ import { prisma } from '@/services/Prisma.service'
 import type { NextRequest } from 'next/server'
 
 // TODO: Fix typization
-export const GET = async (request: NextRequest, props: { params: Promise<{ id: string }> }): Promise<any> => {
-	const params = await props.params;
+export const GET = async (
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> }
+): Promise<Response> => {
+  const params = await props.params
 
-	const posts = await prisma.post.findMany({
-		where: {
-			id: +params.id
-		}
-	})
+  const posts = await prisma.post.findMany({
+    where: {
+      id: +params.id,
+    },
+  })
 
-	return Response.json({
-		ok: true,
-		message: 'success',
-		code: 200,
-		posts
-	})
+  return Response.json({
+    ok: true,
+    message: 'success',
+    code: 200,
+    data: posts,
+  })
 }

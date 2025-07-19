@@ -1,52 +1,30 @@
-"use client";
+'use client'
 
-import React, {
-  useState,
-  type HTMLAttributes,
-  type ReactNode,
-  createContext,
-} from "react";
-import styles from "./Popup.module.scss";
+import React, { useState, type HTMLAttributes, type ReactNode, createContext } from 'react'
 
 export const PopupContext = createContext({
-  togglePopupClassList: (): void => {},
-  popupClassList: "",
-  wrapperClassName: "",
+  toggle: (): void => {},
+  open: (): void => {},
+  close: (): void => {},
   topCloseButton: false,
-});
+  opened: false,
+})
 
 export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
-  topCloseButton?: boolean;
-  forceClosed?: boolean;
+  topCloseButton?: boolean
+  forceClosed?: boolean
 }
 
-export const Popup = ({
-  className,
-  forceClosed,
-  topCloseButton = false,
-  ...props
-}: PopupProps): ReactNode => {
-  const [popupClassList, setPopupClassList] = useState("");
+export const Popup = ({ className, topCloseButton = false, ...props }: PopupProps): ReactNode => {
+  const [opened, setOpened] = useState<boolean>(false)
 
-  const togglePopupClassList = (): void => {
-    popupClassList === ""
-      ? setPopupClassList(styles.opened + " opened-popup")
-      : setPopupClassList("");
-  };
+  const toggle = (): void => setOpened(prev => !prev)
+  const close = () => setOpened(false)
+  const open = () => setOpened(true)
 
   return (
-    <PopupContext.Provider
-      value={{
-        togglePopupClassList,
-        popupClassList,
-        wrapperClassName: styles.wrapper,
-        topCloseButton,
-      }}
-    >
-      <div
-        className={`${styles.popup} ${className} ${!forceClosed && popupClassList}`}
-        {...props}
-      ></div>
+    <PopupContext.Provider value={{ toggle, open, close, topCloseButton, opened }}>
+      <div className={className} {...props}></div>
     </PopupContext.Provider>
-  );
-};
+  )
+}

@@ -1,55 +1,76 @@
-.window {
-	padding: 32px;
-	max-width: 600px;
-	width: 100%;
-	overflow-y: auto;
-	max-height: calc(100vh - 64px);
-	transition: transform .8s, opacity .3s;
+.wrapper {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 18;
 
-	transform: translateY(100vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	background-color: rgba(#222, 20%);
-	border-radius: 24px;
-	border: rgba(#fff, 13%) 1px solid;
-	backdrop-filter: blur(14px);
-	color: #fff;
+  background-color: transparent;
 
-	@media(prefers-color-scheme: light) {
-	    background-color: rgba(#fff, 20%);
-		border-color: rgba(#555, 8%);
-		box-shadow: rgba(#333, 12%) 0 0 24px;
-		color: #333;
-	}
-
-	[class*="opened-popup"] & {
-		transform: translateY(0);
-	}
-
-	&::-webkit-scrollbar {
-		display: none;
-	}
+  &.opened {
+    pointer-events: all;
+  }
 }
 
+
+.window {
+  padding: 32px;
+  max-width: 600px;
+  width: 100%;
+  overflow-y: auto;
+  max-height: calc(100vh - 64px);
+  transition:
+    transform 0.8s,
+    opacity 0.3s;
+
+  transform: translateY(100vh);
+
+  background-color: rgba(#222, 20%);
+  border-radius: 24px;
+  border: rgba(#fff, 13%) 1px solid;
+  backdrop-filter: blur(14px);
+  color: #fff;
+
+  @media (prefers-color-scheme: light) {
+    background-color: rgba(#fff, 20%);
+    border-color: rgba(#555, 8%);
+    box-shadow: rgba(#333, 12%) 0 0 24px;
+    color: #333;
+  }
+
+  &.opened {
+    transform: translateY(0);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 .popupHeader {
-	display: flex;
-	justify-content: flex-end;
-	border-bottom: rgba(#000, 5%) 1px solid;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: rgba(#000, 5%) 1px solid;
 }
 
-
 .topCloseButton {
-	position: absolute;
-	right: 0;
-	padding: 4px 16px;
-	border-radius: 0 !important;
-	transition: background-color .1s;
+  position: absolute;
+  right: 0;
+  padding: 4px 16px;
+  border-radius: 0 !important;
+  transition: background-color 0.1s;
 
-	&:hover {
-		background-color: rgba(#000, 10%);
-	}
+  &:hover {
+    background-color: rgba(#000, 10%);
+  }
 
-	i {
-		color: #000;
-	}
+  i {
+    color: #000;
+  }
 }

@@ -8,18 +8,20 @@ import Icon from '../Icon/Icon.component'
 import { Button } from '../Button/Button.component'
 
 export const PopupWrapper = ({ className, children, ...props }: HTMLAttributes<HTMLDivElement>): ReactNode => {
-	const popup = useContext(PopupContext)
+  const { toggle, topCloseButton, opened } = useContext(PopupContext)
 
-	return <div className={`${styles.popup} ${popup.wrapperClassName} ${popup.wrapperClassName}`}>
-		<div className={clsx(styles.window, className)} {...props}>
-			{popup.topCloseButton &&
-				<div className={styles.popupHeader}>
-					<Button onClick={popup.togglePopupClassList} className={styles.topCloseButton}>
-						<Icon icon="close"></Icon>
-					</Button>
-				</div>
-			}
-			{children}
-		</div>
-	</div>
+  return (
+    <div className={clsx(styles.popup, styles.wrapper, opened && styles.opened)}>
+      <div className={clsx(styles.window, className, opened && styles.opened)} {...props}>
+        {topCloseButton && (
+          <div className={styles.popupHeader}>
+            <Button onClick={toggle} className={styles.topCloseButton}>
+              <Icon icon='close'></Icon>
+            </Button>
+          </div>
+        )}
+        {children}
+      </div>
+    </div>
+  )
 }

@@ -1,10 +1,9 @@
-import { request } from "@/shared/api/helpers/request";
+import { request } from '@/shared/api/helpers/request'
+import { Post } from '@prisma/client'
 
 export const posts = {
-  getByAuthorId: async (authorId: number) =>
-    (await request(`/posts?authorId=${authorId}`)).data,
-  getByAuthorsIds: async (ids: number[]) =>
-    (await request(`/posts/?authorId=${ids.join(",")}`)).data,
-  getDeleted: async () => (await request(`/posts?deleted=true`)).data,
-  getById: async (id: number) => (await request(`/posts/${id}`)).posts,
-};
+  getByAuthorId: (authorId: number): Promise<Post[]> => request(`/posts?authorId=${authorId}`),
+  getByAuthorsIds: async (ids: number[]): Promise<Post[]> => request(`/posts/?authorId=${ids.join(',')}`),
+  getDeleted: (): Promise<Post[]> => request(`/posts?deleted=true`),
+  getById: (id: number): Promise<Post[]> => request<Post[]>(`/posts/${id}`),
+}

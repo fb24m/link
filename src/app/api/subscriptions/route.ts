@@ -1,52 +1,32 @@
 import { prisma } from '@/services/Prisma.service'
+import { users } from '@/shared/api/users'
 import { cookies } from 'next/headers'
 
 export const GET = async () => {
-	const cookie = await cookies()
+  const cookie = await cookies()
+  const userId = await users.getId()
 
-	const lastUpdated = cookie.get('subscriptions.last_updated')?.value
+  const lastUpdated = cookie.get('subscriptions.last_updated')?.value
 
-	if (!lastUpdated || !cookie.has('subscriptions')) {
-		const auth = cookie.get('link_saved_user')?.value
+  if (!lastUpdated || !cookie.has('subscriptions')) {
+    if (!userId) return Response.json({ ok: false, code: 401, message: 'Authorization data found but is not correct' })
 
-		if (!auth?.split(':')[0]) return Response.json({
-			ok: false,
-			code: 401,
-			message: 'No authorization data found'
-		})
+    const subscriptions = await prisma.subscription.findMany({ where: { from: userId } })
 
-		const user = await prisma.user.findUnique({
-			where: { username: auth?.split(':')[0] }
-		})
+    const data = await Promise.all(
+      subscriptions.map(s => prisma.user.findUnique({ where: { id: s.to }, select: { id: true, username: true } }))
+    )
 
-		if (!user) return Response.json({
-			ok: false,
-			code: 401,
-			message: 'Authorization data found but is not correct'
-		})
+    cookie.set('subscriptions', JSON.stringify(data))
+    cookie.set('subscriptions.last_updated', new Date().toISOString())
 
-		const subscriptions = await prisma.subscription.findMany({
-			where: { from: user?.id }
-		})
-
-		const data = await Promise.all(subscriptions.map(s => prisma.user.findUnique({
-			where: { id: s.to },
-			select: { id: true, username: true }
-		})))
-
-		cookie.set('subscriptions', JSON.stringify(data))
-		cookie.set('subscriptions.last_updated', new Date().toISOString())
-
-		return Response.json({
-			ok: true, data
-		})
-	}
-	else {
-		return Response.json({
-			source: "cache-cookie",
-			lastUpdated,
-			ok: true,
-			data: JSON.parse(cookie.get('subscriptions')!.value)
-		})
-	}
+    return Response.json({ ok: true, data })
+  } else {
+    return Response.json({
+      source: 'cache-cookie',
+      lastUpdated,
+      ok: true,
+      data: JSON.parse(cookie.get('subscriptions')!.value),
+    })
+  }
 }

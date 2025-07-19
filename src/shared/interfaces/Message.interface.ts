@@ -1,5 +1,5 @@
 export interface IMessage {
-	content: string
-	chatName: string
-	author: string
+  content: string
+  chatName: string
+  author: string
 }

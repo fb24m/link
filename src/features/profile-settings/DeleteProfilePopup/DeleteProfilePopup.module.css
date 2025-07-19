@@ -1,53 +1,52 @@
-.popupWrapper>div {
-	border: red 1px solid;
-	box-shadow: red 0 0 10px;
-	color: #fff;
+.popupWrapper > div {
+  border: red 1px solid;
+  box-shadow: red 0 0 10px;
+  color: #fff;
 }
 
 .deleteButton.deleteButton {
-	background-color: red;
-	color: #fff;
+  background-color: red;
+  color: #fff;
 }
 
 .input {
-	margin-top: 16px;
-
+  margin-top: 16px;
 }
 
 .input.input:has(input:focus) {
-	box-shadow: red 0 0 8px;
+  box-shadow: red 0 0 8px;
 }
 
 .input.input::before {
-	border-color: red;
-	border-width: 0;
+  border-color: red;
+  border-width: 0;
 }
 
 .checkbox {
-	display: flex;
-	gap: 8px;
-	align-items: flex-start;
-	margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 8px;
 
-	& label {
-		user-select: none;
-	}
+  & label {
+    user-select: none;
+  }
 
-	& input {
-		margin-top: 4px;
-		accent-color: red;
-	}
+  & input {
+    margin-top: 4px;
+    accent-color: red;
+  }
 }
 
 .error {
-	margin-top: 16px;
-	font-size: 14px;
-	color: red;
-	font-weight: 500;
+  margin-top: 16px;
+  font-size: 14px;
+  color: red;
+  font-weight: 500;
 }
 
 .changeButton.changeButton {
-	background-color: red;
-	color: #fff;
-	font-weight: 500;
+  background-color: red;
+  color: #fff;
+  font-weight: 500;
 }
