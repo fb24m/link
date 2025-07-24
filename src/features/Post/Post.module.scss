@@ -6,7 +6,7 @@
   backdrop-filter: unset;
 
   * {
-    max-width: 100%;
+    // max-width: 100%;
   }
 }
 
@@ -95,11 +95,9 @@
   margin-top: -40px;
   font-size: 14px;
   padding-top: 24px;
-  background-image: linear-gradient(
-    to top,
-    var(--background-color) 25%,
-    transparent 120%
-  );
+  background-image: linear-gradient(to top,
+      var(--background-color) 25%,
+      transparent 120%);
 
   color: var(--accent-color);
 

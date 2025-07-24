@@ -19,6 +19,7 @@ import { ReadMore } from '@/features/Post/ReadMore'
 import { users } from '@/shared/api/users'
 import { pin } from '../../widgets/Posts/pin.action'
 import { LButton } from '@/shared/ui/LButton/LButton'
+import { Share } from '../Share/Share'
 
 const maxContentLength = 500
 
@@ -115,6 +116,7 @@ export const Post = async ({ full, post, restore, controls, ...props }: PostProp
               Комментарии ({comments.length})
             </LButton>
           )}
+          <Share link={`https://link.fb24m.ru/article/${id}`} text={`Пост ${author.username} на NextLink`} />
           <CopyButton
             className={styles.interactionButton}
             success='Ссылка скопирована'

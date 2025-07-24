@@ -1,3 +1,21 @@
 .box {
   margin-bottom: 16px;
 }
+
+.button {
+  @media(max-width: 640px) {
+    font-size: 0;
+  }
+
+  &.active {
+    @media (max-width: 640px) {
+      font-size: 14px;
+    }
+  }
+}
+
+.hideMobile {
+  @media (max-width: 640px) {
+    display: none;
+  }
+}

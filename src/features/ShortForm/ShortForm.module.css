@@ -1,10 +1,15 @@
-.shortForm {
+.formWrapper {
   position: fixed;
   bottom: 16px;
+  padding-inline: 16px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.shortForm {
   background-color: var(--background-color);
   max-width: 560px;
-  left: 50%;
-  transform: translateX(-50%);
   box-shadow: var(--medium-color) 0 0 10px;
 }
 

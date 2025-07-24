@@ -20,30 +20,31 @@ export const ShortForm = () => {
   return (
     <>
       {isFormOpened && (
-        <Card className={styles.shortForm}>
-          Пройдите короткий опрос о вашем впечатлении о NextLink. Это займет
-          несколько минут
-          <div className={styles.buttons}>
-            <Button
-              className={styles.button}
-              appearance='secondary'
-              onClick={() => {
-                closeForm()
-                setIsFormOpened(false)
-              }}
-            >
-              Закрыть
-            </Button>
-            <LButton
-              className={styles.button}
-              appearance='primary'
-              href='https://forms.gle/GGejHRTZ3svqgWwu8'
-              target='_blank'
-            >
-              Пройти опрос
-            </LButton>
-          </div>
-        </Card>
+        <div className={styles.formWrapper}>
+          <Card className={styles.shortForm}>
+            Пройдите короткий опрос о вашем впечатлении о NextLink. Это займет несколько минут
+            <div className={styles.buttons}>
+              <Button
+                className={styles.button}
+                appearance='secondary'
+                onClick={() => {
+                  closeForm()
+                  setIsFormOpened(false)
+                }}
+              >
+                Закрыть
+              </Button>
+              <LButton
+                className={styles.button}
+                appearance='primary'
+                href='https://forms.gle/GGejHRTZ3svqgWwu8'
+                target='_blank'
+              >
+                Пройти опрос
+              </LButton>
+            </div>
+          </Card>
+        </div>
       )}
     </>
   )

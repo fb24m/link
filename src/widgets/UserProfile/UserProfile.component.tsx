@@ -1,6 +1,5 @@
 import { Body1 } from '@/ui/components/Body1/Body1.component'
 
-import { CopyButton } from '../../components/CopyButton/CopyButton.component'
 import { SocialIcon } from '@/shared/icons/SocialIcon'
 
 import type { UserProfileProps } from './UserProfile.props'
@@ -10,13 +9,14 @@ import styles from './UserProfile.module.scss'
 import Link from 'next/link'
 import Icon from '@/ui/components/Icon/Icon.component'
 import dynamic from 'next/dynamic'
-// import { SubscribeButton } from '@/entities/profile/SubscribeButton'
 import { clsx } from '@/functions/clsx'
+
 import { PopupTrigger } from '@/ui/components/PopupTrigger/PopupTrigger.component'
 import { PopupFooter } from '@/ui/components/PopupFooter/PopupFooter.component'
 import { PopupWrapper } from '@/ui/components/PopupWrapper/PopupWrapper.component'
 import { Popup } from '@/ui/components/Popup/Popup.component'
 import { LButton } from '@/shared/ui/LButton/LButton'
+import { Share } from '@/features/Share/Share'
 
 const ChangeBioPopup = dynamic(() => import('@/features/profile/ChangeBioPopup/ChangeBioPopup'))
 const ChangeAvatarPopup = dynamic(() => import('../../features/profile/ChangeAvatarPopup/ChangeAvatarPopup'))
@@ -101,14 +101,7 @@ export const UserProfile = async ({ user, ...props }: UserProfileProps) => {
         </div>
         <div className={styles.buttons}>
           {/* {!props.selfProfile && !user.suspended && <SubscribeButton from={self.id} to={id} username={username} />} */}
-          <CopyButton
-            success='Ссылка на профиль ($0) скопирована'
-            appearance='secondary'
-            icon='share'
-            text={`https://link.fb24m.ru/user/${username}`}
-          >
-            Поделится
-          </CopyButton>
+          <Share link={`https://link.fb24m.ru/user/${user.id}`} />
           {props.selfProfile && <LButton appearance='secondary' icon='settings' href={`/profile/settings`} />}
         </div>
       </div>

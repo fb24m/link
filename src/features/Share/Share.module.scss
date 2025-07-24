@@ -1,0 +1,62 @@
+.button {
+	@media (max-width: 480px) {
+		font-size: 0;
+	}
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.shareList {
+	display: flex;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.shareItem {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	background-color: var(--background-opaque);
+	border: var(--border-opaque) 1px solid;
+	border-radius: 16px;
+	cursor: pointer;
+
+	overflow: hidden !important;
+	position: relative;
+
+	& img:first-child {
+		position: relative;
+		z-index: 2;
+	}
+
+	& img:last-child {
+		position: absolute;
+		filter: blur(40px);
+		opacity: 0;
+		transition: filter .3s, opacity .3s, transform .3s;
+		width: 56px;
+		height: 56px;
+		overflow: hidden;
+		transform: scale(2);
+	}
+
+	&:hover img:last-child {
+		filter: blur(40px);
+		opacity: 1;
+		transform: scale(1);
+
+	}
+
+	i {
+		font-size: 30px;
+	}
+
+	&:hover {
+		// opacity: .9;
+	}
+}
