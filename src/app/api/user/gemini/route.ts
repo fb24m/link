@@ -28,7 +28,7 @@ export const GET = async (request: Request) => {
   const ai = new GoogleGenAI({ apiKey: user?.geminiKey })
 
   const text = ai.models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.5-flash-lite',
     contents: [
       `Вот предыдущие посты пользователя в виду JSON: ${JSON.stringify(myposts)}. Сгенерируй новый пост для пользователя, чтобы по стилю выглядело так, будто этот пост составлял сам пользователь. Объем, стиль, пунктуация и особенности - все должно быть скопировано. Ответом должен быть чистый отформатированный текст без JSON-разметки или дополнительных комментариев`,
     ],
