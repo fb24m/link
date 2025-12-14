@@ -21,9 +21,9 @@ export const pin = async (formData: FormData) => {
     credentials: 'include',
   })
 
-  revalidateTag(`user`)
-  revalidateTag(`user/${username}`)
-  revalidateTag(`user/${userId}`)
+  revalidateTag(`user`, 'max')
+  revalidateTag(`user/${username}`, 'max')
+  revalidateTag(`user/${userId}`, 'max')
   revalidatePath(`/user/${username}`, 'layout')
   revalidatePath(`/profile`, 'layout')
 }

@@ -12,7 +12,7 @@ export const updateBio = async (formData: FormData): Promise<void> => {
 
   await postUser(userId, { bio: rawData.newBio })
 
-  revalidateTag('user')
+  revalidateTag('user', 'max')
   revalidatePath('/profile')
   revalidatePath(`/user/${username}`)
 }

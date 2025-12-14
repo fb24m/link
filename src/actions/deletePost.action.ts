@@ -11,8 +11,8 @@ export const deletePost = async (formData: FormData): Promise<void> => {
   const { userId, username } = await users.getId()
 
   await deletePostById(id)
-  revalidateTag(`posts`)
-  revalidateTag(`posts?authorId=${userId}`)
+  revalidateTag(`posts`, 'max')
+  revalidateTag(`posts?authorId=${userId}`, 'max')
   revalidatePath('/profile', 'layout')
   revalidatePath(`/user/${username}`, 'layout')
 }

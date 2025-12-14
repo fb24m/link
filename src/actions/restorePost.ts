@@ -9,16 +9,9 @@ export const restorePost = async (formData: FormData): Promise<void> => {
   const id = +exists(formData.get('post-id'))
   const authorId = exists(formData.get('author-id'))
 
-  await prisma.post.update({
-    where: {
-      id,
-    },
-    data: {
-      deleted: false,
-    },
-  })
+  await prisma.post.update({ where: { id }, data: { deleted: false } })
 
-  revalidateTag(`posts?authorId=${authorId}`)
+  revalidateTag(`posts?authorId=${authorId}`, 'max')
   revalidatePath('/profile/deleted')
   revalidatePath('/profile')
 }

@@ -29,8 +29,8 @@ export const createPost = async (formData: FormData): Promise<void> => {
     })
   }
 
-  revalidateTag(`posts`)
-  revalidateTag(`posts?authorId=${userId}`)
+  revalidateTag(`posts`, 'max')
+  revalidateTag(`posts?authorId=${userId}`, 'max')
   revalidatePath('/profile', 'layout')
   revalidatePath(`/user/${username}`, 'layout')
   redirect('/profile')
