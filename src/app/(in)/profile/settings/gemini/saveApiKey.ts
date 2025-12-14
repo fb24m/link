@@ -11,7 +11,7 @@ export const saveGeminiKey = async (message: string, formData: FormData): Promis
 
   try {
     await ai.models.list()
-    request('user/updateGemini', { method: 'POST', body: JSON.stringify({ key: key }) })
+    request('user/gemini', { method: 'POST', body: JSON.stringify({ key: key }) })
     message = 'ok'
     revalidateTag('user/gemini', 'max')
   } catch {

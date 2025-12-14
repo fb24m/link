@@ -6,6 +6,7 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { User } from '@prisma/client'
 import { askGemini } from './askGemini'
 import { users } from '@/shared/api/users'
+import Link from 'next/link'
 
 export const EditorArea = ({
   defaultValue,
@@ -57,9 +58,11 @@ export const EditorArea = ({
               Сгенерировать пост
             </Button>
           ) : (
-            <Button type='button' appearance='primary' className={styles.tryButton}>
-              Настроить
-            </Button>
+            <Link href='/profile/settings/gemini'>
+              <Button type='button' appearance='primary' className={styles.tryButton}>
+                Настроить
+              </Button>
+            </Link>
           )}
         </div>
         <textarea
