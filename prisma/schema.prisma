@@ -35,6 +35,7 @@ model User {
   suspended           Boolean?
   likes               PostLike[]
   mentions            PostMention[]
+  geminiKey 					String?
 }
 
 model TempCode {

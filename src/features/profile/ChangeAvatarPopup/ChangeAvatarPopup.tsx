@@ -35,7 +35,7 @@ const ChangeAvatarPopup = (props: CustomPopupProps): ReactNode => {
 
   return (
     <form action={action}>
-      <Popup className={styles.popup} forceClosed={isForceClosed}>
+      <Popup className={styles.popup}>
         <PopupWrapper>
           <Eval>
             <p className={styles.title}>Изменение аватара</p>

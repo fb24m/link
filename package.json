@@ -12,13 +12,14 @@
     "env": "vercel env pull"
   },
   "dependencies": {
+    "@google/genai": "^1.33.0",
     "@prisma/client": "6.12.0",
     "cloudinary": "^2.7.0",
     "jsonwebtoken": "^9.0.2",
     "marked": "^11.1.0",
-    "next": "^15.4.1",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "^16.0.10",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-hot-toast": "^2.5.2",
     "timeago-react": "^3.0.6",
     "timeago.js": "^4.0.2",

@@ -2,10 +2,20 @@ import { prisma } from '@/services/Prisma.service'
 import { users } from '@/shared/api/users'
 import { NextRequest } from 'next/server'
 
+type PrismaSelect = { [key: string]: boolean }
+
 export const GET = async (request: NextRequest) => {
   const queryParams = new URLSearchParams(new URL(request.url).search)
 
   const authorId = queryParams.get('authorId')!
+  const fields = queryParams
+    .get('fields')
+    ?.split(',')
+    .reduce((acc: PrismaSelect, field) => {
+      acc[field] = true
+      return acc
+    }, {})
+  const max = queryParams.get('max')
 
   if (authorId) {
     return Response.json({
@@ -16,6 +26,11 @@ export const GET = async (request: NextRequest) => {
         where: {
           authorId: authorId.includes(',') ? { in: authorId.split(',').map(i => +i) } : +authorId,
           deleted: false,
+        },
+        select: fields,
+        take: max ? Number.parseInt(max) : 100,
+        orderBy: {
+          publishDate: 'asc', // или id: 'desc'
         },
       }),
     })

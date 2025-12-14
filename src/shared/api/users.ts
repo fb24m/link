@@ -12,6 +12,9 @@ export const users = {
 
   get: async (selector: string | number): Promise<User> => await request(`user/${selector}`),
 
+  getGemini: async (): Promise<{ response: string }> => request<{ response: string }>('user/gemini', {}, true),
+  geminiReady: async (): Promise<boolean> => (await request<{ geminiReady: boolean }>('user/geminiready')).geminiReady,
+
   getId: async (userCookies?: ReadonlyRequestCookies): Promise<{ userId: number; username: string }> => {
     const cookie = userCookies ?? (await cookies())
     const token = cookie.get('user')?.value

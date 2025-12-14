@@ -1,0 +1,19 @@
+.title2 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.title.title {
+  margin-top: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back {
+  display: inline-block;
+  min-width: 0;
+}

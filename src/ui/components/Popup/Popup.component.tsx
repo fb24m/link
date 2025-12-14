@@ -12,7 +12,6 @@ export const PopupContext = createContext({
 
 export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
   topCloseButton?: boolean
-  forceClosed?: boolean
 }
 
 export const Popup = ({ className, topCloseButton = false, ...props }: PopupProps): ReactNode => {

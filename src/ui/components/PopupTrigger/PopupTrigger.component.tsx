@@ -7,14 +7,8 @@ export interface PopupTriggerProps extends Omit<HTMLAttributes<HTMLDivElement>, 
   onClick?: (arg: () => void) => void
 }
 
-export const PopupTrigger = ({ onClick, ...props }: PopupTriggerProps): ReactNode => {
+export const PopupTrigger = ({ ...props }: PopupTriggerProps): ReactNode => {
   const popup = useContext(PopupContext)
 
-  return (
-    <div
-      {...props}
-      style={{ display: 'contents' }}
-      onClick={() => (onClick ? onClick(popup.toggle) : popup.toggle)}
-    ></div>
-  )
+  return <div {...props} style={{ display: 'contents' }} onClick={() => popup.toggle()}></div>
 }

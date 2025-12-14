@@ -23,24 +23,29 @@ export interface EditorProps {
 export const Editor = async (props: EditorProps): Promise<ReactElement> => {
   const now = typeof props.post?.publishDate !== 'undefined' ? props.post?.publishDate : props.publishDate
   const date = `${now?.getDate()}.${exists(now?.getMonth()) + 1}.${now?.getFullYear()}`
-  const { username } = await users.getId()
+  const me = await users.getMe()
+  const isGeminiReady = await users.geminiReady()
 
   return (
     <div className={styles.wrapper}>
       <form action={props.new ? createPost : updatePost} className={styles.form}>
         <input type='text' style={{ display: 'none' }} name='id' readOnly value={props.post?.id} />
         <div className={styles.post}>
-          <EditorArea defaultValue={props.post?.content.split('<br>').join('\n')} />
+          <EditorArea
+            defaultValue={props.post?.content.split('<br>').join('\n')}
+            me={me}
+            isGeminiReady={isGeminiReady}
+          />
         </div>
         <div className={styles.sidebar}>
-          <BackButton className={styles.backButton} appearance='transparent' icon='arrow_back'>
+          <BackButton type='button' className={styles.backButton} appearance='transparent' icon='arrow_back'>
             Назад
           </BackButton>
           <div className={styles.sidebarBlock}>
             <span className={styles.title}>{props.new ? 'Создать' : 'Изменить'} пост</span>
           </div>
           {props.user?.name && <div className={styles.sidebarBlock}>Публикация: {props.user?.name}</div>}
-          <div className={styles.sidebarBlock}>Автор: {username}</div>
+          <div className={styles.sidebarBlock}>Автор: {me.username}</div>
           <div className={styles.sidebarBlock}>Дата публикации: {date}</div>
           <details className={styles.instruction}>
             <summary>Форматирование</summary>

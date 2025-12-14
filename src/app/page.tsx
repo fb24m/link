@@ -12,8 +12,14 @@ import { users } from '@/shared/api/users'
 import { LButton } from '@/shared/ui/LButton/LButton'
 
 const Home = async (): Promise<ReactElement> => {
-  // const user = await users.getMe()
-  const posts = await request<Post[]>('recommendations')
+  let posts = null
+  const me = await users.getMe()
+
+  console.log(me)
+
+  if (me) {
+    posts = await request<Post[]>('recommendations')
+  }
 
   const id = await users.getId()
 

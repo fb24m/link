@@ -9,4 +9,5 @@ export interface ButtonProps extends HTMLAttributes<HTMLElement> {
   type?: 'submit' | 'button' | 'reset'
   size?: 'sm' | 'md' | 'lg'
   loader?: LoaderType
+  isLoading?: boolean
 }

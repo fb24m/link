@@ -17,6 +17,7 @@ export const Button = ({
   children,
   disabled,
   loader,
+  isLoading,
   ...props
 }: ButtonProps): ReactNode => {
   const linkStatus = useLinkStatus()
@@ -37,7 +38,7 @@ export const Button = ({
 
   const buttonContent = (
     <>
-      {(linkStatus.pending || formStatus.pending) && loader && loaderEl[loader]}
+      {(linkStatus.pending || formStatus.pending || isLoading) && loader && loaderEl[loader]}
       {icon && <Icon icon={icon} />} {children}
     </>
   )
