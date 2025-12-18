@@ -17,8 +17,12 @@ export const POST = async (request: Request) => {
 }
 
 export const GET = async (request: Request) => {
+  const queryParams = new URLSearchParams(new URL(request.url).search)
   const { userId } = await users.getId()
   const myposts = await posts.getByAuthorId(userId, { max: 20, fields: 'content' })
+
+  const source = queryParams.get('source')
+  const prompt = queryParams.get('prompt')
 
   const user = await prisma.user.findUnique({ where: { id: userId }, select: { geminiKey: true } })
 
@@ -30,7 +34,7 @@ export const GET = async (request: Request) => {
   const text = ai.models.generateContent({
     model: 'gemini-2.5-flash-lite',
     contents: [
-      `Вот предыдущие посты пользователя в виду JSON: ${JSON.stringify(myposts)}. Сгенерируй новый пост для пользователя, чтобы по стилю выглядело так, будто этот пост составлял сам пользователь. Объем, стиль, пунктуация и особенности - все должно быть скопировано. Ответом должен быть чистый отформатированный текст без JSON-разметки или дополнительных комментариев`,
+      `Вот предыдущие посты пользователя в виду JSON: ${JSON.stringify(myposts)}. Сгенерируй новый пост для пользователя, чтобы по стилю выглядело так, будто этот пост составлял сам пользователь. Объем, стиль, пунктуация и особенности - все должно быть скопировано. Ответом должен быть чистый отформатированный текст без JSON-разметки или дополнительных комментариев. ${source ? `Пользователь оставил пост, который был написан или сгенерирован заранее: ${source}. ` : ''} ${prompt ? `Пользователь оставил запрос с пожелниями к генерации поста: ${prompt}` : ''}`,
     ],
   })
 

@@ -8,9 +8,9 @@ import { users } from '@/shared/api/users'
 import { BackButton } from '../../components/BackButton/BackButton.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { EditorArea } from '@/entities/editor/EditorArea/EditorArea'
-import { Post } from '@prisma/client'
 import { LButton } from '@/shared/ui/LButton/LButton'
 import { Button } from '@/ui/components/Button/Button.component'
+import { Post } from '../../../generated/prisma/client'
 
 export interface EditorProps {
   post?: Post
@@ -31,11 +31,7 @@ export const Editor = async (props: EditorProps): Promise<ReactElement> => {
       <form action={props.new ? createPost : updatePost} className={styles.form}>
         <input type='text' style={{ display: 'none' }} name='id' readOnly value={props.post?.id} />
         <div className={styles.post}>
-          <EditorArea
-            defaultValue={props.post?.content.split('<br>').join('\n')}
-            me={me}
-            isGeminiReady={isGeminiReady}
-          />
+          <EditorArea defaultValue={props.post?.content.split('<br>').join('\n')} isGeminiReady={isGeminiReady} />
         </div>
         <div className={styles.sidebar}>
           <BackButton type='button' className={styles.backButton} appearance='transparent' icon='arrow_back'>

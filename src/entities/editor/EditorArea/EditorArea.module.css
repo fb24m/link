@@ -48,8 +48,24 @@
   margin-top: 6px;
   margin-left: 24px;
 }
-
-.tryButton {
+.promptArea {
   margin-top: 16px;
   margin-left: 24px;
+
+  p {
+    font-size: 14px;
+    color: var(--negative-medium-color);
+    opacity: 0.6;
+  }
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.input {
+  flex-grow: 1;
 }

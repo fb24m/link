@@ -4,6 +4,7 @@ import { Container } from '@/components/Container/Container.component'
 import { Posts } from '@/widgets/Posts/Posts'
 import { getPosts } from '@/services/Prisma/post/getPosts'
 import { users } from '@/shared/api/users'
+import { PostType } from '@/shared/api/posts'
 
 const Welcome = async (): Promise<ReactElement> => {
   const user = await users.getMe()
@@ -15,7 +16,7 @@ const Welcome = async (): Promise<ReactElement> => {
 
   if (!posts.ok || !posts.data) return <Container>{posts.message}</Container>
 
-  return <Posts posts={posts.data} />
+  return <Posts posts={posts.data as PostType[]} />
 }
 
 export default Welcome

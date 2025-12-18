@@ -1,9 +1,11 @@
 import { request } from '@/shared/api/helpers/request'
-import { User, UserProfileLink } from '@prisma/client'
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
-import { redirect } from 'next/navigation'
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
+import { UserProfileLink } from '../../../generated/prisma/client'
+import { User } from '../../../generated/prisma/browser'
+import { revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 
 export const users = {
   getMe: (): Promise<User> => request<User>(`user`),
@@ -12,7 +14,22 @@ export const users = {
 
   get: async (selector: string | number): Promise<User> => await request(`user/${selector}`),
 
-  getGemini: async (): Promise<{ response: string }> => request<{ response: string }>('user/gemini', {}, true),
+  update: async (update: Partial<User>): Promise<void> => {
+    await request('user', { method: 'POST', body: JSON.stringify(update) })
+    const { username } = await users.getId()
+
+    revalidateTag('user', 'max')
+    revalidatePath('/profile')
+    revalidatePath(`/user/${username}`)
+  },
+
+  getGemini: async (prompt?: string, source?: string): Promise<{ response: string }> =>
+    request<{ response: string }>(
+      `user/gemini${prompt ? `?prompt=${prompt}` : ''}${source ? `&source=${source}` : ''}`,
+      {},
+      true
+    ),
+
   geminiReady: async (): Promise<boolean> =>
     (await request<{ geminiReady: boolean }>('user/geminiready', {}, true)).geminiReady,
 
@@ -28,30 +45,11 @@ export const users = {
       }
     }
 
-    redirect('/login')
+    return { userId: 0, username: '' }
   },
 
   updatePassword: async (newPassword: string) => {
-    const cookie = await cookies()
-
-    await request(`user/${cookie.get('link_saved_user')?.value.split(':')[0]}/password`, {
-      method: 'POST',
-      body: JSON.stringify({ newPassword }),
-      headers: { Authorization: `Bearer ${btoa(cookie.get('link_saved_user')?.value ?? '')}` },
-    })
-
-    cookie.set('link_saved_user', `${cookie.get('link_saved_user')?.value.split(':')[0]}:${newPassword}`)
-  },
-  changeUsername: async (username: string) => {
-    const cookie = await cookies()
-
-    await request(`user/${cookie.get('link_saved_user')?.value.split(':')[0]}/username`, {
-      method: 'POST',
-      body: JSON.stringify({ username }),
-      headers: { Authorization: `Bearer ${btoa(cookie.get('link_saved_user')?.value ?? '')}` },
-    })
-
-    cookie.set('link_saved_user', `${username}:${cookie.get('link_saved_user')?.value.split(':')[1]}`)
+    await users.update({ password: newPassword })
   },
   toggleSubscription: async (from: number, to: number) =>
     await request(`user/${(await cookies()).get('link_saved_user')?.value.split(':')[0]}`, {

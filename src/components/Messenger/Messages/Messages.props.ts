@@ -1,5 +1,5 @@
 import type { IDisplayMessage } from './DisplayMessage.interface'
-import type { User } from '@prisma/client'
+import type { User } from '../../../../generated/prisma/client'
 
 export interface MessagesProps {
   messages: IDisplayMessage[]

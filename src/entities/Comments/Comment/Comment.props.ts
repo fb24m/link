@@ -1,4 +1,4 @@
-import { Comment } from '@prisma/client'
+import { Comment } from '../../../../generated/prisma/client'
 
 export interface CommentProps {
   comment: Comment

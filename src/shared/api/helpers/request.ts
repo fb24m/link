@@ -7,8 +7,5 @@ export const request = async <T = unknown>(url: string, init?: RequestInit, noCa
     ...(!noCache && { next: { tags: [url], revalidate: 999999 } }),
   })
   const json: { data: T } = await response.json()
-
-  // console.log(json)
-
   return json.data
 }

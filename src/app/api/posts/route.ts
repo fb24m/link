@@ -1,6 +1,7 @@
 import { prisma } from '@/services/Prisma.service'
 import { users } from '@/shared/api/users'
 import { NextRequest } from 'next/server'
+import { PostFindManyArgs } from '../../../../generated/prisma/models'
 
 type PrismaSelect = { [key: string]: boolean }
 
@@ -8,6 +9,7 @@ export const GET = async (request: NextRequest) => {
   const queryParams = new URLSearchParams(new URL(request.url).search)
 
   const authorId = queryParams.get('authorId')!
+  const mentioned = queryParams.get('mentioned')
   const fields = queryParams
     .get('fields')
     ?.split(',')
@@ -16,6 +18,18 @@ export const GET = async (request: NextRequest) => {
       return acc
     }, {})
   const max = queryParams.get('max')
+
+  const include = fields
+    ? { select: { ...fields, _count: { select: { comments: true } } } }
+    : { include: { _count: { select: { comments: true } } } }
+
+  const trindets: Partial<PostFindManyArgs> = {
+    ...(include as PostFindManyArgs),
+    take: max ? Number.parseInt(max) : 100,
+    orderBy: {
+      publishDate: 'asc', // или id: 'desc'
+    },
+  }
 
   if (authorId) {
     return Response.json({
@@ -27,11 +41,19 @@ export const GET = async (request: NextRequest) => {
           authorId: authorId.includes(',') ? { in: authorId.split(',').map(i => +i) } : +authorId,
           deleted: false,
         },
-        select: fields,
-        take: max ? Number.parseInt(max) : 100,
-        orderBy: {
-          publishDate: 'asc', // или id: 'desc'
-        },
+        ...trindets,
+      }),
+    })
+  } else if (mentioned) {
+    const mentions = await prisma.postMention.findMany({ where: { userId: +mentioned }, select: { postId: true } })
+
+    return Response.json({
+      ok: true,
+      message: 'success',
+      code: 200,
+      data: await prisma.post.findMany({
+        where: { id: { in: mentions.map(item => item.postId) }, deleted: false },
+        ...trindets,
       }),
     })
   } else {
@@ -39,7 +61,10 @@ export const GET = async (request: NextRequest) => {
       ok: true,
       message: 'success',
       code: 200,
-      data: await prisma.post.findMany({ where: { authorId: (await users.getId()).userId, deleted: true } }),
+      data: await prisma.post.findMany({
+        where: { authorId: (await users.getId()).userId, deleted: true },
+        ...trindets,
+      }),
     })
   }
 

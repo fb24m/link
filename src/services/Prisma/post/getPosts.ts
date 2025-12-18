@@ -1,6 +1,6 @@
 'use server'
 
-import { Post } from '@prisma/client'
+import { Post } from '../../../../generated/prisma/client'
 import { prisma } from '../../Prisma.service'
 import type { IResponse } from '@/shared/interfaces/IResponse.interface'
 

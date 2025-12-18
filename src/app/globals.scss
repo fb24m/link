@@ -4,7 +4,7 @@ html {
   --medium-color: #ccc;
   --negative-medium-color: #222;
   // --accent-color: #000;
-  --background-color: #fff;
+  --background-color: #f7f9ff;
   --background-opaque: rgb(24, 24, 24, 4%);
   --foreground-color: #333;
   --content-layer: rgba(60, 60, 60, 0.05);
@@ -12,18 +12,25 @@ html {
   --accent-color: #18a8ff;
   --accent-color-2: #18a8ff;
 
+  --container-high: #eceef3;
+
   --border-radius-md: 8px;
 
   @media (prefers-color-scheme: dark) {
     --medium-color: #252525;
     --negative-medium-color: #ccc;
     // --accent-color: #fff;
-    --background-color: #181818;
+    --background-color: #101418;
     --background-opaque: rgba(255, 255, 255, 5%);
     --border-opaque: rgb(255, 255, 255, 5%);
     --foreground-color: #eee;
     --content-layer: #1d1d1d;
     --content-layer-hover: rgba(255, 255, 255, 0.05);
+
+    --container-high: #1c2024;
+
+    --accent-color: #9bcbfa;
+    --primary: var(--accent-color);
   }
 
   &[data-theme='classic'] {

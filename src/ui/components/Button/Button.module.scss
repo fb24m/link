@@ -31,14 +31,14 @@
   }
 }
 
-
 .primary,
 .secondary,
 .transparent,
 .filled_secondary {
-  padding: 6px 12px;
+  padding: 11px 16px;
   font-size: 14px;
   border-radius: 9999px;
+  font-weight: 500;
 
   &.icon {
     padding: 4px 10px;
@@ -104,9 +104,7 @@
 
   &.primary {
     transition: opacity 0.3s;
-    background-image: linear-gradient(45deg,
-        var(--accent-color),
-        var(--accent-color-2));
+    background-color: var(--primary);
     color: var(--background-color);
 
     &:hover {

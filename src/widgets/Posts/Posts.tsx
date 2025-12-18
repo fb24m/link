@@ -4,12 +4,13 @@ import styles from './Posts.module.scss'
 import { Post } from '../../features/Post/Post.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { users } from '@/shared/api/users'
-import { Post as PostType, type User } from '@prisma/client'
 import { prisma } from '@/services/Prisma.service'
 import { Box } from '@/ui/components/Box/Box.component'
 import { clsx } from '@/functions/clsx'
 import { LButton } from '@/shared/ui/LButton/LButton'
 import { PinnedPost } from './PinnedPost/PinnedPost'
+import { User } from '../../../generated/prisma/client'
+import { PostType } from '@/shared/api/posts'
 
 export interface PostsProps {
   posts: PostType[]

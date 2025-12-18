@@ -2,7 +2,7 @@
 
 import { prisma } from '@/services/Prisma.service'
 import { request } from '@/shared/api/helpers/request'
-import { Subscription } from '@prisma/client'
+import { Subscription } from '../../../generated/prisma/client'
 import { cookies } from 'next/headers'
 
 export const subscribe = async (_: unknown, formData: FormData) => {

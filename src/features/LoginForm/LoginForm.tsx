@@ -20,7 +20,7 @@ export const LoginForm = () => {
               type='text'
               placeholder='Введите эл. почту'
               name='email'
-              autoComplete='email'
+              autoComplete='login'
             />
           </span>
 

@@ -1,4 +1,4 @@
-import { Post, User } from '@prisma/client'
+import { Post, User } from '../../../generated/prisma/client'
 
 export interface PostProps {
   author?: User
@@ -9,5 +9,5 @@ export interface PostProps {
   restore?: boolean | undefined
   likes?: number | undefined
   // self?: User
-  post: Post
+  post: Post & { _count: { comments: number } }
 }

@@ -1,7 +1,7 @@
 'use server'
 
 import { prisma } from '../Prisma.service'
-import { Post } from '@prisma/client'
+import { Post } from '../../../generated/prisma/client'
 
 export const createPost = async (content: string, authorId: number): Promise<Post> => {
   return await prisma.post.create({

@@ -2,19 +2,7 @@
   border-radius: 24px;
   padding: 20px;
 
-  border-width: var(--card-border-width);
-  border-color: var(--card-border-color);
-  border-style: var(--card-border-style);
-
-  @media (prefers-color-scheme: light) {
-    background-color: var(--background-color);
-    box-shadow: rgba(#333, 12%) 0 0 24px;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    border: #ffffff10 1px solid;
-    /* backdrop-filter: blur(9px); */
-  }
+  background-color: var(--container-high);
 }
 
 @media (max-width: 640px) {

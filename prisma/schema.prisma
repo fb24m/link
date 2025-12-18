@@ -1,41 +1,42 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["multiSchema"]
+  provider   = "prisma-client"
+  output     = "../generated/prisma"
+  engineType = "client"
 }
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
 }
 
 model UserProfileLink {
   id     Int     @id @default(autoincrement())
-  User   User?   @relation(fields: [userId], references: [id])
   userId Int?
   icon   String?
   link   String
+  User   User?   @relation(fields: [userId], references: [id])
+
+  @@index([userId], map: "UserProfileLink_userId_fkey")
 }
 
 model User {
-  id                  Int               @id @default(autoincrement())
-  email               String            @unique
-  username            String            @unique
-  password            String
-  bio                 String?
-  avatar              String?
-  pronouns            String?
-  badge               String?
-  statusIcon          String?
-  statusTooltip       String?
-  savedArticles       String?
-  apps                App[]
-  links               UserProfileLink[]
-  pinned              Int?
-  last_gravatar_query DateTime?
-  suspended           Boolean?
-  likes               PostLike[]
-  mentions            PostMention[]
-  geminiKey 					String?
+  id            Int               @id @default(autoincrement())
+  email         String            @unique
+  username      String            @unique
+  password      String
+  bio           String?
+  avatar        String?
+  badge         String?
+  savedArticles String?
+  statusIcon    String?
+  statusTooltip String?
+  pinned        Int?
+  pronouns      String?
+  suspended     Boolean?
+  geminiKey     String?
+  apps          App[]
+  likes         PostLike[]
+  mentions      PostMention[]
+  links         UserProfileLink[]
 }
 
 model TempCode {
@@ -45,12 +46,13 @@ model TempCode {
 }
 
 model PostLike {
-  user   User @relation(fields: [userId], references: [id])
   userId Int
-  post   Post @relation(fields: [postId], references: [id])
   postId Int
+  post   Post @relation(fields: [postId], references: [id])
+  user   User @relation(fields: [userId], references: [id])
 
   @@id([userId, postId])
+  @@index([postId], map: "PostLike_postId_fkey")
 }
 
 model Subscription {
@@ -80,10 +82,10 @@ model Post {
   deleted         Boolean?      @default(false)
   userId          Int?
   writtenBy       Int?          @default(0)
-  comments        Comment[]
   commentsEnabled Boolean       @default(true)
-  mentions        PostMention[]
+  comments        Comment[]
   likes           PostLike[]
+  mentions        PostMention[]
 }
 
 model PostMention {
@@ -93,6 +95,7 @@ model PostMention {
   User   User @relation(fields: [userId], references: [id])
 
   @@id([postId, userId])
+  @@index([userId], map: "PostMention_userId_fkey")
 }
 
 model Message {

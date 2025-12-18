@@ -12,8 +12,6 @@ import { Card } from '@/ui/components/Card/Card.component'
 import { CopyButton } from '@/components/CopyButton/CopyButton.component'
 import { DateFormat } from '@/entities/Date/Date'
 
-import { prisma } from '@/services/Prisma.service'
-
 import styles from './Post.module.scss'
 import { ReadMore } from '@/features/Post/ReadMore'
 import { users } from '@/shared/api/users'
@@ -39,7 +37,6 @@ export const Post = async ({ full, post, restore, controls, ...props }: PostProp
   const author = props.author ?? (await users.get(authorId))
 
   let content = rawContent.split('<br>').join('\n')
-  const comments = await prisma.comment.findMany({ where: { postId: id } })
 
   if (content.match(/(<script|<style|<head|style=)/g)) return <hr style={{ borderColor: 'var(--medium-color)' }} />
 
@@ -113,7 +110,7 @@ export const Post = async ({ full, post, restore, controls, ...props }: PostProp
               appearance='secondary'
               href={`/article/${id}#comments`}
             >
-              Комментарии ({comments.length})
+              Комментарии ({post._count.comments})
             </LButton>
           )}
           <Share link={`https://link.fb24m.ru/article/${id}`} text={`Пост ${author.username} на NextLink`} />

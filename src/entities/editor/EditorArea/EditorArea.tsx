@@ -1,62 +1,77 @@
 'use client'
-import { useActionState, useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from './EditorArea.module.css'
 import Icon from '@/ui/components/Icon/Icon.component'
 import { Button } from '@/ui/components/Button/Button.component'
-import { User } from '@prisma/client'
 import { askGemini } from './askGemini'
-import { users } from '@/shared/api/users'
 import Link from 'next/link'
+import { Input } from '@/ui/components/Input/Input'
 
-export const EditorArea = ({
-  defaultValue,
-  me,
-  isGeminiReady,
-}: {
-  defaultValue?: string
-  me: User
-  isGeminiReady: boolean
-}) => {
+export const EditorArea = ({ defaultValue, isGeminiReady }: { defaultValue?: string; isGeminiReady: boolean }) => {
   const [text, setText] = useState(defaultValue ?? '')
   const [isLoading, setIsLoading] = useState(false)
   const [generated, setGenerated] = useState(false)
+  const prompt = useRef<HTMLInputElement>(null)
 
   return (
     <>
       <div className={styles.postEditor}>
         <div className={styles.aiStart}>
           <h3 className={styles.aiTitle}>
-            <Icon icon='lightbulb' /> {generated ? 'Gemini создал пост' : 'Начать писать с Gemini'}
+            <Icon icon='lightbulb' />{' '}
+            {generated
+              ? 'Gemini создал пост'
+              : text != ''
+                ? 'Редактировать пост с помощью Gemini'
+                : 'Начать писать с Gemini'}
           </h3>
           <p className={styles.aiDescription}>
             {generated
-              ? 'Gemini создал пост специально для вас. Вы можете отредактировать его и опубликовать, а если идея не нравится совсем - попробовать сгенерировать его еще раз.'
-              : 'Gemini проанализирует ваши посты и подскажет идею для нового в похожем стиле, а скоро вы сможете придумывать идеи и улучшать готовые посты с помощью Gemini.'}
+              ? 'Gemini создал пост специально для вас. Вы можете написать, что хотели бы изменить, ниже, и Gemini исправит это.'
+              : text != ''
+                ? 'Вы написали текст поста. Теперь вы можете редактировать его с помощью Gemini.'
+                : 'Gemini проанализирует ваши посты и подскажет идею для нового в похожем стиле, а скоро вы сможете придумывать идеи и улучшать готовые посты с помощью Gemini.'}
           </p>
           {isGeminiReady ? (
-            <Button
-              type='button'
-              appearance='primary'
-              loader='spinner'
-              isLoading={isLoading}
-              onClick={() => {
-                setIsLoading(true)
+            <div className={styles.promptArea}>
+              <p>{generated || text ? 'Введите, что вы хотели бы изменить:' : 'Введите промпт:'}</p>
 
-                askGemini()
-                  .then(response => {
-                    console.log(response)
-                    setText(response)
-                    setIsLoading(false)
-                    setGenerated(true)
-                  })
-                  .finally(() => {
-                    setIsLoading(false)
-                  })
-              }}
-              className={styles.tryButton}
-            >
-              Сгенерировать пост
-            </Button>
+              <div className={styles.prompt}>
+                <Input
+                  ref={prompt}
+                  appearance='rounded'
+                  className={styles.input}
+                  placeholder={generated || text ? 'Введите запрос' : 'Поле можно оставить пустым'}
+                />
+                <Button
+                  type='button'
+                  appearance='primary'
+                  loader='spinner'
+                  isLoading={isLoading}
+                  onClick={() => {
+                    const value: string | undefined = prompt.current?.value
+                    if (prompt.current) {
+                      prompt.current.value = ''
+                    }
+                    setIsLoading(true)
+
+                    askGemini(value)
+                      .then(response => {
+                        console.log(response)
+                        setText(response)
+                        setIsLoading(false)
+                        setGenerated(true)
+                      })
+                      .finally(() => {
+                        setIsLoading(false)
+                      })
+                  }}
+                  className={styles.tryButton}
+                >
+                  Сгенерировать пост
+                </Button>
+              </div>
+            </div>
           ) : (
             <Link href='/profile/settings/gemini'>
               <Button type='button' appearance='primary' className={styles.tryButton}>

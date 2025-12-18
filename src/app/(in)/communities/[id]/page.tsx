@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'
 import { Posts } from '@/widgets/Posts/Posts'
 import { LButton } from '@/shared/ui/LButton/LButton'
+import { PostType } from '@/shared/api/posts'
 
 const CommunityPage = async (props: { params: Promise<{ id: string }> }): Promise<ReactElement> => {
   const params = await props.params
@@ -18,7 +19,7 @@ const CommunityPage = async (props: { params: Promise<{ id: string }> }): Promis
       <LButton icon='create' appearance='primary' href={`/communities/${params.id}/post`}>
         Новый пост
       </LButton>
-      <Posts posts={posts} />
+      <Posts posts={posts as PostType[]} />
     </div>
   )
 }

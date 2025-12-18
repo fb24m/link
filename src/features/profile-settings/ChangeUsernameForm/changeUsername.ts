@@ -18,5 +18,5 @@ export const changeUsername = async (_: unknown, formData: FormData) => {
     return 'Имя пользователя недоступно'
   }
 
-  await users.changeUsername(username)
+  await users.update({ username })
 }

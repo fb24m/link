@@ -1,5 +1,3 @@
-import { getPostById } from '@/services/Prisma/post/getById'
-
 import styles from './page.module.scss'
 
 import type { ReactElement } from 'react'
@@ -9,10 +7,11 @@ import { BackButton } from '@/components/BackButton/BackButton.component'
 import { Post } from '@/features/Post/Post.component'
 import { users } from '@/shared/api/users'
 import { Comments } from '@/entities/Comments/Comments.component'
+import { posts } from '@/shared/api/posts'
 
 export const generateMetadata = async (props: { params: Promise<{ id: string }> }): Promise<Metadata> => {
-  const params = await props.params
-  const post = await getPostById(+params.id)
+  const { id } = await props.params
+  const [post] = await posts.getById(+id)
   const author = await users.get(+exists(post?.authorId))
 
   return {
@@ -27,7 +26,7 @@ export const generateMetadata = async (props: { params: Promise<{ id: string }> 
 
 const Article = async (props: { params: Promise<{ id: string }> }): Promise<ReactElement> => {
   const { id } = await props.params
-  const post = await getPostById(+id)
+  const [post] = await posts.getById(+id)
 
   return (
     <div>

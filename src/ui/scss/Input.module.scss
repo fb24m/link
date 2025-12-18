@@ -8,6 +8,10 @@
   resize: none;
   color: var(--foreground-color);
   border-radius: 8px;
+
+  .expressive & {
+    padding: 9px 16px;
+  }
 }
 
 .wrapper {
@@ -20,6 +24,10 @@
   outline: 0;
   border: var(--content-layer-hover) 1px solid;
   border-bottom: var(--content-layer-hover) 2px solid;
+
+  &.expressive {
+    border-radius: 999px;
+  }
 
   &::before {
     content: '';

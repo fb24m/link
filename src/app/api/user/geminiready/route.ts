@@ -12,7 +12,7 @@ export const GET = async () => {
   try {
     await ai.models.list()
     return Response.json({ ok: true, data: { geminiReady: true } })
-  } catch {
-    return Response.json({ ok: true, data: { geminiReady: false } })
+  } catch (e) {
+    return Response.json({ ok: true, data: { geminiReady: false, problem: e } })
   }
 }
