@@ -8,7 +8,6 @@ import { Card } from '@/ui/components/Card/Card.component'
 import { Title1 } from '@/shared/ui/Title1'
 import { Input } from '@/shared/ui/Input/Input'
 import { Button } from '@/shared/ui/Button/Button.component'
-import { LButton } from '@/shared/ui/LButton/LButton'
 
 export const metadata: Metadata = {
   title: 'Регистрация - NextLink',
@@ -55,10 +54,10 @@ const Signup = async (): Promise<ReactElement> => {
             </Box>
           </form>
           <Box className={styles.box} direction="row" justifyContent="space-between">
-            <LButton appearance="link" href="/login">
+            <Button as="link" appearance="text" href="/login">
               Вход
-            </LButton>
-            <Button appearance="link">Персональные данные</Button>
+            </Button>
+            <Button appearance="text">Персональные данные</Button>
           </Box>
         </Box>
       </Card>

@@ -1,6 +1,9 @@
-.vercel
+.vercel/
 .env*.local
-node_modules
+node_modules/
 .next
 .env
-mysql_data
+mysql_data/
+coverage/
+.storybook/
+generated/

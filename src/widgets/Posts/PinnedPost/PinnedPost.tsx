@@ -1,5 +1,5 @@
 import { ActionButton } from '@/components/ActionButton'
-import { Markdown } from '@/components/Markdown/Markdown.component'
+import { Markdown } from '@/shared/ui/Markdown'
 import { posts } from '@/shared/api/posts'
 import { Card } from '@/ui/components/Card/Card.component'
 import Icon from '@/ui/components/Icon/Icon.component'

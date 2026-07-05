@@ -1,4 +1,3 @@
-import { createApp } from '@/actions/app/create.action'
 import { Button } from '@/shared/ui/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { Title1 } from '@/shared/ui/Title1'
@@ -9,7 +8,7 @@ const Apps = async (): Promise<ReactElement> => {
     <div>
       <Title1>Новое приложение</Title1>
       <Card>
-        <form action={createApp}>
+        <form action={''}>
           <div>
             <label htmlFor="">Название приложения</label>
             <input name="name" placeholder="Название" maxLength={80} required />

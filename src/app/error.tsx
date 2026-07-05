@@ -1,7 +1,7 @@
 'use client'
 
 import { Container } from '@/shared/ui/Container'
-import { Markdown } from '@/components/Markdown/Markdown.component'
+import { Markdown } from '@/shared/ui/Markdown'
 import type { ReactNode } from 'react'
 
 const Error = ({ error }: { error: { message: string } }): ReactNode => {

@@ -1,4 +1,4 @@
-import { Markdown } from '@/components/Markdown/Markdown.component'
+import { Markdown } from '@/shared/ui/Markdown'
 
 const Page = async (props: { params: Promise<{ id: string }> }) => {
   const id = (await props.params).id

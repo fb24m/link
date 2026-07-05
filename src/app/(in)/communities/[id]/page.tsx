@@ -2,8 +2,8 @@ import { prisma } from '@/services/prisma'
 import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'
 import { Posts } from '@/widgets/Posts/Posts'
-import { LButton } from '@/shared/ui/LButton/LButton'
 import { PostType } from '@/shared/api/posts'
+import { Button } from '@/shared/ui/Button/Button.component'
 
 const CommunityPage = async (props: { params: Promise<{ id: string }> }): Promise<ReactElement> => {
   const params = await props.params
@@ -16,9 +16,9 @@ const CommunityPage = async (props: { params: Promise<{ id: string }> }): Promis
   return (
     <div>
       Сообщество: {community?.name}
-      <LButton icon='create' appearance='primary' href={`/communities/${params.id}/post`}>
+      <Button as="link" icon="create" appearance="primary" href={`/communities/${params.id}/post`}>
         Новый пост
-      </LButton>
+      </Button>
       <Posts posts={posts as PostType[]} />
     </div>
   )

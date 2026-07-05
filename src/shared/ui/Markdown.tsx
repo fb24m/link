@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, type ReactElement } from 'react'
 
-import styles from './Markdown.module.scss'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { clsx } from 'clsx'
 import { usePostFormat } from '@/shared/hooks/usePostFormat'
@@ -86,9 +85,9 @@ export const Markdown = ({ children, className }: { children: string; className?
     <div ref={container} className={clsx(styles.markdown, className)} dangerouslySetInnerHTML={{ __html: post }}></div>
   ) : (
     <>
-      <Skeleton width='100%' height={20} />
-      <Skeleton width='100%' height={20} />
-      <Skeleton width='100%' height={20} />
+      <Skeleton width="100%" height={20} />
+      <Skeleton width="100%" height={20} />
+      <Skeleton width="100%" height={20} />
     </>
   )
 }
