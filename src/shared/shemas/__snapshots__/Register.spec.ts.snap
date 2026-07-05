@@ -1,0 +1,110 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RegisterSchema > should enforce password character constraint 1`] = `
+[ZodError: [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/[A-Z]/",
+    "path": [
+      "password"
+    ],
+    "message": "Нужна хотя бы одна заглавная буква"
+  },
+  {
+    "code": "custom",
+    "path": [
+      "repeatPassword"
+    ],
+    "message": "Пароли не совпадают"
+  }
+]]
+`;
+
+exports[`RegisterSchema > should enforce password length constraint 1`] = `
+[ZodError: [
+  {
+    "origin": "string",
+    "code": "too_small",
+    "minimum": 8,
+    "inclusive": true,
+    "path": [
+      "password"
+    ],
+    "message": "Пароль должен быть не менее 8 символов"
+  }
+]]
+`;
+
+exports[`RegisterSchema > should validate login correctly 1`] = `
+[ZodError: [
+  {
+    "origin": "string",
+    "code": "too_small",
+    "minimum": 3,
+    "inclusive": true,
+    "path": [
+      "login"
+    ],
+    "message": "Имя пользователя слишком короткое"
+  }
+]]
+`;
+
+exports[`RegisterSchema > should validate login correctly 2`] = `
+[ZodError: [
+  {
+    "origin": "string",
+    "code": "too_big",
+    "maximum": 20,
+    "inclusive": true,
+    "path": [
+      "login"
+    ],
+    "message": "Имя пользователя слишком длинное"
+  }
+]]
+`;
+
+exports[`RegisterSchema > should validate password correctly 1`] = `
+[ZodError: [
+  {
+    "origin": "string",
+    "code": "too_small",
+    "minimum": 8,
+    "inclusive": true,
+    "path": [
+      "password"
+    ],
+    "message": "Пароль должен быть не менее 8 символов"
+  }
+]]
+`;
+
+exports[`RegisterSchema > should validate password correctly 2`] = `
+[ZodError: [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "regex",
+    "pattern": "/[A-Z]/",
+    "path": [
+      "password"
+    ],
+    "message": "Нужна хотя бы одна заглавная буква"
+  }
+]]
+`;
+
+exports[`RegisterSchema > should validate repeat password correctly 1`] = `
+[ZodError: [
+  {
+    "code": "custom",
+    "path": [
+      "repeatPassword"
+    ],
+    "message": "Пароли не совпадают"
+  }
+]]
+`;

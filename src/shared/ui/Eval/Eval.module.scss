@@ -1,0 +1,50 @@
+.eval {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  line-height: 170%;
+
+  a {
+    text-decoration: underline;
+  }
+
+  ol {
+    counter-reset: ol-numbers;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      margin-left: 22px;
+      display: flex;
+      gap: 22px;
+
+      &::before {
+        counter-increment: ol-numbers;
+        content: counter(ol-numbers) '. ';
+        margin-left: 8px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  ul {
+    counter-reset: ol-numbers;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+      margin-left: 22px;
+      display: flex;
+      gap: 22px;
+
+      &::before {
+        counter-increment: ol-numbers;
+        content: '.';
+        margin-left: 8px;
+        font-weight: 500;
+      }
+    }
+  }
+}

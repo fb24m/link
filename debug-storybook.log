@@ -1,0 +1,28 @@
+[04:40:43.440] [INFO] storybook v10.4.6
+[04:40:44.027] [DEBUG] Getting package.json info for /home/fb24m/Project/Personal/link/package.json...
+[04:40:44.058] [WARN] Could not resolve addon "@chromatic-com/storybook", skipping. Is it installed?
+[04:40:44.422] [WARN] Could not resolve addon "@chromatic-com/storybook", skipping. Is it installed?
+[04:40:44.577] [WARN] No story files found for the specified pattern: [34msrc/**/*.mdx[39m
+[04:40:44.617] [WARN] 🚨 Unable to index ./src/components/Eval/Eval.stories.tsx,./src/shared/ui/Toolbar/Toolbar.stories.tsx:
+  Error: Duplicate stories with id: ui-toolbar--default
+    at _StoryIndexGenerator.chooseDuplicate (file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/core-server/index.js:19414:13)
+    at file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/core-server/index.js:19473:52
+    at Array.forEach (<anonymous>)
+    at _StoryIndexGenerator.getIndexAndStats (file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/core-server/index.js:19470:23)
+    at async _StoryIndexGenerator.getIndex (file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/core-server/index.js:19457:13)
+    at async Object.experimental_serverChannel (file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/@storybook+addon-vitest@10.4.6_@vitest+browser-playwright@4.1.9_@vitest+browser@4.1.9_@_6406d5aeefc52093b404e83f98659069/node_modules/@storybook/addon-vitest/dist/preset.js:460:14)
+    at async buildDevStandalone (file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/core-server/index.js:12051:32)
+    at async withTelemetry (file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/_node-chunks/chunk-G7NXW2C2.js:650:12)
+    at async dev (file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/bin/core.js:2735:3)
+    at async _Command.<anonymous> (file:///home/fb24m/Project/Personal/link/node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/bin/core.js:2805:92)
+[04:40:44.623] [ERROR] Error: Unable to index ./src/components/Eval/Eval.stories.tsx,./src/shared/ui/Toolbar/Toolbar.stories.tsx
+    at _StoryIndexGenerator.getIndexAndStats (file://./node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/core-server/index.js:19478:15)
+    at async _StoryIndexGenerator.getIndex (file://./node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/core-server/index.js:19457:13)
+    at async Object.experimental_serverChannel (file://./node_modules/.pnpm/@storybook+addon-vitest@10.4.6_@vitest+browser-playwright@4.1.9_@vitest+browser@4.1.9_@_6406d5aeefc52093b404e83f98659069/node_modules/@storybook/addon-vitest/dist/preset.js:460:14)
+    at async buildDevStandalone (file://./node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/core-server/index.js:12051:32)
+    at async withTelemetry (file://./node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/_node-chunks/chunk-G7NXW2C2.js:650:12)
+    at async dev (file://./node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/bin/core.js:2735:3)
+    at async _Command.<anonymous> (file://./node_modules/.pnpm/storybook@10.4.6_@testing-library+dom@10.4.1_@types+react@18.3.31_prettier@3.9.0_react@19.2.3/node_modules/storybook/dist/bin/core.js:2805:92)
+[04:40:44.624] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[04:40:44.625] [WARN] Could not resolve addon "@chromatic-com/storybook", skipping. Is it installed?

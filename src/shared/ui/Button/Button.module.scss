@@ -1,0 +1,144 @@
+.loader {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+
+  &.spinner {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation-name: appearLoader;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes appearLoader {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+
+.primary,
+.secondary,
+.transparent,
+.filled_secondary {
+  padding: 11px 16px;
+  font-size: 14px;
+  border-radius: 9999px;
+  font-weight: 500;
+
+  &.icon {
+    padding: 4px 10px;
+  }
+
+  i {
+    font-size: 20px;
+  }
+}
+
+.button {
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  &.secondary {
+    color: var(--foreground-color);
+    position: relative;
+
+    backdrop-filter: blur(4px);
+    background-color: rgba(#999, 10%);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: rgba(#fff, 4%);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 10%;
+      border: #fff 0px solid;
+      border-left-width: 1px;
+      border-right-width: 1px;
+      border-radius: 999px;
+    }
+  }
+
+  &.primary {
+    transition: opacity 0.3s;
+    background-color: var(--primary);
+    color: var(--background-color);
+  }
+
+  &.transparent {
+    color: var(--foreground-color);
+  }
+
+  &.filled_secondary {
+    background-color: var(--medium-color);
+    opacity: 80%;
+  }
+
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:active {
+    background-color: rgba(#ffffff, 50%);
+    opacity: 1;
+  }
+
+  &[title] {
+    overflow: visible;
+  }
+
+  &[title]::before {
+    content: attr(title);
+
+    position: absolute;
+
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
+
+    display: block;
+    white-space: nowrap;
+    top: 100%;
+    background-color: var(--foreground-color);
+    border: var(--medium-color) 1px solid;
+    padding: 8px 12px;
+    border-radius: 24px;
+    font-size: 16px;
+
+    backdrop-filter: blur(16px);
+
+    margin-top: 8px;
+    color: var(--background-color);
+
+    transform: translateY(-16px);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &[title]:hover::before {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+}

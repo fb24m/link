@@ -1,0 +1,282 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #2f628c;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #cee5ff;
+  --color-on-primary-container: #001d32;
+  --color-inverse-primary: #9bcbfb;
+  --color-primary-fixed: #cee5ff;
+  --color-primary-fixed-dim: #9bcbfb;
+  --color-on-primary-fixed: #001d32;
+  --color-on-primary-fixed-variant: #0d4a73;
+
+  --color-secondary: #51606f;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #d5e4f7;
+  --color-on-secondary-container: #0e1d2a;
+  --color-secondary-fixed: #d5e4f7;
+  --color-secondary-fixed-dim: #b9c8da;
+  --color-on-secondary-fixed: #0e1d2a;
+  --color-on-secondary-fixed-variant: #3a4857;
+
+  --color-tertiary: #68587a;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #eedbff;
+  --color-on-tertiary-container: #231533;
+  --color-tertiary-fixed: #eedbff;
+  --color-tertiary-fixed-dim: #d3bfe6;
+  --color-on-tertiary-fixed: #231533;
+  --color-on-tertiary-fixed-variant: #4f4061;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #410002;
+
+  --color-surface-dim: #d8dae0;
+  --color-surface: #f7f9ff;
+  --color-surface-tint: #2f628c;
+  --color-surface-bright: #f7f9ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f1f3f9;
+  --color-surface-container: #eceef3;
+  --color-surface-container-high: #e6e8ee;
+  --color-surface-container-highest: #e0e2e8;
+
+  --color-on-surface: #181c20;
+  --color-on-surface-variant: #42474e;
+  --color-outline: #72777f;
+  --color-outline-variant: #c2c7cf;
+  --color-inverse-surface: #2d3135;
+  --color-inverse-on-surface: #eef1f6;
+  --color-surface-variant: #dee3eb;
+  --color-background: #f7f9ff;
+  --color-on-background: #181c20;
+  --color-shadow: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-primary: #9bcbfb;
+    --color-on-primary: #003353;
+    --color-primary-container: #0d4a73;
+    --color-on-primary-container: #cee5ff;
+    --color-inverse-primary: #2f628c;
+    --color-primary-fixed: #cee5ff;
+    --color-primary-fixed-dim: #9bcbfb;
+    --color-on-primary-fixed: #001d32;
+    --color-on-primary-fixed-variant: #0d4a73;
+
+    --color-secondary: #b9c8da;
+    --color-on-secondary: #233240;
+    --color-secondary-container: #3a4857;
+    --color-on-secondary-container: #d5e4f7;
+    --color-secondary-fixed: #d5e4f7;
+    --color-secondary-fixed-dim: #b9c8da;
+    --color-on-secondary-fixed: #0e1d2a;
+    --color-on-secondary-fixed-variant: #3a4857;
+
+    --color-tertiary: #d3bfe6;
+    --color-on-tertiary: #382a49;
+    --color-tertiary-container: #4f4061;
+    --color-on-tertiary-container: #eedbff;
+    --color-tertiary-fixed: #eedbff;
+    --color-tertiary-fixed-dim: #d3bfe6;
+    --color-on-tertiary-fixed: #231533;
+    --color-on-tertiary-fixed-variant: #4f4061;
+
+    --color-error: #ffb4ab;
+    --color-on-error: #690005;
+    --color-error-container: #93000a;
+    --color-on-error-container: #ffdad6;
+
+    --color-surface-dim: #101418;
+    --color-surface: #101418;
+    --color-surface-tint: #9bcbfb;
+    --color-surface-bright: #36393e;
+    --color-surface-container-lowest: #0b0f12;
+    --color-surface-container-low: #181c20;
+    --color-surface-container: #1c2024;
+    --color-surface-container-high: #272a2f;
+    --color-surface-container-highest: #323539;
+
+    --color-on-surface: #e0e2e8;
+    --color-on-surface-variant: #c2c7cf;
+    --color-outline: #8c9198;
+    --color-outline-variant: #42474e;
+    --color-inverse-surface: #e0e2e8;
+    --color-inverse-on-surface: #2d3135;
+    --color-surface-variant: #42474e;
+    --color-background: #101418;
+    --color-on-background: #e0e2e8;
+    --color-shadow: #000000;
+  }
+}
+
+.tiptap {
+  outline: 0;
+  border: 0;
+  height: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  line-height: 150%;
+}
+
+html {
+  --medium-color: #ccc;
+  --negative-medium-color: #222;
+  --background-color: #f7f9ff;
+  --background-opaque: rgb(24, 24, 24, 4%);
+  --foreground-color: #333;
+  --content-layer: rgba(60, 60, 60, 0.05);
+  --content-layer-hover: rgba(60, 60, 60, 0.05);
+  --accent-color: #18a8ff;
+  --accent-color-2: #18a8ff;
+
+  --container-high: #eceef3;
+
+  --border-radius-md: 8px;
+
+  scrollbar-gutter: stable;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --medium-color: #252525;
+    --negative-medium-color: #ccc;
+    --background-color: #101418;
+    --background-opaque: rgba(255, 255, 255, 5%);
+    --border-opaque: rgb(255, 255, 255, 5%);
+    --foreground-color: #eee;
+    --content-layer: #1d1d1d;
+    --content-layer-hover: rgba(255, 255, 255, 0.05);
+
+    --container-high: #1c2024;
+
+    --accent-color: #9bcbfa;
+    --primary: var(--accent-color);
+  }
+}
+
+html:has(img[class*='active']) {
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--foreground-color);
+  background-color: var(--background-color);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  transition: border-width 0.5s;
+  background: rgba(255, 255, 255, 40%);
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+details {
+  &[open] {
+    summary {
+      margin-bottom: 7px;
+    }
+  }
+}
+
+summary {
+  user-select: none;
+  cursor: pointer;
+}
+
+video,
+iframe,
+img {
+  border-radius: 8px;
+}
+
+.main-container {
+  display: flex;
+  gap: 16px;
+  flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+}
+
+.menu-title {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.sidebar {
+  flex-basis: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 68px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+::view-transition-old(root) {
+  animation-name: pageBlur;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+::view-transition-new(root) {
+  animation-name: pageFocus;
+  animation-duration: 0.8s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes pageBlur {
+  0% {
+    opacity: 100%;
+  }
+
+  100% {
+    filter: blur(50px);
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes pageFocus {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+
+  100% {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 100%;
+  }
+}
