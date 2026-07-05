@@ -1,4 +1,4 @@
-import { prisma } from '@/services/Prisma.service'
+import { prisma } from '@/services/prisma'
 import { users } from '@/shared/api/users'
 import { cookies } from 'next/headers'
 

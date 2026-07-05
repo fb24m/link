@@ -1,4 +1,4 @@
-import { Container } from '@/components/Container/Container.component'
+import { Container } from '@/shared/ui/Container'
 import { Sidebar } from '@/features/Sidebar/Sidebar.component'
 import type { Metadata } from 'next'
 import { type ReactElement, type ReactNode } from 'react'
@@ -8,18 +8,10 @@ import { Header } from '@/widgets/Header/Header'
 export const metadata: Metadata = {
   title: 'NextLink',
   description: 'NextLink - здесь есть только лучшие люди',
-  openGraph: {
-    title: 'NextLink',
-    description: 'NextLink - здесь есть только лучшие люди',
-    images: ['/logo.png'],
-  },
+  openGraph: { title: 'NextLink', description: 'NextLink - здесь есть только лучшие люди', images: ['/logo.png'] },
 }
 
-const Layout = async ({
-  children,
-}: {
-  children: ReactNode
-}): Promise<ReactElement> => (
+const Layout = async ({ children }: { children: ReactNode }): Promise<ReactElement> => (
   <>
     <Header />
     <Container className={styles.inContainer}>

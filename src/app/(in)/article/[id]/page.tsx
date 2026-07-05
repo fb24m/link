@@ -2,8 +2,8 @@ import styles from './page.module.scss'
 
 import type { ReactElement } from 'react'
 import type { Metadata } from 'next'
-import { exists } from '@/functions/exists'
-import { BackButton } from '@/components/BackButton/BackButton.component'
+import { exists } from '@/shared/utils/exists'
+import { BackButton } from '@/components/BackButton'
 import { Post } from '@/features/Post/Post.component'
 import { users } from '@/shared/api/users'
 import { Comments } from '@/entities/Comments/Comments.component'
@@ -30,7 +30,7 @@ const Article = async (props: { params: Promise<{ id: string }> }): Promise<Reac
 
   return (
     <div>
-      <BackButton appearance='transparent' icon='arrow_back' className={styles.button}>
+      <BackButton appearance="transparent" icon="arrow_back" className={styles.button}>
         Назад
       </BackButton>
       <Post full post={exists(post)} />

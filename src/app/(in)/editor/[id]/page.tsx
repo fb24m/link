@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react'
-import { exists } from '@/functions/exists'
+import { exists } from '@/shared/utils/exists'
 import { Editor } from '@/widgets/Editor/Editor.component'
 import { posts } from '@/shared/api/posts'
 

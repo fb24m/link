@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 
 import type { Metadata } from 'next'
-import { Container } from '@/components/Container/Container.component'
+import { Container } from '@/shared/ui/Container'
 import { Posts } from '@/widgets/Posts/Posts'
 import { notFound, redirect } from 'next/navigation'
 import styles from './page.module.scss'

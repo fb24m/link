@@ -4,11 +4,14 @@ import { Posts } from '@/widgets/Posts/Posts'
 import { posts } from '@/shared/api/posts'
 import { users } from '@/shared/api/users'
 
-const Welcome = async (): Promise<ReactElement> => {
-  const { userId } = (await users.getId()) ?? 0
-  const user = await users.get(userId)
+export const dynamic = 'force-dynamic'
 
-  const myposts = await posts.getByAuthorId(userId)
+const Welcome = async (): Promise<ReactElement> => {
+  const user = await users.getMe()
+
+  console.log(user)
+
+  const myposts = await posts.getMine()
 
   return <Posts controls author={user} posts={myposts ? myposts.filter(post => !post.deleted) : []} />
 }

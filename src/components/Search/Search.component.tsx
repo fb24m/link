@@ -1,9 +1,9 @@
 'use client'
 
-import { Input } from '@/ui/components/Input/Input'
+import { Input } from '@/shared/ui/Input/Input'
 import type { ReactElement } from 'react'
 import type { SearchProps } from './Search.props'
-import { useMedia } from '@/hooks/useMedia'
+import { useMedia } from '@/shared/hooks/useMedia'
 
 export const Search = (props: SearchProps): ReactElement => {
   const media = useMedia(props.only)
@@ -11,8 +11,8 @@ export const Search = (props: SearchProps): ReactElement => {
   return (
     <>
       {media && (
-        <form action='' style={{ flexBasis: 240 }}>
-          <Input placeholder='Найти...' style={{ width: '100%' }} />
+        <form action="" style={{ flexBasis: 240 }}>
+          <Input placeholder="Найти..." style={{ width: '100%' }} />
         </form>
       )}
     </>

@@ -1,6 +1,5 @@
-import { request } from '@/shared/api/helpers/request'
+import { request } from '@/shared/utils/request'
 import { cookies } from 'next/headers'
-import jwt from 'jsonwebtoken'
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
 import { UserProfileLink } from '../../../generated/prisma/client'
 import { User } from '../../../generated/prisma/browser'
@@ -8,30 +7,30 @@ import { revalidateTag } from 'next/cache'
 import { revalidatePath } from 'next/cache'
 
 export const users = {
-  getMe: (): Promise<User> => request<User>(`user`),
+  getMe: (): Promise<User> => request<User>(`users/me`),
   getLinksByUsername: (username: string): Promise<UserProfileLink[]> =>
-    request<UserProfileLink[]>(`user/${username}/links`),
+    request<UserProfileLink[]>(`users/${username}/links`),
 
-  get: async (selector: string | number): Promise<User> => await request(`user/${selector}`),
+  get: async (selector: string | number): Promise<User> => await request(`users/${selector}`, {}, true),
 
   update: async (update: Partial<User>): Promise<void> => {
-    await request('user', { method: 'POST', body: JSON.stringify(update) })
+    await request('users', { method: 'POST', body: JSON.stringify(update) })
     const { username } = await users.getId()
 
     revalidateTag('user', 'max')
     revalidatePath('/profile')
-    revalidatePath(`/user/${username}`)
+    revalidatePath(`/users/${username}`)
   },
 
   getGemini: async (prompt?: string, source?: string): Promise<{ response: string }> =>
     request<{ response: string }>(
-      `user/gemini${prompt ? `?prompt=${prompt}` : ''}${source ? `&source=${source}` : ''}`,
+      `users/gemini${prompt ? `?prompt=${prompt}` : ''}${source ? `&source=${source}` : ''}`,
       {},
       true
     ),
 
   geminiReady: async (): Promise<boolean> =>
-    (await request<{ geminiReady: boolean }>('user/geminiready', {}, true)).geminiReady,
+    (await request<{ geminiReady: boolean }>('users/geminiready', {}, true)).geminiReady,
 
   getId: async (userCookies?: ReadonlyRequestCookies): Promise<{ userId: number; username: string }> => {
     const cookie = userCookies ?? (await cookies())
@@ -52,7 +51,7 @@ export const users = {
     await users.update({ password: newPassword })
   },
   toggleSubscription: async (from: number, to: number) =>
-    await request(`user/${(await cookies()).get('link_saved_user')?.value.split(':')[0]}`, {
+    await request(`users/${(await cookies()).get('link_saved_user')?.value.split(':')[0]}`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${btoa((await cookies()).get('link_saved_user')?.value ?? '')}` },
       body: JSON.stringify({ from, to }),

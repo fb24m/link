@@ -1,7 +1,7 @@
 import { createApp } from '@/actions/app/create.action'
-import { Button } from '@/ui/components/Button/Button.component'
+import { Button } from '@/shared/ui/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
-import { Title1 } from '@/ui/components/Title1/Title1.component'
+import { Title1 } from '@/shared/ui/Title1'
 import type { ReactElement } from 'react'
 
 const Apps = async (): Promise<ReactElement> => {
@@ -11,24 +11,24 @@ const Apps = async (): Promise<ReactElement> => {
       <Card>
         <form action={createApp}>
           <div>
-            <label htmlFor=''>Название приложения</label>
-            <input name='name' placeholder='Название' maxLength={80} required />
+            <label htmlFor="">Название приложения</label>
+            <input name="name" placeholder="Название" maxLength={80} required />
           </div>
           <div>
-            <label htmlFor=''>Описание приложения</label>
+            <label htmlFor="">Описание приложения</label>
             <textarea
-              name='description'
-              placeholder='О чем ваше приложение? (от 80 до 2000 символов)'
+              name="description"
+              placeholder="О чем ваше приложение? (от 80 до 2000 символов)"
               minLength={80}
               maxLength={2000}
               required
             ></textarea>
           </div>
           <div>
-            <label htmlFor=''>Ссылка на приложение</label>
-            <input name='url' type='url' placeholder='Название' required />
+            <label htmlFor="">Ссылка на приложение</label>
+            <input name="url" type="url" placeholder="Название" required />
           </div>
-          <Button appearance='primary'>Создать приложение</Button>
+          <Button appearance="primary">Создать приложение</Button>
         </form>
       </Card>
     </div>

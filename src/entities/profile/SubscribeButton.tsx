@@ -2,7 +2,7 @@
 
 // import { useActionState, useEffect } from 'react'
 // import { subscribe } from './subscribe'
-// import { Button } from '@/ui/components/Button/Button.component'
+// import { Button } from '@/shared/ui/Button/Button.component'
 // import { useSubscriptions } from '@/shared/store/Subscriptions.store'
 
 export const SubscribeButton = (/*{ from, to, username }: { from: number; to: number; username: string }*/) => {

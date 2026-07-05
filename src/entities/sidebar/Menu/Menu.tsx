@@ -2,7 +2,7 @@
 
 import styles from './Menu.module.css'
 import { ReactNode, useState } from 'react'
-import { clsx } from '@/functions/clsx'
+import { clsx } from 'clsx'
 import { SidebarItem } from '../SidebarItem/SidebarItem'
 
 export const Menu = ({
@@ -30,13 +30,7 @@ export const Menu = ({
         {title}
       </SidebarItem>
 
-      <div
-        className={clsx(
-          styles.menu,
-          opened === 'desktop' && styles.desktopOpened,
-          isOpened && styles.opened
-        )}
-      >
+      <div className={clsx(styles.menu, opened === 'desktop' && styles.desktopOpened, isOpened && styles.opened)}>
         <ul className={clsx(styles.list)}>{list}</ul>
       </div>
     </>

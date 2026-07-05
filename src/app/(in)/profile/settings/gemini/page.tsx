@@ -2,10 +2,10 @@ import type { ReactElement } from 'react'
 
 import styles from './page.module.css'
 
-import { Title1 } from '@/ui/components/Title1/Title1.component'
-import { LButton } from '@/shared/ui/LButton/LButton'
+import { Title1 } from '@/shared/ui/Title1'
 import { UpdateGemini } from '@/entities/profile/UpdateGemini/UpdateGemini'
 import { users } from '@/shared/api/users'
+import { Button } from '@/shared/ui/Button/Button.component'
 
 const ProfileSetting = async (): Promise<ReactElement> => {
   const gemini = await users.geminiReady()
@@ -13,9 +13,9 @@ const ProfileSetting = async (): Promise<ReactElement> => {
   return (
     <div>
       <div className={styles.header}>
-        <LButton className={styles.back} appearance='transparent' icon='arrow_back' href='/profile'>
+        <Button as="link" className={styles.back} appearance="transparent" icon="arrow_back" href="/profile">
           В профиль
-        </LButton>
+        </Button>
       </div>
 
       <Title1 className={styles.title}>Настройки Gemini™</Title1>

@@ -1,9 +1,9 @@
 import { getAppByOwnerId } from '@/services/Prisma/app/getByOwnerId'
 import { users } from '@/shared/api/users'
 import { LButton } from '@/shared/ui/LButton/LButton'
-import { Button } from '@/ui/components/Button/Button.component'
+import { Button } from '@/shared/ui/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
-import { Title1 } from '@/ui/components/Title1/Title1.component'
+import { Title1 } from '@/shared/ui/Title1'
 import type { ReactElement } from 'react'
 
 const Apps = async (): Promise<ReactElement> => {
@@ -14,10 +14,10 @@ const Apps = async (): Promise<ReactElement> => {
   return (
     <div>
       <Title1>Ваши приложения</Title1>
-      <LButton appearance='primary' href='/apps/new'>
+      <LButton appearance="primary" href="/apps/new">
         Создать новое
       </LButton>
-      <Button appearance='secondary'>О приложениях</Button>
+      <Button appearance="secondary">О приложениях</Button>
 
       {apps.data?.map(app => (
         <Card key={app.id}>

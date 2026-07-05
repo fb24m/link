@@ -1,6 +1,6 @@
 'use client'
 
-import { Container } from '@/components/Container/Container.component'
+import { Container } from '@/shared/ui/Container'
 import { Markdown } from '@/components/Markdown/Markdown.component'
 import type { ReactNode } from 'react'
 

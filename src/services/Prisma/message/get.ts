@@ -1,4 +1,4 @@
-import { prisma } from '@/services/Prisma.service'
+import { prisma } from '@/services/prisma'
 
 interface IMessage {
   id: number
@@ -8,12 +8,8 @@ interface IMessage {
   content: string
 }
 
-export const getMessages = async (
-  chatName: string
-): Promise<IMessage[] | null> => {
-  const messages = await prisma.message.findMany({
-    where: { chatName },
-  })
+export const getMessages = async (chatName: string): Promise<IMessage[] | null> => {
+  const messages = await prisma.message.findMany({ where: { chatName } })
 
   return messages
 }

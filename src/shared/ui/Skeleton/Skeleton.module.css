@@ -1,31 +1,30 @@
 .skeleton {
   position: relative;
-  background-color: #212121;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 24px;
 }
 
 .skeleton::before {
   content: '';
   position: absolute;
-  width: 200px;
+  width: 300px;
   height: 1000%;
   top: -100%;
   left: 0;
-  background: linear-gradient(90deg, #212121 10%, #303030 50%, #212121 90%);
+  background: linear-gradient(90deg, #272a2f00 10%, #272a2f 50%, #272a2f00 90%);
   transform: rotateZ(20deg) translate(-125%, -50%);
 
   animation-name: skeleton;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 
 @keyframes skeleton {
   from {
-    transform: rotateZ(20deg) translate(-500%, -50%);
+    transform: rotateZ(20deg) translate(-200%, -50%);
   }
 
   to {
-    transform: rotateZ(20deg) translate(500%, -50%);
+    transform: rotateZ(20deg) translate(200%, -50%);
   }
 }

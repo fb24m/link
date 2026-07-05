@@ -1,5 +1,5 @@
 import { Editor } from '@/widgets/Editor/Editor.component'
-import { prisma } from '@/services/Prisma.service'
+import { prisma } from '@/services/prisma'
 import { users } from '@/shared/api/users'
 import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'

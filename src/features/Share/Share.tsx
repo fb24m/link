@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/ui/components/Button/Button.component'
+import { Button } from '@/shared/ui/Button/Button.component'
 import { Popup } from '@/ui/components/Popup/Popup.component'
 import { PopupFooter } from '@/ui/components/PopupFooter/PopupFooter.component'
 import { PopupTrigger } from '@/ui/components/PopupTrigger/PopupTrigger.component'
@@ -10,46 +10,47 @@ import Image from 'next/image'
 import { PopupWindow } from '@/ui/components/PopupWindow/PopupWindow'
 import toast from 'react-hot-toast'
 import Icon from '@/ui/components/Icon/Icon.component'
+import { Ripple } from 'm3-ripple'
 
-export const Share = ({ link, text }: { link: string; text?: string }) => {
+export const Share = ({ link, text, outlined }: { link: string; text?: string; outlined?: boolean }) => {
   return (
     <Popup>
       <PopupWrapper>
         <PopupWindow className={styles.body}>
-          <h2 className={styles.title}>Поделиться</h2>
+          <h2 className="text-center text-2xl font-medium mb-6">Поделиться</h2>
 
           <ul className={styles.shareList}>
             <li>
               <a
                 className={styles.shareItem}
                 href={`https://t.me/share/url?url=${link}${text ? `&text=${text}` : ''}`}
-                target='_blank'
-                rel='noreferrer'
+                target="_blank"
+                rel="noreferrer"
               >
-                <Image src='/social/telegram.svg' alt='' width={40} height={40} />
-                <Image src='/social/telegram.svg' alt='' width={40} height={40} />
+                <Ripple />
+                <Image src="/social/telegram.svg" alt="" width={40} height={40} />
               </a>
             </li>
             <li>
               <a
                 className={styles.shareItem}
                 href={`https://vk.com/share.php?url=${link}${text ? `&text=${text}` : ''}`}
-                target='_blank'
-                rel='noreferrer'
+                target="_blank"
+                rel="noreferrer"
               >
-                <Image src='/social/vk.svg' alt='' width={40} height={40} />
-                <Image src='/social/vk.svg' alt='' width={40} height={40} />
+                <Ripple />
+                <Image src="/social/vk.svg" alt="" width={40} height={40} />
               </a>
             </li>
             <li>
               <a
                 className={styles.shareItem}
                 href={`https://twitter.com/intent/tweet?url=${link}${text ? `&text=${text}` : ''}`}
-                target='_blank'
-                rel='noreferrer'
+                target="_blank"
+                rel="noreferrer"
               >
-                <Image src='/social/x.svg' alt='' width={40} height={40} />
-                <Image src='/social/x.svg' alt='' width={40} height={40} />
+                <Ripple />
+                <Image src="/social/x.svg" alt="" width={40} height={40} />
               </a>
             </li>
             <li>
@@ -61,7 +62,8 @@ export const Share = ({ link, text }: { link: string; text?: string }) => {
                   })
                 }}
               >
-                <Icon icon='content_copy' />
+                <Ripple />
+                <Icon icon="content_copy" />
               </button>
             </li>
           </ul>
@@ -69,7 +71,7 @@ export const Share = ({ link, text }: { link: string; text?: string }) => {
         <PopupFooter></PopupFooter>
       </PopupWrapper>
       <PopupTrigger onClick={openPopup => (navigator.share ? navigator.share({ url: link }) : openPopup())}>
-        <Button appearance='secondary' icon='share' className={styles.button}>
+        <Button appearance={outlined ? 'outlined' : 'tonal'} icon="share" className={styles.button}>
           Поделиться
         </Button>
       </PopupTrigger>

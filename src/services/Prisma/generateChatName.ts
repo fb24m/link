@@ -1,4 +1,4 @@
-// import { exists } from '@/functions/exists'
+// import { exists } from '@/shared/utils/exists'
 
 export const generateChatName = async () // username1: string,
 // username2: string

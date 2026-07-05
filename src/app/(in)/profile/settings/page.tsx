@@ -3,14 +3,14 @@ import type { ReactElement } from 'react'
 import { redirect } from 'next/navigation'
 import styles from './page.module.css'
 
-import { Title1 } from '@/ui/components/Title1/Title1.component'
+import { Title1 } from '@/shared/ui/Title1'
 import { Card } from '@/ui/components/Card/Card.component'
 
 import { ChangePasswordForm } from '@/features/profile-settings/ChangePasswordForm/ChangePasswordForm'
 import { ChangeUsernameForm } from '@/features/profile-settings/ChangeUsernameForm/ChangeUsernameForm'
 import { LogoutPopup } from '@/features/profile-settings/Logout/LogoutPopup/LogoutPopup'
 import { users } from '@/shared/api/users'
-import { LButton } from '@/shared/ui/LButton/LButton'
+import { Button } from '@/shared/ui/Button/Button.component'
 
 const ProfileSetting = async (): Promise<ReactElement> => {
   const userId = await users.getId()
@@ -22,9 +22,9 @@ const ProfileSetting = async (): Promise<ReactElement> => {
   return (
     <div>
       <div className={styles.header}>
-        <LButton className={styles.back} appearance='transparent' icon='arrow_back' href='/profile'>
+        <Button as="link" className={styles.back} appearance="transparent" icon="arrow_back" href="/profile">
           В профиль
-        </LButton>
+        </Button>
       </div>
 
       <Title1 className={styles.title}>Настройки</Title1>

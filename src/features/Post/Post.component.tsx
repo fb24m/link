@@ -1,23 +1,25 @@
-import type { ReactElement } from 'react'
+import { memo, ReactNode, useMemo, type ReactElement } from 'react'
 import type { PostProps } from './Post.props'
 import { Link } from '@/shared/ui/Link/Link'
-import { movePostToDeleted } from '@/actions/movePostToDeleted.action'
-
-import { restorePost } from '@/actions/restorePost'
 
 import { Box } from '@/ui/components/Box/Box.component'
-import { Markdown } from '@/components/Markdown/Markdown.component'
-import { ActionButton } from '@/components/ActionButton/ActionButton.component'
+import { ActionButton } from '@/components/ActionButton'
 import { Card } from '@/ui/components/Card/Card.component'
-import { CopyButton } from '@/components/CopyButton/CopyButton.component'
+import { CopyButton } from '@/components/CopyButton'
 import { DateFormat } from '@/entities/Date/Date'
 
 import styles from './Post.module.scss'
 import { ReadMore } from '@/features/Post/ReadMore'
 import { users } from '@/shared/api/users'
 import { pin } from '../../widgets/Posts/pin.action'
-import { LButton } from '@/shared/ui/LButton/LButton'
 import { Share } from '../Share/Share'
+import { Button } from '@/shared/ui/Button/Button.component'
+import { TrashButton } from './TrashButton'
+import { Post as PostType, User } from '../../../generated/prisma/client'
+import StarterKit from '@tiptap/starter-kit'
+import { renderToReactElement } from '@tiptap/static-renderer'
+import { Eval } from '@/shared/ui/Eval/Eval'
+import { twMerge } from 'tailwind-merge'
 
 const maxContentLength = 500
 
@@ -29,100 +31,105 @@ function stringToNumber255(input: string): number {
   return sum % 255 || 1
 }
 
+const Author = memo(({ author, full, publishDate }: { author: User; full: boolean; publishDate: Date }) => {
+  return (
+    <>
+      <img
+        src={author?.avatar ?? undefined}
+        alt={author?.username[0].toUpperCase()}
+        className={styles.avatar}
+        style={{
+          ...(!author?.avatar && { backgroundColor: `hsl(${stringToNumber255(author?.username)}, 100%, 50%)` }),
+        }}
+      />
+      <div className={styles.userdata}>
+        <Link href={`/user/${author?.username}`} className={styles.name}>
+          {author?.username}
+        </Link>
+        <span className={styles.date}>
+          <DateFormat format={!full ? 'relative' : undefined} date={new Date(publishDate)} />
+        </span>
+      </div>
+    </>
+  )
+})
+
+Author.displayName = 'Author'
+
+const getPostData = async (
+  post: PostType,
+  author?: User
+): Promise<{ author?: User; content: ReactNode | null } & Omit<PostType, 'content'>> => {
+  let resultContent: string | null = null
+
+  try {
+    JSON.parse(post.content)
+    resultContent = post.content
+  } catch {
+    resultContent = null
+  }
+
+  let output: ReactNode
+
+  if (resultContent) {
+    output = useMemo(() => renderToReactElement({ extensions: [StarterKit], content: JSON.parse(resultContent) }), [])
+  }
+
+  return { ...post, author: author ?? (await users.get(post.authorId ?? 0)) ?? null, content: output ?? null }
+}
+
 export const Post = async ({ full, post, restore, controls, ...props }: PostProps): Promise<ReactElement> => {
-  const { id, authorId, content: rawContent, publishDate } = post
+  const { id, author, content, publishDate } = await getPostData(post, props.author)
 
-  if (!authorId) return <></>
-
-  const author = props.author ?? (await users.get(authorId))
-
-  let content = rawContent.split('<br>').join('\n')
-
-  if (content.match(/(<script|<style|<head|style=)/g)) return <hr style={{ borderColor: 'var(--medium-color)' }} />
-
-  const isIncomplete = content.length > maxContentLength && !full
-
-  if (isIncomplete) content = content.substring(0, maxContentLength) + '...'
+  if (!author || !content) return <></>
 
   return (
     <Card mobileShrink className={styles.post} id={`post-${id}`}>
       <div className={styles.author}>
-        <img
-          src={author?.avatar ?? undefined}
-          alt={author?.username[0].toUpperCase()}
-          className={styles.avatar}
-          style={{
-            ...(!author?.avatar && { backgroundColor: `hsl(${stringToNumber255(author?.username)}, 100%, 50%)` }),
-          }}
-        />
-        <div className={styles.userdata}>
-          <Link href={`/user/${author?.username}`} className={styles.name}>
-            {author?.username}
-          </Link>
-          <span className={styles.date}>
-            <DateFormat format={!full ? 'relative' : undefined} date={new Date(publishDate ?? '')} />
-          </span>
-        </div>
+        <Author author={author} full={!!full} publishDate={publishDate ?? new Date()} />
         {controls && (
-          <div className={styles.actions}>
-            <LButton appearance='transparent' icon='edit' href={`/editor/${id}`}></LButton>
-            <ActionButton appearance='transparent' icon='keep' fields={[{ name: 'id', value: id }]} action={pin} />
-            {restore ? (
-              <ActionButton
-                appearance='primary'
-                icon='restore_from_trash'
-                fields={[
-                  { name: 'post-id', value: id },
-                  { name: 'author-id', value: id },
-                ]}
-                action={restorePost}
-              />
-            ) : (
-              <ActionButton
-                appearance='transparent'
-                icon='delete'
-                fields={[{ name: 'post-id', value: id }]}
-                action={movePostToDeleted}
-              />
-            )}
+          <div className="flex gap-1 justify-end grow">
+            <Button size="sm" as="link" appearance="outlined" icon="edit" href={`/editor/${id}`}></Button>
+            <ActionButton
+              size="sm"
+              appearance="outlined"
+              icon="keep"
+              fields={[{ name: 'id', value: id }]}
+              action={pin}
+            />
+            <TrashButton id={post.id} restore={!!restore} />
           </div>
         )}
       </div>
 
-      <Markdown>{content}</Markdown>
+      <Eval className={twMerge(!full && 'max-h-60 overflow-hidden')}>{content}</Eval>
 
-      <ReadMore className={styles.readMore} show={isIncomplete} postId={id}>
+      <ReadMore className={styles.readMore} show={!full} postId={id}>
         Читать далее
       </ReadMore>
 
       <div className={styles.interaction}>
-        <Box gap={8} direction='row' className={styles.interactionButtons}>
-          <LButton
+        <Box gap={8} direction="row" className={styles.interactionButtons}>
+          <Button
+            as="link"
             className={styles.interactionButton}
-            icon='favorite'
-            appearance='secondary'
+            icon="favorite"
+            appearance="tonal"
             href={`/article/${id}#comments`}
-          ></LButton>
+          ></Button>
           {!full && (
-            <LButton
+            <Button
+              as="link"
               className={styles.interactionButton}
-              icon='chat'
-              appearance='secondary'
+              icon="chat"
+              appearance="tonal"
               href={`/article/${id}#comments`}
             >
-              Комментарии ({post._count.comments})
-            </LButton>
+              Комментарии
+              {/*({post._count.comments})*/}
+            </Button>
           )}
           <Share link={`https://link.fb24m.ru/article/${id}`} text={`Пост ${author.username} на NextLink`} />
-          <CopyButton
-            className={styles.interactionButton}
-            success='Ссылка скопирована'
-            text={`https://link.fb24m.ru/article/${id}`}
-            icon='share'
-            appearance='secondary'
-          >
-            Поделиться
-          </CopyButton>
         </Box>
       </div>
     </Card>

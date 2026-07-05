@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/ui/components/Button/Button.component'
+import { Button } from '@/shared/ui/Button/Button.component'
 import { Popup } from '@/ui/components/Popup/Popup.component'
 import { PopupFooter } from '@/ui/components/PopupFooter/PopupFooter.component'
 import { PopupTrigger } from '@/ui/components/PopupTrigger/PopupTrigger.component'
@@ -43,7 +43,7 @@ export const LinksPopup = ({ userLinks }: { userLinks: { icon: string; link: str
                 <div className={styles.linkTag} key={JSON.stringify(link)}>
                   <label htmlFor={link}>{allLinks[link]}</label>
                   <input className={styles.input} name={link} id={link} defaultValue={thisLinkUsername} />
-                  {thisLinkUsername && <Icon icon='check' />}
+                  {thisLinkUsername && <Icon icon="check" />}
                 </div>
               )
             })}
@@ -52,14 +52,14 @@ export const LinksPopup = ({ userLinks }: { userLinks: { icon: string; link: str
           <p className={styles.label}>Preview version. May not work and is subject to change</p>
 
           <PopupFooter>
-            <Button loader='spinner' type='submit' appearance='primary'>
+            <Button loader="spinner" type="submit" appearance="primary">
               Сохранить
             </Button>
           </PopupFooter>
         </PopupWrapper>
       </form>
       <PopupTrigger>
-        <Button appearance='primary'>Изменить ссылки</Button>
+        <Button appearance="primary">Изменить ссылки</Button>
       </PopupTrigger>
     </Popup>
   )

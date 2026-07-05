@@ -1,9 +1,26 @@
-import { prisma } from '@/services/Prisma.service'
+import { prisma } from '@/services/prisma'
 import { users } from '@/shared/api/users'
 import { NextRequest } from 'next/server'
 import { PostFindManyArgs } from '../../../../generated/prisma/models'
+import z from 'zod'
+import { route } from '@/shared/utils/route'
+import { PostSchema } from '@/shared/shemas/Post'
+import { revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 
 type PrismaSelect = { [key: string]: boolean }
+
+const postSchema = z.object({ content: PostSchema })
+
+export const POST = route(postSchema, async (_, body, userId): Promise<Response> => {
+  const post = await prisma.post.create({ data: { authorId: userId, content: JSON.stringify(body.content) } })
+
+  revalidatePath('/profile')
+  revalidateTag('posts/me', 'max')
+  revalidateTag(`posts?author=${userId}`, 'max')
+
+  return Response.json(post)
+})
 
 export const GET = async (request: NextRequest) => {
   const queryParams = new URLSearchParams(new URL(request.url).search)

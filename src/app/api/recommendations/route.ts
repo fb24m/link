@@ -1,5 +1,5 @@
-import { prisma } from '@/services/Prisma.service'
-import { request as notrequest } from '@/shared/api/helpers/request'
+import { prisma } from '@/services/prisma'
+import { request as notrequest } from '@/shared/utils/request'
 import { cookies } from 'next/headers'
 import { PostFindManyArgs } from '../../../../generated/prisma/models'
 

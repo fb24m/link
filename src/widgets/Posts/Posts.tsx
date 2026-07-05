@@ -4,13 +4,13 @@ import styles from './Posts.module.scss'
 import { Post } from '../../features/Post/Post.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { users } from '@/shared/api/users'
-import { prisma } from '@/services/Prisma.service'
+import { prisma } from '@/services/prisma'
 import { Box } from '@/ui/components/Box/Box.component'
-import { clsx } from '@/functions/clsx'
-import { LButton } from '@/shared/ui/LButton/LButton'
+import { clsx } from 'clsx'
 import { PinnedPost } from './PinnedPost/PinnedPost'
 import { User } from '../../../generated/prisma/client'
 import { PostType } from '@/shared/api/posts'
+import { Button } from '@/shared/ui/Button/Button.component'
 
 export interface PostsProps {
   posts: PostType[]
@@ -45,22 +45,26 @@ export const Posts = async ({
 
   return (
     <div className={styles.posts}>
-      <PinnedPost id={pinnedPostId ?? 0} authorId={author?.id} avatar={author?.avatar ?? undefined} />
+      {!!pinnedPostId && (
+        <PinnedPost id={pinnedPostId ?? 0} authorId={author?.id} avatar={author?.avatar ?? undefined} />
+      )}
 
       {(author || whoMentioned) && (
-        <Box gap={8} direction='row' alignItems='center'>
-          <LButton
+        <Box gap={8} direction="row" alignItems="center">
+          <Button
+            as="link"
             href={username === whoMentioned ? '/profile' : `/user/${author?.username ?? whoMentioned}`}
             appearance={!whoMentioned ? 'primary' : 'secondary'}
           >
             Посты автора
-          </LButton>
-          <LButton
+          </Button>
+          <Button
+            as="link"
             href={`/user/${author?.username ?? whoMentioned}/mentioned`}
             appearance={whoMentioned ? 'primary' : 'secondary'}
           >
             Посты с упоминанием
-          </LButton>
+          </Button>
           <span className={clsx(styles.new, whoMentioned && styles.primary)}>Новое</span>
         </Box>
       )}
@@ -83,9 +87,9 @@ export const Posts = async ({
             ? 'Вы можете вернуться в ленту, чтобы прочитать новые посты или найти новых пользователей'
             : 'Начните писать сами или подпишитесь на кого-нибудь из пользователей, чтобы читать его посты в ленте'}
         </p>
-        <LButton className={styles.homeButton} href='/' appearance='primary'>
+        <Button as="link" className={styles.homeButton} href="/" appearance="primary">
           На главную
-        </LButton>
+        </Button>
       </Card>
     </div>
   )

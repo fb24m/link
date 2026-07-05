@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from '@/services/Prisma.service'
+import { prisma } from '@/services/prisma'
 import { v2 as cloudinary } from 'cloudinary'
 import { users } from './users'
 import { revalidatePath } from 'next/cache'

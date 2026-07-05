@@ -1,16 +1,16 @@
-import { Container } from '@/components/Container/Container.component'
+import { Container } from '@/shared/ui/Container'
 import { Card } from '@/ui/components/Card/Card.component'
-import { Title1 } from '@/ui/components/Title1/Title1.component'
+import { Title1 } from '@/shared/ui/Title1'
 import type { ReactElement } from 'react'
 import styles from './page.module.scss'
-import { Input } from '@/ui/components/Input/Input'
+import { Input } from '@/shared/ui/Input/Input'
 import Textarea from '@/ui/components/Textarea/Textarea.component'
 import { Radio } from '@/ui/components/Radio/Radio'
-import { clsx } from '@/functions/clsx'
-import { prisma } from '@/services/Prisma.service'
+import { clsx } from 'clsx'
+import { prisma } from '@/services/prisma'
 import Image from 'next/image'
 import { users } from '@/shared/api/users'
-import { Button } from '@/ui/components/Button/Button.component'
+import { Button } from '@/shared/ui/Button/Button.component'
 
 const createCommunity = async (formData: FormData): Promise<void> => {
   'use server'
@@ -35,35 +35,35 @@ const Communities = async (): Promise<ReactElement> => {
           <div className={styles.block}>
             <h3 className={styles.title}>Придумайте название:</h3>
             <div className={styles.inputBlock}>
-              <Input className={styles.input} name='name' type='text' placeholder='Новое сообщество' required />
+              <Input className={styles.input} name="name" type="text" placeholder="Новое сообщество" required />
             </div>
           </div>
           <div className={styles.block}>
             <h3 className={styles.title}>Описание сообщества:</h3>
             <div className={styles.inputBlock}>
-              <Textarea className={styles.input} name='bio' type='text' placeholder='Сообщество на NextLink' />
+              <Textarea className={styles.input} name="bio" type="text" placeholder="Сообщество на NextLink" />
             </div>
           </div>
           <div className={styles.block}>
             <h3 className={clsx(styles.title, styles.smallBlock)}>Ваше сообщество будет:</h3>
             <div className={clsx(styles.inputBlock, styles.flex)}>
-              <Radio required label='Открытым' name='visibility' value='public' />
-              <Radio required label='Закрытым' name='visibility' value='private' />
+              <Radio required label="Открытым" name="visibility" value="public" />
+              <Radio required label="Закрытым" name="visibility" value="private" />
             </div>
           </div>
           <div className={styles.block}>
             <h3 className={clsx(styles.title, styles.smallBlock)}>Владелец сообщества:</h3>
             <div className={styles.owner}>
-              <Image src={user?.avatar ? user?.avatar : ''} alt='' width={32} height={32} />
+              <Image src={user?.avatar ? user?.avatar : ''} alt="" width={32} height={32} />
               {user?.username}
               <span className={styles.badge}>{user?.badge}</span>
             </div>
           </div>
 
-          <input style={{ display: 'none' }} name='owner-id' readOnly value={user?.id} type='text' required />
+          <input style={{ display: 'none' }} name="owner-id" readOnly value={user?.id} type="text" required />
 
           <span className={styles.buttonBg}>
-            <Button loader='spinner' className={styles.button} appearance='primary'>
+            <Button loader="spinner" className={styles.button} appearance="primary">
               Начнём
             </Button>
           </span>

@@ -1,8 +1,17 @@
 import type { ReactNode } from 'react'
-import styles from './Card.module.scss'
 import type { CardProps } from './Card.props'
-import { clsx } from '@/functions/clsx'
+import { twMerge } from 'tailwind-merge'
 
 export const Card = ({ className, mobileShrink, ...props }: CardProps): ReactNode => {
-  return <div className={clsx(className, styles.card, mobileShrink && styles.mobileShrink)} {...props}></div>
+  return (
+    <div
+      className={twMerge(
+        mobileShrink
+          ? 'bg-transparent sm:bg-surface-container sm:p-5 sm:rounded-3xl'
+          : 'bg-surface-container p-5 rounded-3xl',
+        className
+      )}
+      {...props}
+    ></div>
+  )
 }

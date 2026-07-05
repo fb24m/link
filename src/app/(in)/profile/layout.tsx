@@ -1,17 +1,16 @@
 import { ProfileMenu } from '@/entities/profile/ProfileMenu/ProfileMenu'
-import { exists } from '@/functions/exists'
+import { exists } from '@/shared/utils/exists'
 import { posts } from '@/shared/api/posts'
 import { users } from '@/shared/api/users'
 import { UserProfile } from '@/widgets/UserProfile/UserProfile.component'
-import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 
 const ProfileLayout = async ({ children }: { children: ReactNode }) => {
   const user = await users.getMe()
-  const myposts = await posts.getByAuthorId(user.id)
+  const myposts = await posts.getMine()
 
   if (!user) {
-    redirect('/login')
+    // redirect('/auth/login')
   }
 
   return (

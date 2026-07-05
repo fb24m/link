@@ -9,14 +9,14 @@ import styles from './UserProfile.module.scss'
 import Link from 'next/link'
 import Icon from '@/ui/components/Icon/Icon.component'
 import dynamic from 'next/dynamic'
-import { clsx } from '@/functions/clsx'
+import { clsx } from 'clsx'
 
 import { PopupTrigger } from '@/ui/components/PopupTrigger/PopupTrigger.component'
 import { PopupFooter } from '@/ui/components/PopupFooter/PopupFooter.component'
 import { PopupWrapper } from '@/ui/components/PopupWrapper/PopupWrapper.component'
 import { Popup } from '@/ui/components/Popup/Popup.component'
-import { LButton } from '@/shared/ui/LButton/LButton'
 import { Share } from '@/features/Share/Share'
+import { Button } from '@/shared/ui/Button/Button.component'
 
 const ChangeBioPopup = dynamic(() => import('@/features/profile/ChangeBioPopup/ChangeBioPopup'))
 const ChangeAvatarPopup = dynamic(() => import('../../features/profile/ChangeAvatarPopup/ChangeAvatarPopup'))
@@ -93,7 +93,7 @@ export const UserProfile = async ({ user, ...props }: UserProfileProps) => {
               </PopupWrapper>
               <PopupTrigger>
                 <span className={clsx(styles.badge, badge === 'NextLink' && styles.nextLink)}>
-                  {badge} <Icon icon='question_mark'></Icon>
+                  {badge} <Icon icon="question_mark"></Icon>
                 </span>
               </PopupTrigger>
             </Popup>
@@ -101,8 +101,8 @@ export const UserProfile = async ({ user, ...props }: UserProfileProps) => {
         </div>
         <div className={styles.buttons}>
           {/* {!props.selfProfile && !user.suspended && <SubscribeButton from={self.id} to={id} username={username} />} */}
-          <Share link={`https://link.fb24m.ru/user/${user.id}`} />
-          {props.selfProfile && <LButton appearance='secondary' icon='settings' href={`/profile/settings`} />}
+          <Share outlined link={`https://link.fb24m.ru/user/${user.id}`} />
+          {props.selfProfile && <Button as="link" appearance="outlined" icon="settings" href={`/profile/settings`} />}
         </div>
       </div>
       <div className={styles.about}>

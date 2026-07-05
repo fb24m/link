@@ -1,17 +1,16 @@
 import type { ReactElement } from 'react'
 import styles from './Sidebar.module.css'
-import { clsx } from '@/functions/clsx'
+import { clsx } from 'clsx'
 import { users } from '@/shared/api/users'
 import { Menu } from '@/entities/sidebar/Menu/Menu'
-import { request } from '@/shared/api/helpers/request'
-import { LButton } from '@/shared/ui/LButton/LButton'
+import { Button } from '@/shared/ui/Button/Button.component'
 
 export const Sidebar = async (): Promise<ReactElement> => {
   const userId = await users.getId()
 
-  const { ok, data: subscriptions } = await request<{ ok: boolean; data: { id: number; username: string }[] }>(
-    'subscriptions'
-  )
+  // const { ok, data: subscriptions } = await request<{ ok: boolean; data: { id: number; username: string }[] }>(
+  //   'subscriptions'
+  // )
 
   return (
     <div className={styles.sidebar}>
@@ -19,12 +18,12 @@ export const Sidebar = async (): Promise<ReactElement> => {
         {userId && (
           <>
             <li>
-              <LButton className={styles.button} appearance='transparent' href='/' icon='home'>
+              <Button as="link" className={styles.button} appearance="transparent" href="/" icon="home">
                 Главная
-              </LButton>
+              </Button>
             </li>
 
-            <Menu
+            {/*<Menu
               icon='group'
               opened='desktop'
               title='Подписки'
@@ -33,54 +32,56 @@ export const Sidebar = async (): Promise<ReactElement> => {
                 !!subscriptions.length &&
                 subscriptions.map(item => (
                   <li className={styles.subscription} key={item.id}>
-                    <LButton
+                    <Button as="link"
                       className={clsx(styles.subscription, styles.button)}
                       href={`/user/${item.username}`}
                       appearance='transparent'
                     >
                       {item.username}
-                    </LButton>
+                    </Button>
                   </li>
                 ))
               }
-            />
+            />*/}
 
             <li>
-              <LButton className={styles.button} appearance='transparent' href='/editor?new' icon='add_circle'>
+              <Button as="link" className={styles.button} appearance="transparent" href="/editor?new" icon="add_circle">
                 Создать
-              </LButton>
+              </Button>
             </li>
             <li>
-              <LButton className={styles.button} appearance='transparent' href='/profile' icon='person'>
+              <Button as="link" className={styles.button} appearance="transparent" href="/profile" icon="person">
                 Профиль
-              </LButton>
+              </Button>
             </li>
 
             <Menu
-              icon='more_horiz'
-              opened='desktop'
-              title='Другое'
+              icon="more_horiz"
+              opened="desktop"
+              title="Другое"
               list={
                 <>
                   <li>
-                    <LButton
+                    <Button
+                      as="link"
                       className={styles.button}
-                      appearance='transparent'
-                      href='/profile/settings'
-                      icon='settings'
+                      appearance="transparent"
+                      href="/profile/settings"
+                      icon="settings"
                     >
                       Настройки
-                    </LButton>
+                    </Button>
                   </li>
                   <li>
-                    <LButton
+                    <Button
+                      as="link"
                       className={styles.button}
-                      appearance='transparent'
-                      href='https://github.com/fb24m/link/issues'
-                      icon='bug_report'
+                      appearance="transparent"
+                      href="https://github.com/fb24m/link/issues"
+                      icon="bug_report"
                     >
                       Нашли ошибку?
-                    </LButton>
+                    </Button>
                   </li>
                 </>
               }
@@ -100,9 +101,9 @@ export const Sidebar = async (): Promise<ReactElement> => {
 			</>} */}
 
       {!userId && (
-        <LButton appearance='primary' href='/login' className={styles.loginButton}>
+        <Button as="link" appearance="primary" href="/login" className={styles.loginButton}>
           Войти
-        </LButton>
+        </Button>
       )}
 
       <div className={styles.cookies}>

@@ -1,7 +1,6 @@
 generator client {
-  provider   = "prisma-client"
-  output     = "../generated/prisma"
-  engineType = "client"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -40,9 +39,10 @@ model User {
 }
 
 model TempCode {
-  id    Int    @id @default(autoincrement())
-  code  Int
-  email String
+  id         Int      @id @default(autoincrement())
+  code       Int
+  email      String
+  expireDate DateTime
 }
 
 model PostLike {

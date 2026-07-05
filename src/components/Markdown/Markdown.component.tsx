@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactElement } from 'react'
 
 import styles from './Markdown.module.scss'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
-import { clsx } from '@/functions/clsx'
+import { clsx } from 'clsx'
 import { usePostFormat } from '@/shared/hooks/usePostFormat'
 
 export const Markdown = ({ children, className }: { children: string; className?: string }): ReactElement => {

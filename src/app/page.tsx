@@ -2,7 +2,7 @@ import type { ReactElement } from 'react'
 import styles from './page.module.css'
 
 import { Sidebar } from '@/features/Sidebar/Sidebar.component'
-import { Container } from '@/components/Container/Container.component'
+import { Container } from '@/shared/ui/Container'
 import { Header } from '@/widgets/Header/Header'
 import { Posts } from '@/widgets/Posts/Posts'
 import { users } from '@/shared/api/users'
@@ -11,7 +11,7 @@ import { posts } from '@/shared/api/posts'
 
 const Home = async (): Promise<ReactElement> => {
   const me = await users.getMe()
-  if (!me) redirect('/login')
+  if (!me) redirect('/auth')
 
   const notposts = await posts.getRecommendations()
 

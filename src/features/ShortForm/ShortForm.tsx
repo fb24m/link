@@ -1,12 +1,11 @@
 'use client'
 
-import { Button } from '@/ui/components/Button/Button.component'
+import { Button } from '@/shared/ui/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import styles from './ShortForm.module.css'
 import { useEffect, useState } from 'react'
 import { getShortFormState } from './getFormState'
 import { closeForm } from './closeForm'
-import { LButton } from '@/shared/ui/LButton/LButton'
 
 export const ShortForm = () => {
   const [isFormOpened, setIsFormOpened] = useState<boolean>(false)
@@ -26,7 +25,7 @@ export const ShortForm = () => {
             <div className={styles.buttons}>
               <Button
                 className={styles.button}
-                appearance='secondary'
+                appearance="secondary"
                 onClick={() => {
                   closeForm()
                   setIsFormOpened(false)
@@ -34,14 +33,15 @@ export const ShortForm = () => {
               >
                 Закрыть
               </Button>
-              <LButton
+              <Button
+                as="a"
                 className={styles.button}
-                appearance='primary'
-                href='https://forms.gle/GGejHRTZ3svqgWwu8'
-                target='_blank'
+                appearance="primary"
+                href="https://forms.gle/GGejHRTZ3svqgWwu8"
+                target="_blank"
               >
                 Пройти опрос
-              </LButton>
+              </Button>
             </div>
           </Card>
         </div>

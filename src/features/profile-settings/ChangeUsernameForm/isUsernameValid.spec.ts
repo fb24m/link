@@ -1,4 +1,6 @@
+import { describe, expect, it } from 'vitest'
 import { isUsernameValid } from './isUsernameValid'
+
 describe('isUsernameValid()', () => {
   it('Проверка имен пользователя 1/5', () => expect(isUsernameValid('helloworld24').valid).toBe(true))
   it('Проверка имен пользователя 2/5', () => expect(isUsernameValid('hi').valid).toBe(false))

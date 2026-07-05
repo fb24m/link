@@ -1,7 +1,7 @@
 'use server'
 
-import { exists } from '@/functions/exists'
-import { prisma } from '../Prisma.service'
+import { exists } from '@/shared/utils/exists'
+import { prisma } from '../prisma'
 import { Post } from '../../../generated/prisma/client'
 
 export const getDeletedPostsByAuthorId = async (id: number[], maxPosts: number | false = false): Promise<Post[]> => {

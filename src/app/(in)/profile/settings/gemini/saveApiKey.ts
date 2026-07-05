@@ -1,6 +1,6 @@
 'use server'
 
-import { request } from '@/shared/api/helpers/request'
+import { request } from '@/shared/utils/request'
 import { GoogleGenAI } from '@google/genai/web'
 import { revalidateTag } from 'next/cache'
 

@@ -2,15 +2,15 @@
 
 import { useActionState, useEffect, useState, type ReactNode } from 'react'
 import styles from './ChangeAvatarPopup.module.scss'
-import { Button } from '@/ui/components/Button/Button.component'
+import { Button } from '@/shared/ui/Button/Button.component'
 import { Popup } from '@/ui/components/Popup/Popup.component'
 import { PopupWrapper } from '@/ui/components/PopupWrapper/PopupWrapper.component'
 import { PopupFooter } from '@/ui/components/PopupFooter/PopupFooter.component'
 import { PopupTrigger } from '@/ui/components/PopupTrigger/PopupTrigger.component'
-import { Eval } from '@/components/Eval/Eval.component'
+import { Eval } from '@/shared/ui/Eval/Eval'
 import { setAvatar } from '@/shared/api/avatar'
 import Icon from '@/ui/components/Icon/Icon.component'
-import { clsx } from '@/functions/clsx'
+import { clsx } from 'clsx'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import toast from 'react-hot-toast'
 
@@ -41,10 +41,10 @@ const ChangeAvatarPopup = (props: CustomPopupProps): ReactNode => {
             <p className={styles.title}>Изменение аватара</p>
 
             <input
-              type='file'
-              name='avatar'
+              type="file"
+              name="avatar"
               className={styles.input}
-              id='new-avatar-input'
+              id="new-avatar-input"
               onInput={e => {
                 e.preventDefault()
 
@@ -69,27 +69,28 @@ const ChangeAvatarPopup = (props: CustomPopupProps): ReactNode => {
               }}
             />
 
-            <label className={styles.buttonWrapper} htmlFor='new-avatar-input'>
+            <label className={styles.buttonWrapper} htmlFor="new-avatar-input">
               <span className={styles.button}>
                 {isUploading ? (
                   <Skeleton width={240} height={240} className={styles.skeleton} />
                 ) : (
-                  !baseUrl && <Icon icon='photo_camera_front'></Icon>
+                  !baseUrl && <Icon icon="photo_camera_front"></Icon>
                 )}
-                <img src={baseUrl} alt='' className={clsx(styles.preview, baseUrl && styles.active)} />
+                <img src={baseUrl} alt="" className={clsx(styles.preview, baseUrl && styles.active)} />
               </span>
             </label>
           </Eval>
           <PopupFooter>
-            <Button loader='spinner' appearance='primary' type='submit'>
+            <Button loader="spinner" appearance="primary" type="submit">
               Сохранить
             </Button>
           </PopupFooter>
         </PopupWrapper>
         <PopupTrigger>
           <Button
+            appearance="link"
             className={styles.changeButton}
-            type='button'
+            type="button"
             onClick={() => isForceClosed && setIsForceClosed(false)}
           >
             {props.buttonContent}

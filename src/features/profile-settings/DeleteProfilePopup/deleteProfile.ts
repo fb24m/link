@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from '@/services/Prisma.service'
+import { prisma } from '@/services/prisma'
 import { cookies } from 'next/headers'
 
 export const deleteProfile = async (_: unknown, formData: FormData) => {
@@ -18,11 +18,7 @@ export const deleteProfile = async (_: unknown, formData: FormData) => {
 
   const cookie = await cookies()
 
-  await prisma.user.delete({
-    where: {
-      username: cookie.get('link_saved_user')?.value.split(':')[0],
-    },
-  })
+  await prisma.user.delete({ where: { username: cookie.get('link_saved_user')?.value.split(':')[0] } })
 
   cookie.delete('link_saved_user')
 }

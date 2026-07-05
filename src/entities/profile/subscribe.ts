@@ -1,7 +1,7 @@
 'use server'
 
-import { prisma } from '@/services/Prisma.service'
-import { request } from '@/shared/api/helpers/request'
+import { prisma } from '@/services/prisma'
+import { request } from '@/shared/utils/request'
 import { Subscription } from '../../../generated/prisma/client'
 import { cookies } from 'next/headers'
 

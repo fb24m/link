@@ -1,4 +1,4 @@
-const months = [
+export const months = [
   'января',
   'февраля',
   'марта',

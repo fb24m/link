@@ -1,26 +1,28 @@
 import type { ReactElement } from 'react'
-import styles from './Username.module.scss'
 import Icon from '@/ui/components/Icon/Icon.component'
-import { clsx } from '@/functions/clsx'
 import { users } from '@/shared/api/users'
-import { LButton } from '@/shared/ui/LButton/LButton'
+import { Button } from '@/shared/ui/Button/Button.component'
+import { twMerge } from 'tailwind-merge'
 
-export const Username = async ({
-  id,
-  avatar,
-  className,
-}: {
+export interface UsernameProps {
   id: number
   avatar?: boolean
   className?: string
-}): Promise<ReactElement> => {
+}
+
+export const Username = async ({ id, avatar, className }: UsernameProps): Promise<ReactElement> => {
   const user = await users.get(id)
 
   return (
-    <LButton href={`/user/${user?.username}`} appearance='transparent' className={clsx(className, styles.button)}>
-      {avatar && user?.avatar ? <img src={user?.avatar} className={styles.avatar} /> : ''}
-      {!user?.avatar ? <Icon icon='account_circle' className={styles.avatar_placeholder} /> : ''}
+    <Button
+      as="link"
+      href={`/user/${user?.username}`}
+      appearance="transparent"
+      className={twMerge('p-0.75', className)}
+    >
+      {avatar && user?.avatar && <img src={user?.avatar} className="bg-white w-5.5 h-5.5 appearance-none rounded-sm" />}
+      {!user?.avatar && <Icon icon="account_circle" className="text-2xl" />}
       {user?.username}
-    </LButton>
+    </Button>
   )
 }

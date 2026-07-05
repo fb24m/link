@@ -1,4 +1,4 @@
-import { prisma } from '@/services/Prisma.service'
+import { prisma } from '@/services/prisma'
 import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'
 import { Posts } from '@/widgets/Posts/Posts'
